@@ -1,18 +1,64 @@
-<!--
-  Generated template for the IndexPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>index</ion-title>
+  <ion-navbar color="light">
+    <ion-title text-center>الفهرس</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
 
+  <!-- الاجزاء -->
+  <ul *ngIf="activeList === 'parts'" [@partsState]="partsState">
+    <li *ngFor="let item of partsNum;let i = index"
+
+      (click)="changeList('parts')"
+    >
+      <div class="part-num">
+        {{i+1}}
+      </div>
+      <div class="part-id">
+        الجزء {{partName(i)}}
+      </div>
+      <div class="part-num">
+        {{i+1}}
+      </div>
+    </li>
+  </ul>
+  <!--السور-->
+  <ul *ngIf="activeList === 'surah'" [@partsState]="partsState">
+    <li *ngFor="let item of partsNum;let i = index" (click)="changeList('surah')" >
+      <div class="part-num">
+        {{i+1}}
+      </div>
+      <div class="part-id surah-id">
+       <span class="surah-name">
+         الفاتحة
+       </span>
+        <span class="ayat-num">
+          7 ايات
+        </span>
+        <span class="surah-loc">
+           <ion-icon name="home"></ion-icon>
+        </span>
+      </div>
+      <div class="part-num">
+        {{i+1}}
+      </div>
+    </li>
+  </ul>
+  <!--الايات-->
+  <ul *ngIf="activeList === 'ayah'" [@partsState]="partsState">
+    <li *ngFor="let item of partsNum;let i = index" (click)="changeList('ayah')" >
+      <div class="part-num">
+        {{i+1}}
+      </div>
+      <div class="part-id">
+        اية
+      </div>
+      <div class="part-num">
+        {{i+1}}
+      </div>
+    </li>
+  </ul>
 </ion-content>

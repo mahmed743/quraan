@@ -1,0 +1,10 @@
+page-recitalmenu {
+  ion-menu {
+    ion-content {
+      &.content {
+        background-color: $primary;
+        color: #fff
+      }
+    }
+  }
+}

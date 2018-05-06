@@ -1,27 +1,20 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {RecitalPage} from "../recital/recital";
+
 
 
 @IonicPage()
 @Component({
-  selector: 'page-search',
-  templateUrl: 'search.html',
+  selector: 'page-recitalmenu',
+  templateUrl: 'recitalmenu.html',
 })
-export class SearchPage {
-
+export class RecitalmenuPage {
+  recitalPage:string = 'RecitalPage';
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
-  }
-
-  search() {
-
-  }
-
-  onSearchClear() {
-    console.log('search cleared')
   }
 
 }

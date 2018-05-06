@@ -1,3 +1,27 @@
 page-recital {
+  .toolbar-content {
+    display: flex;
+  }
+  ion-content {
+    .recital {
+      width: 100%;
+      height: 100%;
+      border: 16px solid #eee;
+      padding: 10px;
+      font-size: 16px;
+      line-height: 1.8;
+      text-align: justify;
+    }
+  }
+  ion-header {
+    ion-navbar {
+      ion-title {
+        .toolbar-title-md {
+          padding-right: 5px!important;
+          transform: translateX(0);
+        }
+      }
+    }
+  }
 
 }

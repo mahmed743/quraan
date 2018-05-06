@@ -2,26 +2,19 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
+
 @IonicPage()
 @Component({
-  selector: 'page-search',
-  templateUrl: 'search.html',
+  selector: 'page-explain',
+  templateUrl: 'explain.html',
 })
-export class SearchPage {
+export class ExplainPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
-  }
-
-  search() {
-
-  }
-
-  onSearchClear() {
-    console.log('search cleared')
+    console.log('ionViewDidLoad ExplainPage');
   }
 
 }

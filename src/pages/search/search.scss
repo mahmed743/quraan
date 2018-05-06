@@ -1,3 +1,65 @@
 page-search {
+  ion-header {
+    ion-toolbar {
+      background-color: #fff;
+      ion-searchbar {
+        input {
+          box-shadow: none !important;
+          padding-right: 15px !important;
+        }
+      }
+      .searchbar-search-icon {
+        display: none !important;
+      }
+      .searchbar-input {
+        direction: rtl;
+      }
+    }
+  }
+  ion-content {
+    &.content {
+      background-color: #f8f8f8;
+      color: #fff
+    }
+    ion-list {
+      ion-item {
 
+        ion-label {
+          margin: 0 0 30px 0!important;
+
+        }
+        .surah-name {
+          color: $primary;
+          width: fit-content;
+          padding: 4px 8px;
+          font-weight: bold;
+          border-bottom: 2px solid $primary;
+          margin-bottom: 8px;
+        }
+        .surah-search {
+          white-space: normal;
+          .matched {
+            background-color: #f9f2cc;
+          }
+        }
+        .surah-page {
+          background-color: #0e7879;
+          color: #fff;
+          padding: 5px;
+          font-size: 10px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          width: fit-content;
+          position: absolute;
+          left: 0;
+          bottom: -1px;
+          ion-icon {
+            font-size: 14px;
+            padding: 0 3px;
+          }
+        }
+      }
+    }
+  }
 }

@@ -15,7 +15,25 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 * {
+  //TODO: get ayat font hafs,"Times","Traditional Arabic",Arial;
   font-family: 'jf-flat-regular', sans-serif
 }
 
 $primary: color($colors, primary);
+
+
+
+ion-header {
+  ion-navbar {
+    ion-title {
+      .toolbar-title-md {
+        padding-right: 0 !important;
+        transform: translateX(20px);
+        color: $primary !important;
+      }
+    }
+  }
+  &::after {
+    background-image: none !important;
+  }
+}
