@@ -1,0 +1,29 @@
+page-home {
+  ion-content {
+    &.content {
+      background-image: url(../assets/imgs/home-bg.jpg);
+      background-size: cover;
+    }
+    ion-list {
+      position: absolute;
+      bottom: 0;
+      width: 75vw;
+      left: 13vw;
+      text-align: center;
+      button {
+        box-shadow: none !important;
+        width: 30%;
+        border-radius: 30px !important;
+        min-height: 80px;
+        color: $primary !important;
+        .button-inner {
+          flex-direction: column;
+          ion-icon {
+            font-size: 2rem;
+            margin-bottom: 4px;
+          }
+        }
+      }
+    }
+  }
+}
