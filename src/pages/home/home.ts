@@ -4,6 +4,8 @@ import {SealdoaaPage} from "../sealdoaa/sealdoaa";
 import {RecitalPage} from "../recital/recital";
 import {ExplainPage} from "../explain/explain";
 import {RecitalmenuPage} from "../recitalmenu/recitalmenu";
+import {DailyreadPage} from "../dailyread/dailyread";
+import {SalahtimesPage} from "../salahtimes/salahtimes";
 
 interface Page {
   index: number,
@@ -56,6 +58,16 @@ export class HomePage {
         title: 'البحث'
       },{
         index: 6,
+        component: 'DailyreadPage',
+        icon: 'ios-paper-outline',
+        title: 'الورد اليومى'
+      },{
+        index: 7,
+        component: 'SalahtimesPage',
+        icon: 'ios-paper-outline',
+        title: 'مواعيد الصلاة'
+      },{
+        index: 8,
         component: 'SealdoaaPage',
         icon: 'ios-paper-outline',
         title: 'دعاء الختم'

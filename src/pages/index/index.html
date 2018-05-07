@@ -27,7 +27,8 @@
   </ul>
   <!--السور-->
   <ul *ngIf="activeList === 'surah'" [@partsState]="partsState">
-    <li *ngFor="let item of partsNum;let i = index" (click)="changeList('surah')" >
+
+    <li *ngFor="let item of surahNum;let i = index" (click)="changeList('surah')" >
       <div class="part-num">
         {{i+1}}
       </div>

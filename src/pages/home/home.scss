@@ -22,6 +22,11 @@ page-home {
             font-size: 2rem;
             margin-bottom: 4px;
           }
+          span {
+            &.small {
+              font-size: 1.2rem;
+            }
+          }
         }
       }
     }

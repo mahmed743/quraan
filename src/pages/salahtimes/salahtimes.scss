@@ -1,0 +1,27 @@
+page-salahtimes {
+    ion-content {
+        &.content {
+            background-color: #f6f6f6;
+        }
+        ion-list {
+            ion-item {
+                margin-bottom: 8px !important;
+                .item-inner {
+                    border-bottom: none !important
+                }
+                .pray-time {
+                    p {
+                        &:first-of-type {
+                            font-weight: bold;
+                            color: $primary
+                        }
+                    }
+                }
+                ion-label {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}
