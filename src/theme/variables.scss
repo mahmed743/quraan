@@ -41,6 +41,14 @@ $font-path: "../assets/fonts";
   font-style: normal;
 }
 
+
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('../assets/fonts/UthmanicHafs.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/

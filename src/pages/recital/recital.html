@@ -32,7 +32,12 @@
   </section>
 
   <section class="audio-section">
-    <div class="rewind-btns">
+      <div class="rewind-btns">
+          <button ion-button clear>
+              <ion-icon [name]="isOn?'pause':'play'" (click)="changePlayState()"></ion-icon>
+            </button>
+      </div>
+    <!--<div class="rewind-btns">
       <button ion-button clear>
         <ion-icon name="rewind"></ion-icon>
       </button>
@@ -42,13 +47,13 @@
       <button ion-button clear>
         <ion-icon name="rewind"></ion-icon>
       </button>
-    </div>
+    </div> -->
     <div class="play-indicator"></div>
     <div class="reader">
       <div class="reader-info">
         <p>القارىء</p>
-        <ion-select>
-          <ion-option selected okText="اختيار" cancelText="الغاء">المنشاوى</ion-option>
+        <ion-select okText="اختيار" cancelText="الغاء">
+          <ion-option selected >المنشاوى</ion-option>
         </ion-select>
       </div>
     </div>

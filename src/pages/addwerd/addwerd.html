@@ -1,0 +1,39 @@
+<ion-header no-lines>
+    <ion-navbar color="light">
+      <button icon-only clear ion-button (click)="dismissModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <ion-title text-center>اضف ورد</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+
+  <section class="page-content">
+
+      <ion-input dir="rtl" placeholder="الاسم" [(ngModel)]="werdname"></ion-input>
+      <div class="werd-type">
+        <span class="type">نوع الورد</span>
+        <div class="user" [class.selected]="werdtype == 'ayah'" (click)="werdtype = 'ayah'">
+          <label for="type2" >
+            <p>اية</p>
+          </label>
+          <input type="radio" id="type2" value="user"  >
+        </div>
+        <div class="user" [class.selected]="werdtype == 'doaa'"  (click)="werdtype = 'doaa'">
+          <label for="type1" >
+            <p>دعاء</p>
+          </label>
+          <input type="radio" id="type1" value="branch"  >
+        </div>
+      </div>
+      <ion-textarea [hidden]="werdtype == 'doaa'" dir="rtl" placeholder="الاية" rows="5" [(ngModel)]="werdtext"></ion-textarea>
+  
+  </section>
+ 
+</ion-content>
+<ion-footer>
+    <button no-margin block ion-button (click)="addWerd()">
+        اضف الوِرد
+      </button>
+</ion-footer>  

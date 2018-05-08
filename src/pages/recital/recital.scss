@@ -19,6 +19,8 @@ page-recital {
       text-align: justify;
       background-color: #E2FEDE;
       a {
+
+      //font-family: 'UthmanicHafs', sans-serif;
         color: #222!important;
         padding: 6px;
         &.selected {
@@ -58,13 +60,13 @@ page-recital {
         justify-content: space-around;
         button {
           color: #fff !important;
-          &:first-of-type {
+          /*&:first-of-type {
             transform: scale(-1);
-          }
+          }*/
         }
       }
       .reader {
-        padding: 18px;
+        padding: 12px;
         .reader-info {
           padding: 0 8px;
           justify-content: space-between;

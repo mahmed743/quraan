@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
-import {SealdoaaPage} from "../sealdoaa/sealdoaa";
-import {RecitalPage} from "../recital/recital";
-import {ExplainPage} from "../explain/explain";
-import {RecitalmenuPage} from "../recitalmenu/recitalmenu";
-import {DailyreadPage} from "../dailyread/dailyread";
-import {SalahtimesPage} from "../salahtimes/salahtimes";
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
 interface Page {
   index: number,
   title: string,
@@ -21,61 +15,71 @@ interface Page {
 })
 export class HomePage {
   homePages:Page[];
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public localNotification: LocalNotifications) {
 
   }
   ionViewDidLoad() {
     this.homePages = [
       {
         index: 0,
+        component: 'SalahtimesPage',
+        icon: 'مواعيد الصلاة',
+        title: 'مواعيد الصلاة'
+      },
+      {
+        index: 1,
         component: 'IndexPage',
-        icon: 'ios-clipboard-outline',
+        icon: 'فهرس',
         title: 'الفهرس'
       },{
-        index: 1,
-        component: 'TagsPage',
-        icon: 'pricetags',
-        title: 'الفواصل'
-      },{
-        index:2,
-        component: 'RecitalmenuPage',// 'RecitalPage',
-        icon: 'md-volume-up',
-        title: 'التلاوة'
-      },{
-        index: 3,
-        component: 'ExplainPage',
-        icon: 'leaf',
-        title: 'التفسير'
-      },{
-        index: 4,
-        component: 'SettingsPage',
-        icon: 'settings',
-        title: 'الاعدادات'
-      },{
-        index: 5,
-        component: 'SearchPage',
-        icon: 'search',
-        title: 'البحث'
-      },{
-        index: 6,
+        index: 2,
         component: 'DailyreadPage',
-        icon: 'ios-paper-outline',
+        icon: 'الورد اليومي',
         title: 'الورد اليومى'
       },{
-        index: 7,
-        component: 'SalahtimesPage',
-        icon: 'ios-paper-outline',
-        title: 'مواعيد الصلاة'
+        index:3,
+        component: 'RecitalmenuPage',// 'RecitalPage',
+        icon: 'تلاوة',
+        title: 'التلاوة'
       },{
-        index: 8,
+        index: 4,
         component: 'SealdoaaPage',
-        icon: 'ios-paper-outline',
+        icon: 'دعاء الختم',
         title: 'دعاء الختم'
+      },{
+        index: 5,
+        component: 'ExplainPage',
+        icon: 'تفسير',
+        title: 'التفسير'
+      },{
+        index: 6,
+        component: 'SettingsPage',
+        icon: 'الاعدادات',
+        title: 'الاعدادات'
+      },{
+        index: 7,
+        component: 'SearchPage',
+        icon: 'البحث',
+        title: 'البحث'
       }
     ];
+
+    this.scheduleNotifications();
   }
+
   public navTo(page:string, params:any={}):void {
     this.navCtrl.push(page, params)
+  }
+
+  scheduleNotifications() {
+    this.localNotification.schedule(
+      {
+        text: 'Delayed ILocalNotification',
+        trigger: {at: new Date(new Date().getTime() + 3600)},
+        led: 'FF0000',
+        sound: null
+     }
+    )
   }
 
 }

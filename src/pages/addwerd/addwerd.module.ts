@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { DailyreadPage } from './dailyread';
+import { AddwerdPage } from './addwerd';
 import {WerdProvider} from "../../providers/werd/werd";
 
 @NgModule({
   declarations: [
-    DailyreadPage,
+    AddwerdPage,
   ],
   imports: [
-    IonicPageModule.forChild(DailyreadPage),
+    IonicPageModule.forChild(AddwerdPage),
   ],
   providers: [
     WerdProvider
   ]
 })
-export class DailyreadPageModule {}
+export class AddwerdPageModule {}

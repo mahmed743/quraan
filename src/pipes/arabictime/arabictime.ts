@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MinLengthValidator } from '@angular/forms';
 
 @Pipe({
   name: 'arabictime',

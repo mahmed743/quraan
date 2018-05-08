@@ -7,15 +7,21 @@ page-home {
     ion-list {
       position: absolute;
       bottom: 0;
-      width: 75vw;
-      left: 13vw;
+      left: 0;
       text-align: center;
+      display: grid;
+      grid-template-columns: 25% 25% 25% 25%;
+      padding: 14px;
       button {
         box-shadow: none !important;
-        width: 30%;
-        border-radius: 30px !important;
+        border-radius: 28px !important;
         min-height: 80px;
+        margin: 0.4rem !important;
         color: $primary !important;
+        font-size: 1.2rem !important;
+        img {
+          padding-bottom: 4px;
+        }
         .button-inner {
           flex-direction: column;
           ion-icon {

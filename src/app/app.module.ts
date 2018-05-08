@@ -10,7 +10,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QuraanProvider } from '../providers/quraan/quraan';
 import { PraytimeProvider } from '../providers/praytime/praytime';
-
+import { WerdProvider } from '../providers/werd/werd';
+import {IonicStorageModule} from '@ionic/storage';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -23,7 +24,10 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: ''
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -41,7 +45,8 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     QuraanProvider,
-    PraytimeProvider
+    PraytimeProvider,
+    WerdProvider,
   ]
 })
 export class AppModule {}
