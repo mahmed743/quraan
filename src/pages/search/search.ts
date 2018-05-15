@@ -13,7 +13,6 @@ export class SearchPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
   }
 
   search() {

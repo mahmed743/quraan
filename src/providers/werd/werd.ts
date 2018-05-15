@@ -1,20 +1,20 @@
 
 import { Injectable } from '@angular/core';
-import {Storage} from "@ionic/storage";
+import { Storage } from "@ionic/storage";
 
 
 @Injectable()
 export class WerdProvider {
 
   constructor(public storage: Storage) {
-      //this.storage.clear()
+    //this.storage.clear()
   }
 
-  getStaticWerd () {
+  getStaticWerd() {
     return this.storage.get('static:werds')
   }
 
-  addStaticWerds () {
+  addStaticWerds() {
     return this.storage.set('static:werds', [{
       name: 'اية الكرسى',
       type: 'ayah',
@@ -37,21 +37,21 @@ export class WerdProvider {
     }])
   }
 
-  getPrivateWerd () {
+  getPrivateWerd() {
 
-      return this.storage.get('private:werds')
+    return this.storage.get('private:werds')
   }
 
-  async addPrivateWerd (werd) {
+  async addPrivateWerd(werd) {
 
 
-      let privateWerds = await this.storage.get('private:werds') || [];
-      let werdsLength = privateWerds.length;
+    let privateWerds = await this.storage.get('private:werds') || [];
+    let werdsLength = privateWerds.length;
     if (werd.type == 'ayah') {
       werd.opened = false
     }
-    werd.id = werdsLength?(privateWerds[werdsLength-1].id+1):0;
-      return this.storage.set('private:werds', [...privateWerds,werd])
+    werd.id = werdsLength ? (privateWerds[werdsLength - 1].id + 1) : 0;
+    return this.storage.set('private:werds', [...privateWerds, werd])
   }
 
   async removePrivateWerd(index) {
