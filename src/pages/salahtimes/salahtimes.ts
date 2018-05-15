@@ -4,10 +4,9 @@ import { PraytimeProvider } from '../../providers/praytime/praytime';
 import {toPairs} from 'lodash';
 import {
   trigger,
-  state,
   style,
   animate,
-  transition
+  transition,
 } from '@angular/animations';
 @IonicPage()
 @Component({

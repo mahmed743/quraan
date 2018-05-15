@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController, Platform} from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 interface Page {
   index: number,
   title: string,
@@ -15,10 +16,17 @@ interface Page {
 })
 export class HomePage {
   homePages:Page[];
-  constructor(public navCtrl: NavController, public localNotification: LocalNotifications) {
+  constructor(public navCtrl: NavController,
+    public localNotification: LocalNotifications,
+    public screenOrientation: ScreenOrientation,
+    public platform: Platform
+  ) {
 
   }
   ionViewDidLoad() {
+    if (this.platform.is('cordova')) {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    }
     this.homePages = [
       {
         index: 0,

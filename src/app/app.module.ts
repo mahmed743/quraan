@@ -14,6 +14,9 @@ import { WerdProvider } from '../providers/werd/werd';
 import {IonicStorageModule} from '@ionic/storage';
 import { AppnotificatiosProvider } from '../providers/appnotificatios/appnotificatios';
 import { ConfigProvider } from '../providers/config/config';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { DocumentViewer } from '@ionic-native/document-viewer';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -51,6 +54,9 @@ export function createTranslateLoader(http: HttpClient) {
     WerdProvider,
     AppnotificatiosProvider,
     ConfigProvider,
+    File,
+    FileTransfer,
+    DocumentViewer
   ]
 })
 export class AppModule {}

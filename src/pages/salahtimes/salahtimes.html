@@ -7,9 +7,10 @@
 
 <ion-content padding>
   <ion-list>
-
+    <p text-center margin>
+      <ion-spinner *ngIf="!times"></ion-spinner>
+    </p>
 <ion-item *ngFor="let time of times" [@itemEnter]="'void'">
-
       <div class="pray-time">
         <p>{{time[0] | translate}}</p>
         <p>{{time[1]| arabictime}}</p>
