@@ -2,11 +2,28 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PraytimeProvider } from '../../providers/praytime/praytime';
 import {toPairs} from 'lodash';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 @IonicPage()
 @Component({
   selector: 'page-salahtimes',
-  templateUrl: 'salahtimes.html',
+    templateUrl: 'salahtimes.html',
+    animations: [
+      trigger('itemEnter', [
+        transition('void => *', [
+          style({ transform: 'translateX(0)' }),
+          animate(250)
+        ]), transition('* => void', [
+          style({ transform: 'translateX(100%)' }),
+          animate(250)
+        ]) 
+    ])
+  ]
 })
 export class SalahtimesPage {
   times: any;
