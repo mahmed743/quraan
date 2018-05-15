@@ -3,16 +3,41 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {QuraanProvider} from "../../providers/quraan/quraan";
 import {values} from  'lodash'
 import 'rxjs/add/operator/pluck';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+
+enum AudioStateToggle {
+  'inactive',
+  'active'
+}
 @IonicPage()
 @Component({
   selector: 'page-recital',
   templateUrl: 'recital.html',
+  animations: [
+    trigger('show', [
+      state('inactive', style({
+        transform: 'scaleX(0)'
+      })),
+      state('active',   style({
+        transform: 'scaleX(1)'
+      })),
+      transition('inactive => active', animate('100ms ease-in')),
+      transition('active => inactive', animate('100ms ease-out')),
+    ])
+  ]
 })
 export class RecitalPage {
   verses:any[];
   pageNum: number = 1;
   audio:HTMLAudioElement;
   isOn:boolean = false;
+  showAudioControls: AudioStateToggle|keyof AudioStateToggle = AudioStateToggle.active;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -56,4 +81,11 @@ export class RecitalPage {
   trackByFn(index, item) {
     return index; // or item.id
   }
+
+  toggleAudioCtrl() {
+    this.showAudioControls = this.showAudioControls?AudioStateToggle[AudioStateToggle.inactive]:AudioStateToggle[AudioStateToggle.active];
+    console.log(this.showAudioControls);
+  }
+
+
 }

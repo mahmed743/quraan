@@ -12,6 +12,8 @@ import { QuraanProvider } from '../providers/quraan/quraan';
 import { PraytimeProvider } from '../providers/praytime/praytime';
 import { WerdProvider } from '../providers/werd/werd';
 import {IonicStorageModule} from '@ionic/storage';
+import { AppnotificatiosProvider } from '../providers/appnotificatios/appnotificatios';
+import { ConfigProvider } from '../providers/config/config';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,6 +49,8 @@ export function createTranslateLoader(http: HttpClient) {
     QuraanProvider,
     PraytimeProvider,
     WerdProvider,
+    AppnotificatiosProvider,
+    ConfigProvider,
   ]
 })
 export class AppModule {}
