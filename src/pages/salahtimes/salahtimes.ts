@@ -8,6 +8,8 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { AppnotificatiosProvider } from '../../providers/appnotificatios/appnotificatios';
+import { TranslateService } from '@ngx-translate/core';
 @IonicPage()
 @Component({
   selector: 'page-salahtimes',
@@ -28,12 +30,13 @@ export class SalahtimesPage {
   times: any;
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
-    public prayTime: PraytimeProvider
+    public prayTime: PraytimeProvider,
+    public appNotifications: AppnotificatiosProvider,
+    public translate: TranslateService
     ) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SalahtimesPage');
     this.getUserDataFormIp();
   }
 
@@ -53,7 +56,11 @@ export class SalahtimesPage {
           console.log('Pray Data', data);
           this.times = toPairs(data.data.timings).filter(time=>(time[0]!='Sunset'&&time[0]!='Imsak'&&time[0]!='Midnight'))
           console.log(this.times);
-
+          this.times.forEach(async(time) => {
+            let [salah, date] = time;
+            let salahTranslatedName = await this.translate.get(salah).toPromise()
+            this.appNotifications.scheduleNotifications(salahTranslatedName, new Date(new Date(date).getTime() - (1000 * 60 * 30)));
+          })
         })
 
     });

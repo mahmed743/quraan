@@ -17,6 +17,7 @@ import { ConfigProvider } from '../providers/config/config';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { DocumentViewer } from '@ionic-native/document-viewer';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -56,7 +57,8 @@ export function createTranslateLoader(http: HttpClient) {
     ConfigProvider,
     File,
     FileTransfer,
-    DocumentViewer
+    DocumentViewer,
+    LocalNotifications
   ]
 })
 export class AppModule {}

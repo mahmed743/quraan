@@ -22,13 +22,13 @@ enum AudioStateToggle {
   animations: [
     trigger('show', [
       state('inactive', style({
-        transform: 'scaleX(0)'
+        transform: 'translateX(120%)'
       })),
       state('active',   style({
-        transform: 'scaleX(1)'
+        transform: 'translateX(0)'
       })),
-      transition('inactive => active', animate('100ms ease-in')),
-      transition('active => inactive', animate('100ms ease-out')),
+      transition('inactive => active', animate('250ms ease-in')),
+      transition('active => inactive', animate('250ms ease-out')),
     ])
   ]
 })
@@ -37,7 +37,7 @@ export class RecitalPage {
   pageNum: number = 1;
   audio:HTMLAudioElement;
   isOn:boolean = false;
-  showAudioControls: AudioStateToggle|keyof AudioStateToggle|string = AudioStateToggle.active;
+  showAudioControls: AudioStateToggle|keyof AudioStateToggle|string = AudioStateToggle[1];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -83,7 +83,8 @@ export class RecitalPage {
   }
 
   toggleAudioCtrl() {
-    this.showAudioControls = this.showAudioControls?AudioStateToggle[AudioStateToggle.inactive]:AudioStateToggle[AudioStateToggle.active];
+    console.log(this.showAudioControls);
+    this.showAudioControls = this.showAudioControls==AudioStateToggle[1]?AudioStateToggle[AudioStateToggle.inactive]:AudioStateToggle[AudioStateToggle.active];
     console.log(this.showAudioControls);
   }
   contentSwipe(dir) {

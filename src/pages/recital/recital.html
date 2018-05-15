@@ -17,9 +17,9 @@
 
 <ion-content (swipe)="contentSwipe($event)">
   <section class="recital">
-<!-- <img src="https://hosam1696.github.io/quran-ios/Quran/Resources/images/images_1280/width_1280/page{{pageNum|number:'3.'}}.png" alt=""> -->
+    <img *ngIf="pageNum>=3" src="https://hosam1696.github.io/quran-ios/Quran/Resources/images/images_1280/width_1280/page{{pageNum|number:'3.'}}.png" alt="">
 
-    <img src="https://hosam1696.github.io/Quran/img/{{pageNum|number:'3.'}}.jpg" alt="">
+    <img *ngIf="pageNum<3" src="https://hosam1696.github.io/Quran/img/{{pageNum|number:'3.'}}.jpg" alt="">
     <!-- <a *ngFor="let verse of verses;trackBy:trackByFn"  [class.selected]="verse.selected" (click)="selectVerse(verse)">{{verse.verse}}({{verse.ayah}})</a> -->
  <!--/ إِنَّهُ لَقُرْآنٌ كَرِيمٌ (77) فِي كِتَابٍ مَّكْنُونٍ (78) لَّا يَمَسُّهُ إِلَّا الْمُطَهَّرُونَ (79) تَنزِيلٌ مِّن رَّبِّ الْعَالَمِينَ (80) أَفَبِهَٰذَا الْحَدِيثِ أَنتُم مُّدْهِنُونَ (81) وَتَجْعَلُونَ رِزْقَكُمْ أَنَّكُمْ تُكَذِّبُونَ (82) فَلَوْلَا إِذَا بَلَغَتِ الْحُلْقُومَ (83) وَأَنتُمْ حِينَئِذٍ تَنظُرُونَ (84) وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنكُمْ وَلَٰكِن لَّا تُبْصِرُونَ (85) فَلَوْلَا إِن كُنتُمْ غَيْرَ مَدِينِينَ (86) تَرْجِعُونَهَا إِن كُنتُمْ صَادِقِينَ (87) فَأَمَّا إِن كَانَ مِنَ الْمُقَرَّبِينَ (88) فَرَوْحٌ وَرَيْحَانٌ وَجَنَّتُ نَعِيمٍ (89) وَأَمَّا إِن كَانَ مِنْ أَصْحَابِ الْيَمِينِ (90) فَسَلَامٌ لَّكَ مِنْ أَصْحَابِ الْيَمِينِ (91) وَأَمَّا إِن كَانَ مِنَ الْمُكَذِّبِينَ الضَّالِّينَ (92) فَنُزُلٌ مِّنْ حَمِيمٍ (93) وَتَصْلِيَةُ جَحِيمٍ (94) إِنَّ هَٰذَا لَهُوَ حَقُّ الْيَقِينِ (95) فَسَبِّحْ بِاسْمِ رَبِّكَ الْعَظِيمِ (96)-->
   </section>
@@ -33,20 +33,20 @@
       <ion-icon name="md-arrow-dropright"></ion-icon>
     </button>
   </section>
-
+<div class="cta-btns">
+  <div class="close">
+    <button [@show]="showAudioControls" ion-button small icon-only no-margin color="primary" (click)="toggleAudioCtrl()">
+      <ion-icon [name]="showAudioControls=='active'?'close':'ios-arrow-forward'"></ion-icon>
+    </button>
+  </div>
+</div>
   <section class="audio-section" [@show]="showAudioControls">
       <!--<div class="rewind-btns">
           <button ion-button clear>
               <ion-icon [name]="isOn?'pause':'play'" (click)="changePlayState()"></ion-icon>
             </button>
       </div>-->
-      <div class="cta-btns">
-        <div class="close">
-          <button ion-button  small icon-only no-margin color="primary" (click)="toggleAudioCtrl()">
-              <ion-icon name="close"></ion-icon>  
-          </button>
-        </div>
-      </div>
+      
     <div class="rewind-btns">
       <button ion-button clear>
         <ion-icon name="rewind"></ion-icon>

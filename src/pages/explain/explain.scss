@@ -3,18 +3,33 @@ page-explain {
     display: flex;
   }
   ion-content {
+    .scroll-content {
+      padding: 22px 23px 28px 22px !important;
+      background-color: $primary;
+      background-image: url('../assets/imgs/720.png');
+      background-size: 100% 100%
+    }
+
     .recital {
       width: 100%;
       height: 100%;
-      border: 18px solid $primary;
-      padding: 10px;
       font-size: 16px;
       line-height: 1.8;
-      text-align: justify;
+      //text-align: justify;
       background-color: #E2FEDE;
+      font-size: 5.35vw;
+      text-align: justify;
+      line-height: 1.5;
+      padding: 4px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
       a {
         color: #222!important;
-        padding: 6px;
+        margin-left: 6px;
+        font-family: 'UthmanicHafs', 'jf-flat-regular', sans-serif;
         &.selected {
           background-color: #C4D9BF;
           color: #000 !important;
@@ -26,11 +41,11 @@ page-explain {
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-51%) translateY(-8px);
+      width: 65px;
       display: flex;
       align-items: center;
-      background-color: #7FEDA1;
-      box-shadow: inset 1px 1px #7FEDA1, inset -1px -1px #7FEDA1, inset 2px 2px #0e7879, inset -2px -2px #0e7879;
+      background-color: #7FEDA1; //box-shadow: inset 1px 1px #7FEDA1, inset -1px -1px #7FEDA1, inset 2px 2px #0e7879, inset -2px -2px #0e7879;
       span {
         width: 20px;
         text-align: center;
@@ -40,6 +55,35 @@ page-explain {
         height: 1.4em !important;
       }
     }
+    .tafseer-section {
+      position: absolute;
+      bottom: 28px;
+      width: calc(100vw - 44px);
+      padding: 8px;
+      background-color: rgba(5, 125, 128, 0.92);
+      left: 22px;
+      .verse-tafseer {
+        font-size: 12px;
+        color: #eee;
+        max-height: 60px;
+        overflow-y: scroll;
+      }
+      ion-select {
+        position: relative;
+        min-width: 50% !important;
+        transform: scale(0.8);
+            margin: 5px auto;
+            background-color: #fff;
+            border-radius: 33px;
+            max-height: 48px;
+            .select-icon {
+              margin: 5px 10px
+            }
+
+      }
+
+    }
+
   }
   ion-header {
     ion-navbar {

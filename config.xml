@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.methaaq.quraanhayah" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>hayaaquraan</name>
+<widget id="com.methaaq.lifewithquran" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>الحياة مع القران</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="ceo@methaaq.com" href="http://methaq.net.sa/">Methaaq Team</author>
     <content src="index.html" />
@@ -89,5 +89,6 @@
     <plugin name="cordova-android-support-gradle-release" spec="^1.4.2">
         <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
     </plugin>
+    <allow-navigation href="http://192.168.1.13:8100" />
     <engine name="android" spec="7.1.0" />
 </widget>

@@ -15,6 +15,8 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 export class ExplainPage {
   verses:any[];
   pageNum: number = 1;
+  tafseerName: string = 'Arabic Saddi Tafseer';
+  tafseer: string = '';
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -29,7 +31,7 @@ export class ExplainPage {
 
   }
   openPDF() {
-    this.documentViewer.viewDocument('assets/standard1-quran.pdf', 'application/pdf', {title:'pdf file'})
+    this.documentViewer.viewDocument('assets/ngcourse2.pdf', 'application/pdf', {title:'pdf file'})
 
   }
 
@@ -65,10 +67,18 @@ export class ExplainPage {
   }
   selectVerse(verse) {
     this.verses = values(this.verses).map(ver=>({...ver, selected:ver==verse}));
-
+    console.log('verse =>', verse);
+    this.quraanProvider.getTafseer(this.tafseerName, 1, verse.ayah)
+      .subscribe((result:any) => {
+        console.info(result.tafsirs);
+        let verseTafseer = result.tafsirs.find(x => x.resource_name == this.tafseerName);
+        this.tafseer = verseTafseer.text;
+      })
   }
   trackByFn(index, item) {
     return index; // or item.id
   }
+
+  
 
 }

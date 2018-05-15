@@ -82,8 +82,8 @@ export class HomePage {
   scheduleNotifications() {
     this.localNotification.schedule(
       {
-        text: 'Delayed ILocalNotification',
-        trigger: {at: new Date(new Date().getTime() + 3600)},
+        text: 'لا تنسى قراءة الورد اليومى',
+        trigger: {at: new Date(new Date().getTime() + 100000)},
         led: 'FF0000',
         sound: null
      }

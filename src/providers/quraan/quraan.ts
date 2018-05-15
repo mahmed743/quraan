@@ -1,6 +1,6 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class QuraanProvider {
@@ -11,5 +11,9 @@ export class QuraanProvider {
 
   getPage(pageNum) {
     return this.http.get(`${this.API_URL}/page/${pageNum}/quran-simple`, {params: new HttpParams().append('key', this.API_KEY)})
+  }
+
+  getTafseer(tafseerName, part, verseNumber) {
+    return this.http.get(`http://staging.quran.com:3000/api/v3/chapters/${part}/verses/${verseNumber}/tafsirs`)
   }
 }

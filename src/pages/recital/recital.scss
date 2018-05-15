@@ -20,6 +20,9 @@ page-recital {
       line-height: 1.8;
       text-align: justify;
       background-color: #E2FEDE;
+      .page-verses {
+        padding: 5px 10px;
+      }
       img {
       
         width: 100%;
@@ -29,7 +32,7 @@ page-recital {
 
       //font-family: 'UthmanicHafs', sans-serif;
         color: #222!important;
-        padding: 6px;
+        margin: 6px;
         &.selected {
           background-color: #C4D9BF;
           color: #000 !important;
@@ -56,12 +59,24 @@ page-recital {
         height: 1.4em !important;
       }
     }
+    .cta-btns {
+      position: absolute;
+      width: 100%;
+      right: 22px;
+      //transform: translateY(-100%);
+      bottom: 163px;
+      button {
+        box-shadow: none !important;
+      }
+    }
+
     .audio-section {
       position:  absolute;
       bottom: 28px;
       width: calc(100vw - 44px);
       background-color: rgba(5, 125, 128, 0.92);
       left:22px;
+      
       .rewind-btns {
         padding: 8px;
         display: flex;

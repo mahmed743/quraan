@@ -1,17 +1,25 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
-/*
-  Generated class for the AppnotificatiosProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AppnotificatiosProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello AppnotificatiosProvider Provider');
+  constructor(
+    public localNotification: LocalNotifications) {
+
+  }
+
+  scheduleNotifications(text, time) {
+    this.localNotification.schedule(
+      {
+        text ,
+        trigger: { at: time },
+        led: 'FF0000',
+        sound: null
+      }
+    )
   }
 
 }

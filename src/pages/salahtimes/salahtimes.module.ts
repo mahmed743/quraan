@@ -4,6 +4,7 @@ import { SalahtimesPage } from './salahtimes';
 import { PraytimeProvider } from '../../providers/praytime/praytime';
 import { TranslateModule } from '@ngx-translate/core';
 import { PipesModule } from '../../pipes/pipes.module';
+import { AppnotificatiosProvider } from '../../providers/appnotificatios/appnotificatios';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PipesModule } from '../../pipes/pipes.module';
     PipesModule
   ],
   providers: [
-    PraytimeProvider
+    PraytimeProvider,
+    AppnotificatiosProvider,
   ]
 })
 export class SalahtimesPageModule {}
