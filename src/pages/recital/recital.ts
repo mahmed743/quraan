@@ -11,7 +11,7 @@ import {
   transition
 } from '@angular/animations';
 
-enum AudioStateToggle {
+export enum AnimationStateToggle {
   'inactive',
   'active'
 }
@@ -37,7 +37,7 @@ export class RecitalPage {
   pageNum: number = 1;
   audio:HTMLAudioElement;
   isOn:boolean = false;
-  showAudioControls: AudioStateToggle|keyof AudioStateToggle|string = AudioStateToggle[1];
+  showAudioControls: AnimationStateToggle|keyof AnimationStateToggle|string = AnimationStateToggle[1];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -84,7 +84,7 @@ export class RecitalPage {
 
   toggleAudioCtrl() {
     console.log(this.showAudioControls);
-    this.showAudioControls = this.showAudioControls==AudioStateToggle[1]?AudioStateToggle[AudioStateToggle.inactive]:AudioStateToggle[AudioStateToggle.active];
+    this.showAudioControls = this.showAudioControls==AnimationStateToggle[1]?AnimationStateToggle[AnimationStateToggle.inactive]:AnimationStateToggle[AnimationStateToggle.active];
     console.log(this.showAudioControls);
   }
   contentSwipe(dir) {

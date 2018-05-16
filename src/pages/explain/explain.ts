@@ -1,38 +1,74 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import {QuraanProvider} from "../../providers/quraan/quraan";
-import { File } from '@ionic-native/file';
-import {values} from  'lodash';
+import {File} from '@ionic-native/file';
+import {values} from 'lodash';
 import 'rxjs/add/operator/pluck';
-import { DocumentViewer } from '@ionic-native/document-viewer';
-import { FileTransfer } from '@ionic-native/file-transfer';
+import {DocumentViewer} from '@ionic-native/document-viewer';
+import {FileTransfer} from '@ionic-native/file-transfer';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+import {AnimationStateToggle} from '../recital/recital';
+import {ConfigProvider, TafseerId} from '../../providers/config/config';
+
+interface Verse {
+  id: number,
+  surah: number,
+  ayah: number | string,
+  text?: string,
+  verse?: number
+}
 
 @IonicPage()
 @Component({
   selector: 'page-explain',
   templateUrl: 'explain.html',
+  animations: [
+    trigger('show', [
+      state('inactive', style({
+        transform: 'translateX(120%)'
+      })),
+      state('active', style({
+        transform: 'translateX(0)'
+      })),
+      transition('inactive => active', animate('250ms ease-in')),
+      transition('active => inactive', animate('250ms ease-out')),
+    ])
+  ]
 })
 export class ExplainPage {
-  verses:any[];
+  verses: any[];
+  selectedVers: Verse;
   pageNum: number = 1;
-  tafseerName: string = 'Arabic Saddi Tafseer';
+  tafseerName: string ;
   tafseer: string = '';
+  allTafseers: TafseerId[];
+  showTafseer: AnimationStateToggle | keyof AnimationStateToggle | string = AnimationStateToggle[1];
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
-    public documentViewer: DocumentViewer,
-    public file: File,
-    public platform: Platform,
-    public transfer: FileTransfer
+              public configProvider: ConfigProvider,
+              public documentViewer: DocumentViewer,
+              public file: File,
+              public platform: Platform,
+              public transfer: FileTransfer
   ) {
   }
-  ionViewDidLoad() {
+
+  async ionViewDidLoad() {
+    this.allTafseers = this.configProvider.availableTafssers;
+    this.tafseerName = await this.configProvider.getTafseerName();
     this.getPage();
-
   }
-  openPDF() {
-    this.documentViewer.viewDocument('assets/ngcourse2.pdf', 'application/pdf', {title:'pdf file'})
 
+  openPDF() {
+    this.documentViewer.viewDocument('assets/ngcourse2.pdf', 'application/pdf', {title: 'pdf file'})
   }
 
   getPDF() {
@@ -49,36 +85,56 @@ export class ExplainPage {
         this.documentViewer.viewDocument(url, 'application/pdf', {});
       })
   }
-  getPage(num=1) {
+
+  getPage(num = 1) {
     this.quraanProvider.getPage(num)
       .pluck('quran', 'quran-simple')
-      .subscribe(data=>{
-        console.log(data,values(data));
-        this.verses = values(data).map(verse=>({...verse, selected:false}));
+      .subscribe(data => {
+        this.verses = values(data).map((verse, index) => ({...verse, selected: index == 0}));
+        this.selectedVers = this.verses[0];
+        if (this.verses.length) {
+          this.getTafseer(this.tafseerName);
+        }
       })
   }
+
   popPage() {
 
-    this.navCtrl.setRoot('HomePage', {}, {animate:true})
+    this.navCtrl.setRoot('HomePage', {}, {animate: true})
     //this.navCtrl.popToRoot()
   }
+
   changePage(change) {
-    this.getPage(this.pageNum+=change)
+    this.getPage(this.pageNum += change)
   }
+
   selectVerse(verse) {
-    this.verses = values(this.verses).map(ver=>({...ver, selected:ver==verse}));
+    this.verses = values(this.verses).map(ver => ({...ver, selected: ver == verse}));
+    this.selectedVers = verse;
     console.log('verse =>', verse);
-    this.quraanProvider.getTafseer(this.tafseerName, 1, verse.ayah)
-      .subscribe((result:any) => {
+    this.getTafseer(this.tafseerName)
+
+  }
+
+  getTafseer(tafseerName, surahNumber = this.selectedVers.surah, ayahNumber = this.selectedVers.ayah) {
+    this.tafseerName = tafseerName;
+    this.configProvider.selectedTafseer = tafseerName;
+    this.quraanProvider.getTafseer(tafseerName, surahNumber, ayahNumber)
+      .subscribe((result: any) => {
         console.info(result.tafsirs);
         let verseTafseer = result.tafsirs.find(x => x.resource_name == this.tafseerName);
         this.tafseer = verseTafseer.text;
       })
   }
+
+  toggleTafseerCtrls() {
+    this.showTafseer = this.showTafseer == AnimationStateToggle[1] ? AnimationStateToggle[AnimationStateToggle.inactive] : AnimationStateToggle[AnimationStateToggle.active];
+
+  }
+
   trackByFn(index, item) {
     return index; // or item.id
   }
 
-  
 
 }

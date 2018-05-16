@@ -91,4 +91,5 @@
     </plugin>
     <allow-navigation href="http://192.168.1.13:8100" />
     <engine name="android" spec="7.1.0" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>

@@ -34,7 +34,7 @@ page-recital {
         color: #222!important;
         margin: 6px;
         &.selected {
-          background-color: #C4D9BF;
+          background-color: #bce0b3;
           color: #000 !important;
           border-radius: 0 4px  0 4px
         }
@@ -44,11 +44,11 @@ page-recital {
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translateX(-51%) translateY(-8px);
+      transform: translateX(-53%) translateY(-8px);
       width: 65px;
       display: flex;
       align-items: center;
-      background-color: #7FEDA1;
+      background-color: transparent;
       //box-shadow: inset 1px 1px #7FEDA1, inset -1px -1px #7FEDA1, inset 2px 2px #0e7879, inset -2px -2px #0e7879;
       span {
         width: 20px;
@@ -57,6 +57,9 @@ page-recital {
       button {
         margin: 0 !important;
         height: 1.4em !important;
+        ion-icon {
+          color: transparent !important
+        }
       }
     }
     .cta-btns {

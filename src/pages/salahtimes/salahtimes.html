@@ -1,6 +1,6 @@
 <ion-header no-lines>
   <ion-navbar color="light">
-    <ion-title text-center>مواعيد الصلاة</ion-title>
+    <ion-title text-center>{{"prayTime"| translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,12 +10,12 @@
     <p text-center margin>
       <ion-spinner *ngIf="!times"></ion-spinner>
     </p>
-<ion-item *ngFor="let time of times" [@itemEnter]="'void'">
+    <ion-item *ngFor="let time of times" [@itemEnter]="'void'">
       <div class="pray-time">
         <p>{{time[0] | translate}}</p>
-        <p>{{time[1]| arabictime}}</p>
+        <p>{{time[1] | arabictime}}</p>
       </div>
       <img src="assets/imgs/prayer.webp" alt="">
-    </ion-item>  
+    </ion-item>
   </ion-list>
 </ion-content>

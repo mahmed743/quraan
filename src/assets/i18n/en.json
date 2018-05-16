@@ -1,8 +1,19 @@
 {
-    "fajr": "الفجر",
-    "Sunrise": "الشروق",
-    "Dhuhr": "الظهر",
-    "Asr": "العصر",
-    "Maghrib": "المغرب",
-    "Isha": "العشاء"
+    "Fajr": "Fajr",
+    "Sunrise": "Sunrise",
+    "Dhuhr": "Dhuhr",
+    "Asr": "Asr",
+    "Maghrib": "Maghrib",
+    "Isha": "Isha",
+  "الميسر": "Moyaser",
+  "ابن كثير": "Ebn Katheer ",
+  "القرطبى": "Qurtubi Tafseer",
+  "التنوير": "Tanweer Tafseer",
+  "الوسيط": "Waseet Tafseer",
+  "البغوى": "Baghawy Tafseer",
+  "الطبرى": "AlTobry Tafseer",
+  "السعدى": "Saddi Tafseer",
+  "اللغة": "Language",
+  "التفسير" : "Tafseer",
+  "prayTime": "Pray Times"
 }

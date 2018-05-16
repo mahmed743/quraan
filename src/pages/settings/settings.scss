@@ -1,3 +1,39 @@
 page-settings {
+    ion-content {
+        * {
+            font-size: 11px
+        }
+      .button-inner {
+        position: relative;
+      }
+        ion-list {
+            ion-item-divider {
+                font-weight: bold;
+                text-align: center
+            }
+          ion-item {
+            ion-label {
+              color: #555 !important
+            }
+            &.lang {
+              ion-label {
+                &:first-of-type {
+                  max-width: 40%;
+                }
+                button {
+                  box-shadow: none !important;
+                  color: $primary !important;
+                  max-width: 45% !important;
+                  &.selected {
+                    border: 2px solid $primary !important;
+                    background-color: $primary;
+                    color: #fff !important;
+                  }
+                }
+              }
+            }
 
+          }
+        }
+    }
 }

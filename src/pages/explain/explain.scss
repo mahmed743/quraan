@@ -31,21 +31,31 @@ page-explain {
         margin-left: 6px;
         font-family: 'UthmanicHafs', 'jf-flat-regular', sans-serif;
         &.selected {
-          background-color: #C4D9BF;
+          background-color: #bce0b3;
           color: #000 !important;
           border-radius: 0 4px  0 4px
         }
+      }
+    }
+    .cta-btns {
+      position: absolute;
+      width: 100%;
+      right: 22px;
+      //transform: translateY(-100%);
+      bottom: 163px;
+      button {
+        box-shadow: none !important;
       }
     }
     .cta {
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translateX(-51%) translateY(-8px);
+      transform: translateX(-53%) translateY(-8px);
       width: 65px;
       display: flex;
       align-items: center;
-      background-color: #7FEDA1; //box-shadow: inset 1px 1px #7FEDA1, inset -1px -1px #7FEDA1, inset 2px 2px #0e7879, inset -2px -2px #0e7879;
+      background-color: transparent; //box-shadow: inset 1px 1px #7FEDA1, inset -1px -1px #7FEDA1, inset 2px 2px #0e7879, inset -2px -2px #0e7879;
       span {
         width: 20px;
         text-align: center;
@@ -53,24 +63,33 @@ page-explain {
       button {
         margin: 0 !important;
         height: 1.4em !important;
+        ion-icon {
+          color: transparent !important
+        }
       }
     }
     .tafseer-section {
       position: absolute;
       bottom: 28px;
       width: calc(100vw - 44px);
-      padding: 8px;
+      padding: 0 8px;
       background-color: rgba(5, 125, 128, 0.92);
       left: 22px;
+      height: 136px;
+      min-height: 136px;
+      max-height: 136px;
       .verse-tafseer {
         font-size: 12px;
         color: #eee;
-        max-height: 60px;
+        height:calc(100% - 73px);
         overflow-y: scroll;
+        border-top: 1px solid #086d6f;
+        margin: 0;
+        padding: 8px 0;
       }
       ion-select {
         position: relative;
-        min-width: 50% !important;
+        min-width: 40% !important;
         transform: scale(0.8);
             margin: 5px auto;
             background-color: #fff;
