@@ -6,7 +6,9 @@ import {DocumentDirection} from "ionic-angular/platform/platform";
 
 export enum langDir {
   'ar' = 'rtl',
-  'en' = 'ltr'
+  'en' = 'ltr',
+  'rtl' = 'ar',
+  'ltr' = 'en'
 }
 @IonicPage()
 @Component({

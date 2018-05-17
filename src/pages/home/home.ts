@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, Platform} from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { TranslateService } from '@ngx-translate/core';
+import { langDir } from '../settings/settings';
 interface Page {
   index: number,
   title: string,
@@ -16,10 +18,12 @@ interface Page {
 })
 export class HomePage {
   homePages:Page[];
+  appLang:string;
   constructor(public navCtrl: NavController,
     public localNotification: LocalNotifications,
     public screenOrientation: ScreenOrientation,
-    public platform: Platform
+    public platform: Platform,
+    public translate: TranslateService
   ) {
 
   }
@@ -27,6 +31,8 @@ export class HomePage {
     if (this.platform.is('cordova')) {
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     }
+    this.appLang = this.translate.currentLang;
+    
     this.homePages = [
       {
         index: 0,
@@ -76,7 +82,8 @@ export class HomePage {
   }
 
   public navTo(page:string, params:any={}):void {
-    this.navCtrl.push(page, params)
+    console.log('home app lang', this.appLang, this.platform.dir());
+    this.navCtrl.push(page, {...params, lang:langDir[this.platform.dir()]})
   }
 
   scheduleNotifications() {

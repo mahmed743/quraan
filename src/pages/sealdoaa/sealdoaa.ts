@@ -7,12 +7,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'sealdoaa.html',
 })
 export class SealdoaaPage {
-
+  appLang:string
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SealdoaaPage');
+  ionViewDidEnter() {
+    this.appLang = this.navParams.get('lang');
   }
 
 }

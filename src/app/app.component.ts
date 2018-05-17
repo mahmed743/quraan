@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Platform} from 'ionic-angular';
+import {Platform, Config} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TranslateService} from '@ngx-translate/core';
@@ -17,15 +17,10 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               translate: TranslateService,
-              configProvider: ConfigProvider
+              configProvider: ConfigProvider,
+              config: Config
   ) {
-    configProvider.getAppLang()
-      .then(lang => {
-        console.log('App Language', lang);
-        translate.setDefaultLang(lang);
-        translate.use(lang);
-        platform.setDir(langDir[lang] as DocumentDirection, true);
-      });
+    
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -33,6 +28,15 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
+      configProvider.getAppLang()
+      .then(lang => {
+        
+        translate.setDefaultLang(lang);
+        translate.use(lang);
+        platform.setDir(langDir[lang] as DocumentDirection, true);
+        config.set('backButtonIcon', 'arrow-'+(lang==='ar'?'forward':'back'));
+        console.log('App Language', lang, translate.currentLang);
+      });
     });
   }
 }

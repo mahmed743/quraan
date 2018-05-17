@@ -8,11 +8,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'search.html',
 })
 export class SearchPage {
-
+  appLang: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
+    this.appLang = this.navParams.get('lang');
+    console.log(this.navParams.data)
   }
 
   search() {

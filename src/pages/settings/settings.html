@@ -1,8 +1,17 @@
-
 <ion-header no-lines>
 
-  <ion-navbar color="light">
+  <ion-navbar color="light" hideBackButton>
+    <ion-buttons start>
+      <button ion-button clear>
+        <ion-icon name="placeholder"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title text-center>{{'الاعدادات'|translate}}</ion-title>
+    <ion-buttons left>
+      <button ion-button navPop icon-only>
+        <ion-icon [name]="settings.lang=='ar'?'arrow-back':'arrow-forward'"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -38,10 +47,9 @@
     <ion-item class="lang">
       <ion-label>{{'اللغة' | translate}}</ion-label>
       <ion-label>
-        <button  ion-button small round color="light" [class.selected]="settings.lang =='ar'" (click)="changeLang('ar')"> العربية</button>
-        <button  ion-button small round color="light" [class.selected]="settings.lang =='en'" (click)="changeLang('en')"> English</button>
+        <button ion-button small round color="light" [class.selected]="settings.lang =='ar'" (click)="changeLang('ar')"> العربية</button>
+        <button ion-button small round color="light" [class.selected]="settings.lang =='en'" (click)="changeLang('en')"> English</button>
       </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
-

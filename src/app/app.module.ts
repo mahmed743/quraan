@@ -32,7 +32,11 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp, {
-      backButtonText: ''
+      platforms: {
+        ios: {
+            backButtonText: ''
+        }
+      }
     }),
     TranslateModule.forRoot({
       loader: {

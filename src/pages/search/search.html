@@ -1,15 +1,25 @@
 
 <ion-header no-lines>
 
-  <ion-navbar color="light">
-    <ion-title text-center>البحث</ion-title>
-  </ion-navbar>
-  <ion-toolbar>
-    <ion-searchbar dir="rtl" showCancelButton="false" (ionInput)="search()" animates="true" placeholder="ابحث" type="search" (ionClear)="onSearchClear()"></ion-searchbar>
-
-  </ion-toolbar>
-</ion-header>
-
+    <ion-navbar color="light" hideBackButton>
+      <ion-buttons start>
+        <button ion-button clear>
+          <ion-icon name="placeholder"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title text-center>{{'البحث'|translate}}</ion-title>
+      <ion-buttons left>
+        <button ion-button navPop icon-only>
+          <ion-icon [name]="appLang=='ar'?'arrow-back':'arrow-forward'"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar dir="rtl" showCancelButton="false" (ionInput)="search()" animates="true" placeholder="ابحث" type="search" (ionClear)="onSearchClear()"></ion-searchbar>
+    
+      </ion-toolbar>
+  
+  </ion-header>
 
 <ion-content no-padding>
   <ion-list>
