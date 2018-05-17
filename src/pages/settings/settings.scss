@@ -6,6 +6,9 @@ page-settings {
       .button-inner {
         position: relative;
       }
+      .select-text {
+        padding: 3px 10px;
+      }
         ion-list {
             ion-item-divider {
                 font-weight: bold;
@@ -23,7 +26,8 @@ page-settings {
                 button {
                   box-shadow: none !important;
                   color: $primary !important;
-                  max-width: 45% !important;
+                  max-width: 50% !important;
+                  margin: 0 !important;
                   &.selected {
                     border: 2px solid $primary !important;
                     background-color: $primary;

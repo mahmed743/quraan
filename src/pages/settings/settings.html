@@ -2,7 +2,7 @@
 <ion-header no-lines>
 
   <ion-navbar color="light">
-    <ion-title text-center>الاعدادات</ion-title>
+    <ion-title text-center>{{'الاعدادات'|translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,26 +11,26 @@
 <ion-content no-padding>
   <ion-list>
     <ion-item-divider>
-      الاشعارات
+      {{'الاشعارات'| translate}}
     </ion-item-divider>
     <ion-item>
       <ion-label>
-        تنبيه بالورد اليومى
+        {{'dailywerdNotification'|translate}}
       </ion-label>
       <ion-toggle [(ngModel)]="settings.werdNotifications"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>
-        تنبيه بمواعيد الصلاة
+        {{'salahTimeNotification'|translate}}
       </ion-label>
       <ion-toggle [(ngModel)]="settings.prayNotifications"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>
-        التفسير
+        {{'التفسير' | translate}}
       </ion-label>
-      <ion-select [(ngModel)]="configProvider.defaultTafseerName">
-        <ion-option *ngFor="let tafseer of configProvider.availableTafssers" [value]="tafseer.resource_name">{{tafseer.name}}</ion-option>
+      <ion-select [ngModel]="configProvider.defaultTafseerName" (ngModelChange)="changeTafseer($event)">
+        <ion-option *ngFor="let tafseer of configProvider.availableTafssers" [value]="tafseer.resource_name">{{tafseer.name|translate}}</ion-option>
       </ion-select>
     </ion-item>
 

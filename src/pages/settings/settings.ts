@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform, Config} from 'ionic-angular';
 import {TranslateService} from "@ngx-translate/core";
 import {ConfigProvider} from "../../providers/config/config";
 import {DocumentDirection} from "ionic-angular/platform/platform";
@@ -23,7 +23,8 @@ export class SettingsPage {
               public navParams: NavParams,
               public platform: Platform,
               public translate: TranslateService,
-              public configProvider: ConfigProvider
+              public configProvider: ConfigProvider,
+              public config: Config
               ) {
   }
 
@@ -31,11 +32,17 @@ export class SettingsPage {
     this.settings.lang = await this.configProvider.getAppLang();
   }
 
+  changeTafseer(tafsserName) {
+    this.configProvider.selectedTafseer = tafsserName;
+  }
+
   changeLang(lang:string) {
     this.settings.lang = lang;
     this.platform.setDir(langDir[lang] as DocumentDirection, true);
     this.translate.setDefaultLang(lang);
     this.translate.use(lang);
+    this.config.set('backButtonIcon', 'arrow-'+(lang==='ar'?'forward':'back'));
     this.configProvider.changeLang(lang);
+    console.log('config change detector', this.config.get('backButtonIcon'))
   }
 }

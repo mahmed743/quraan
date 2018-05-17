@@ -13,7 +13,8 @@
     <ion-item *ngFor="let time of times" [@itemEnter]="'void'">
       <div class="pray-time">
         <p>{{time[0] | translate}}</p>
-        <p>{{time[1] | arabictime}}</p>
+        <p *ngIf="appLang == 'ar'">{{time[1] | arabictime}}</p>
+        <p *ngIf="appLang == 'en'">{{dayTime(time[1])}}</p>
       </div>
       <img src="assets/imgs/prayer.webp" alt="">
     </ion-item>

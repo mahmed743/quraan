@@ -35,17 +35,12 @@
   </section>
 <div class="cta-btns">
   <div class="close">
-    <button [@show]="showAudioControls" ion-button small icon-only no-margin color="primary" (click)="toggleAudioCtrl()">
+    <button [@show]="showAudioControls" ion-button small icon-only no-margin color="light" (click)="toggleAudioCtrl()">
       <ion-icon [name]="showAudioControls=='active'?'close':'ios-arrow-forward'"></ion-icon>
     </button>
   </div>
 </div>
   <section class="audio-section" [@show]="showAudioControls">
-      <!--<div class="rewind-btns">
-          <button ion-button clear>
-              <ion-icon [name]="isOn?'pause':'play'" (click)="changePlayState()"></ion-icon>
-            </button>
-      </div>-->
       
     <div class="rewind-btns">
       <button ion-button clear>

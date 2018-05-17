@@ -28,6 +28,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SalahtimesPage {
   times: any;
+  appLang:string;
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
     public prayTime: PraytimeProvider,
@@ -38,6 +39,7 @@ export class SalahtimesPage {
 
   ionViewDidLoad() {
     this.getUserDataFormIp();
+    this.appLang = this.translate.currentLang
   }
 
   getUserDataFormIp() {
@@ -64,6 +66,11 @@ export class SalahtimesPage {
         })
 
     });
+  }
+
+  dayTime(time) {
+    let hour = time.split(':')[0];
+    return time + (hour>=12?' PM':' AM')
   }
 
 }

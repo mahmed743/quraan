@@ -7,7 +7,7 @@
       *ngFor="let page of homePages"
             (click)="navTo(page.component, {index: page.index})">
       <img [src]="'assets/icons/'+page.icon+'.png'">
-      <span [class.small]="page.component == 'SalahtimesPage'||page.component=='DailyreadPage'">{{page.title}}</span>
+      <span [class.small]="page.component == 'SalahtimesPage'||page.component=='DailyreadPage'">{{page.title|translate}}</span>
     </button>
     <!--<button ion-button color="light" (click)="navTo('IndexPage')">-->
       <!--<ion-icon name="ios-clipboard-outline"></ion-icon>-->
