@@ -61,7 +61,7 @@ export class SalahtimesPage {
           this.times.forEach(async(time) => {
             let [salah, date] = time;
             let salahTranslatedName = await this.translate.get(salah).toPromise()
-            this.appNotifications.scheduleNotifications(salahTranslatedName, new Date(new Date(date).getTime() - (1000 * 60 * 30)));
+            this.appNotifications.scheduleNotifications('اقتربت صلاة '+ salahTranslatedName, new Date(new Date(date).getTime() - (1000 * 60 * 30)+ (1000*60*60)));
           })
         })
 

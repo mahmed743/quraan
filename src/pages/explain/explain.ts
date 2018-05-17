@@ -95,6 +95,8 @@ export class ExplainPage {
         if (this.verses.length) {
           this.getTafseer(this.tafseerName);
         }
+      }, err => {
+        console.log('error getting page',JSON.stringify(err))
       })
   }
 

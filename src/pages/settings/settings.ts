@@ -30,8 +30,8 @@ export class SettingsPage {
               ) {
   }
 
-  async ionViewDidLoad() {
-    this.settings.lang = await this.configProvider.getAppLang();
+  ionViewDidLoad() {
+    this.settings.lang = this.navParams.get('lang');
   }
 
   changeTafseer(tafsserName) {

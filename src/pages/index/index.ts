@@ -45,12 +45,16 @@ enum ActiveListTrigger {
 })
 export class IndexPage {
   partsNum = Array(30);
-  surahNum = Array(3);
-  partsState:boolean;
+  surahNum = Array(2);
+  partsState: boolean;
+  appLang: string;
   activeList:ActiveList = 'parts';
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
   }
-
+  ionViewDidEnter() {
+    this.appLang = this.navParams.get('lang');
+  }
   ionViewDidLoad() {
     console.log(Quran.surah.name(1, 'arabic_name'))
     console.log(Quran.ayah.fromJuz(600))

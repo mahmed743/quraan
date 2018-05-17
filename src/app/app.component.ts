@@ -30,7 +30,7 @@ export class MyApp {
 
       configProvider.getAppLang()
       .then(lang => {
-        
+        lang = lang || 'ar';
         translate.setDefaultLang(lang);
         translate.use(lang);
         platform.setDir(langDir[lang] as DocumentDirection, true);

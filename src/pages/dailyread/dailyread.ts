@@ -36,11 +36,14 @@ export class DailyreadPage {
   dailyReadCategory: DailyReadCategory = 'static';
   privateDailyRead:any[] = [];
   staticDailyWerds: any[] = [];
+  appLang: string;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
               public werdProvider: WerdProvider
-    ) {
+  ) {
+
+    this.appLang = this.navParams.get('lang');
   }
 
   ionViewDidLoad() {

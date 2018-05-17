@@ -1,9 +1,21 @@
-<ion-header>
-  <ion-navbar color="light">
-    <ion-title text-center>الفهرس</ion-title>
+<ion-header no-lines>
+
+  <ion-navbar color="light" hideBackButton>
+    <ion-buttons start>
+      <button ion-button clear>
+        <ion-icon name="placeholder"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{'الفهرس'|translate}}</ion-title>
+    <ion-buttons left>
+      <button ion-button navPop icon-only>
+        <ion-icon [name]="appLang=='ar'?'arrow-back':'arrow-forward'"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
+
 
 
 <ion-content no-padding>
@@ -33,9 +45,7 @@
         {{i+1}}
       </div>
       <div class="part-id surah-id">
-       <span class="surah-name">
-         الفاتحة
-       </span>
+       <span class="surah-name" [innerHTML]="i?'البقرة':'الفاتحة'"></span>
         <span class="ayat-num">
           7 ايات
         </span>
