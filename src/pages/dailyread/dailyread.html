@@ -1,16 +1,28 @@
 <ion-header no-lines>
-  <ion-navbar color="light">
-    <ion-title text-center>الورد اليومى</ion-title>
-  </ion-navbar>
-</ion-header>
+
+    <ion-navbar color="light" hideBackButton>
+      <ion-buttons start>
+        <button ion-button clear>
+          <ion-icon name="placeholder"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title text-center>{{'الورد اليومى'|translate}}</ion-title>
+      <ion-buttons left>
+        <button ion-button navPop icon-only>
+          <ion-icon [name]="appLang=='ar'?'arrow-back':'arrow-forward'"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
 
 <ion-content padding-horizontal>
   <ion-segment margin-bottom [(ngModel)]="dailyReadCategory">
     <ion-segment-button value="static">
-      الثابت
+      {{"عام"|translate}}
     </ion-segment-button>
     <ion-segment-button value="private">
-      الخاص بى
+      {{"خاص"|translate}}
     </ion-segment-button>
   </ion-segment>
   <ng-template [ngIf]="dailyReadCategory === 'static'">

@@ -39,7 +39,7 @@ export class SalahtimesPage {
 
   ionViewDidLoad() {
     this.getUserDataFormIp();
-    this.appLang = this.translate.currentLang
+    this.appLang = this.navParams.get('lang');
   }
 
   getUserDataFormIp() {

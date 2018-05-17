@@ -25,5 +25,7 @@
   "دعاء الختم": "Seal Doaa",
   "dailywerdNotification": "Daily Werd Notifications",
   "salahTimeNotification": "Pray Time Notifications",
-  "الاشعارات": "Notifications"
+  "الاشعارات": "Notifications",
+  "عام": "public",
+  "خاص": "private"
 }
