@@ -17,5 +17,7 @@
   "التفسير" : "التفسير",
   "prayTime": "مواعيد الصلاة",
   "dailywerdNotification": "تنبيه يومى بالورد",
-  "salahTimeNotification": "تنبيه بمواعيد الصلاة"
+  "salahTimeNotification": "تنبيه بمواعيد الصلاة",
+  "okText": "اختيار",
+  "cancelText": "الغاء"
 }

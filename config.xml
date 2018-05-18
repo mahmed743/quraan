@@ -89,8 +89,7 @@
     <plugin name="cordova-android-support-gradle-release" spec="^1.4.2">
         <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
     </plugin>
-    <allow-navigation href="http://192.168.1.13:8100" />
-    <allow-navigation href="http://192.168.1.7:8100" />
+    <allow-navigation href="*" />
     <engine name="android" spec="7.1.0" />
     <engine name="ios" spec="4.5.4" />
 </widget>

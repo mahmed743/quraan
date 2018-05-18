@@ -38,7 +38,7 @@
       <ion-label>
         {{'التفسير' | translate}}
       </ion-label>
-      <ion-select [ngModel]="configProvider.defaultTafseerName" (ngModelChange)="changeTafseer($event)">
+      <ion-select [ngModel]="configProvider.defaultTafseerName" (ngModelChange)="changeTafseer($event)" okText="{{'okText'|translate}}" cancelText="{{'cancelText'|translate}}">
         <ion-option *ngFor="let tafseer of configProvider.availableTafssers" [value]="tafseer.resource_name">{{tafseer.name|translate}}</ion-option>
       </ion-select>
     </ion-item>

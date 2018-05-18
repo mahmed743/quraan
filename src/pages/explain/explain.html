@@ -35,7 +35,7 @@
     </div>
   </div>
   <div class="tafseer-section" [@show]="showTafseer">
-    <ion-select okText="اختيار" cancelText="الغاء" [ngModel]="tafseerName" (ngModelChange)="getTafseer($event)">
+    <ion-select okText="{{'okText'|translate}}" cancelText="{{'cancelText'|translate}}" [ngModel]="tafseerName" (ngModelChange)="getTafseer($event)">
       <ion-option *ngFor="let tafseer of allTafseers" [value]="tafseer.resource_name">{{tafseer.name|translate}}</ion-option>
     </ion-select>
     <p class="verse-tafseer">{{tafseer}}</p>

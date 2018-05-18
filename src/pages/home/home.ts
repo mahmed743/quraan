@@ -89,8 +89,8 @@ export class HomePage {
   scheduleNotifications() {
     this.localNotification.schedule(
       {
-        text: 'لا تنسى قراءة الورد اليومى',
-        trigger: {at: new Date(new Date().getTime() + 100000)},
+        text: 'تذكير بقراءة الورد اليومى',
+        trigger: {at: new Date(new Date().getTime() + 30000)},
         led: 'FF0000',
         sound: null
      }

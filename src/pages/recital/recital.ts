@@ -42,12 +42,17 @@ export class RecitalPage {
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
               //public quraan: Quran
-              ) {
+  ) {
+    
   }
 
   ionViewDidLoad() {
+    console.log(this.navParams.data);
+    if (this.navParams.get('initPage')) {
+      this.pageNum = this.navParams.get('initPage');
+    }
     this.getPage();
-    this.audio = new Audio('//d1.islamhouse.com/data/ar/ih_quran/ar_Full_Quran_Teacher_Menshawe/ar_Quran_Teacher_Menshawe_112.mp3');
+    this.audio = new Audio('assets/001.mp3');
   }
   ionViewWillLeave() {
     this.isOn = false;
@@ -72,7 +77,8 @@ export class RecitalPage {
     //this.navCtrl.popToRoot()
   }
   changePage(change) {
-    this.getPage(this.pageNum+=change)
+    this.pageNum += change;
+    //this.getPage(this.pageNum+=change)
   }
   selectVerse(verse) {
     this.verses = values(this.verses).map(ver=>({...ver, selected:ver==verse}));

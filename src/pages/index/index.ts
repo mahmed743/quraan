@@ -11,11 +11,10 @@ enum partsNames {
   'الأول' = 1, "الثانى","الثالث","الرابع","الخامس","السادس","السابع","الثامن","التاسع", "العاشر", 'الحادى عشر', "الثانى عشر","الثالث عشر","الرابع عشر","الخامس عشر","السادس عشر","السابع عشر","الثامن عشر","التاسع عشر", "العشرون", 'الواحد والعشرون' , "الثانى والعشرون","الثالث والعشرون","الرابع والعشرون","الخامس والعشرون","السادس والعشرون","السابع والعشرون","الثامن والعشرون","التاسع والعشرون", "الثلاثون",
 }
 declare let  Quran;
-type ActiveList = 'parts' | 'surah' | 'ayah';
+type ActiveList = 'parts' | 'surah';
 enum ActiveListTrigger {
   parts,
-  surah,
-  ayah
+  surah
 }
 
 @IonicPage()
@@ -45,7 +44,7 @@ enum ActiveListTrigger {
 })
 export class IndexPage {
   partsNum = Array(30);
-  surahNum = Array(2);
+  juzSurahs = [];
   partsState: boolean;
   appLang: string;
   activeList:ActiveList = 'parts';
@@ -56,20 +55,52 @@ export class IndexPage {
     this.appLang = this.navParams.get('lang');
   }
   ionViewDidLoad() {
-    console.log(Quran.surah.name(1, 'arabic_name'))
-    console.log(Quran.ayah.fromJuz(600))
+
   }
 
   public partName(index:number) {
     return partsNames[index+1]
   }
 
-  public navTo() {}
-  changeList(listId:ActiveList) {
+  selectJuz(juzNumber) {
+    console.log(Quran.surah.name(juzNumber, 'arabic_name'))
+    let juzStart = Quran.ayah.fromJuz(juzNumber);
+    console.log(juzStart);
+    let [surahName, ayahNumber, nextSurahName] = [Quran.surah.name(juzStart.surah), juzStart.ayah, Quran.surah.name(juzStart.surah + 1)];
+    let pageNum = Quran.ayah.page(juzStart.surah, juzStart.ayah);
+    console.log(`
+      surah Name: ${surahName}
+      ayahNumber: ${ayahNumber}
+      nextSurahName: ${nextSurahName}
+      pageNumber: ${pageNum}
+      ${Quran.ayah.page(1)}
+    `);
+    this.juzSurahs = [];
+    this.juzSurahs.push({ surahName, ayahNumber, pageNumber: 1||pageNum });
+    if (surahName != nextSurahName) {
+      this.juzSurahs.push({ surahName: nextSurahName, ayahNumber, pageNumber: 1||pageNum})
+    }
+
+  }
+
+  public goTo(page: string, id) {
+    this.navCtrl.push(page, { initPage: id });
+  }
+  changeList(listId:ActiveList, juzId) {
     let nextList = ActiveListTrigger[ActiveListTrigger[listId]+1] as ActiveList;
     console.log(nextList);
     if(nextList)
-    this.activeList = nextList
+      this.activeList = nextList;
+    
+    this.selectJuz(juzId);
+    
+  }
+  goBack() {
+    if (this.activeList === 'surah') {
+      this.activeList = ActiveListTrigger[0] as ActiveList
+    } else {
+      this.navCtrl.pop()
+    }
   }
 
 

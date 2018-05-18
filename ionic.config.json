@@ -4,5 +4,14 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "proxies": [{
+    "path": "/api/v3",
+    "proxyUrl": "http://staging.quran.com:3000"
+  }, {
+    "path": "//page",
+    "proxyUrl": "http://api.globalquran.com"
+  }]
+
+
 }

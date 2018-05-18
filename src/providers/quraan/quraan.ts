@@ -12,7 +12,7 @@ export class QuraanProvider {
   }
 
   getPage(pageNum) {
-    
+    this.headers = this.headers.append('Access-Control-Allow-Origin', '*');
     return this.http.get(`${this.API_URL}/page/${pageNum}/quran-simple`, {headers: this.headers,params: new HttpParams().append('key', this.API_KEY)})
   }
 

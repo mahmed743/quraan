@@ -8,7 +8,7 @@
     </ion-buttons>
     <ion-title text-center>{{'الفهرس'|translate}}</ion-title>
     <ion-buttons left>
-      <button ion-button navPop icon-only>
+      <button ion-button  icon-only (click)="goBack()">
         <ion-icon [name]="appLang=='ar'?'arrow-back':'arrow-forward'"></ion-icon>
       </button>
     </ion-buttons>
@@ -24,7 +24,7 @@
   <ul *ngIf="activeList === 'parts'" [@partsState]="partsState">
     <li *ngFor="let item of partsNum;let i = index"
 
-      (click)="changeList('parts')"
+      (click)="changeList('parts', i+1)"
     >
       <div class="part-num">
         {{i+1}}
@@ -40,12 +40,12 @@
   <!--السور-->
   <ul *ngIf="activeList === 'surah'" [@partsState]="partsState">
 
-    <li *ngFor="let item of surahNum;let i = index" (click)="changeList('surah')" >
+    <li *ngFor="let item of juzSurahs;let i = index" (click)="changeList('surah')" (click)="goTo('RecitalPage', item.pageNumber)">
       <div class="part-num">
         {{i+1}}
       </div>
       <div class="part-id surah-id">
-       <span class="surah-name" [innerHTML]="i?'البقرة':'الفاتحة'"></span>
+       <span class="surah-name">{{item.surahName}}</span>
         <span class="ayat-num">
           7 ايات
         </span>
@@ -58,7 +58,7 @@
       </div>
     </li>
   </ul>
-  <!--الايات-->
+  <!--
   <ul *ngIf="activeList === 'ayah'" [@partsState]="partsState">
     <li *ngFor="let item of partsNum;let i = index" (click)="changeList('ayah')" >
       <div class="part-num">
@@ -71,5 +71,5 @@
         {{i+1}}
       </div>
     </li>
-  </ul>
+  </ul>-->
 </ion-content>

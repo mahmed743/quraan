@@ -27,5 +27,8 @@
   "salahTimeNotification": "Pray Time Notifications",
   "الاشعارات": "Notifications",
   "عام": "public",
-  "خاص": "private"
+  "خاص": "private",
+  "okText": "ok",
+  "cancelText": "cancel"
+
 }
