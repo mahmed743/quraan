@@ -1,0 +1,23 @@
+control-brightness {
+  background-color: #fff;
+  position: absolute;
+  left:50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  padding: 30px 16px;
+  border-radius: 16px;
+  border: 1px solid $primary;
+  ion-item {
+
+    ion-range {
+      ion-icon {
+        display: inline-block;
+        margin: 0 1.6rem !important;
+        &:last-of-type {
+          margin: 0 3.8rem !important;
+        }
+      }
+    }
+  }
+}

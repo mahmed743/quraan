@@ -6,12 +6,13 @@ import {TranslateService} from '@ngx-translate/core';
 import {ConfigProvider} from "../providers/config/config";
 import {langDir} from "../pages/settings/settings";
 import {DocumentDirection} from "ionic-angular/platform/platform";
+import {RecitalmenuPage} from "../pages/recitalmenu/recitalmenu";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = 'ChooselanguagePage';
+  rootPage: any;
 
   constructor(platform: Platform,
               statusBar: StatusBar,
@@ -20,7 +21,7 @@ export class MyApp {
               configProvider: ConfigProvider,
               config: Config
   ) {
-    
+
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -30,12 +31,17 @@ export class MyApp {
 
       configProvider.getAppLang()
       .then(lang => {
-        lang = lang || 'ar';
-        translate.setDefaultLang(lang);
-        translate.use(lang);
-        platform.setDir(langDir[lang] as DocumentDirection, true);
-        config.set('backButtonIcon', 'arrow-'+(lang==='ar'?'forward':'back'));
-        console.log('App Language', lang, translate.currentLang);
+        if (lang) {
+          translate.setDefaultLang(lang);
+          translate.use(lang);
+          platform.setDir(langDir[lang] as DocumentDirection, true);
+          config.set('backButtonIcon', 'arrow-'+(lang==='ar'?'forward':'back'));
+          console.log('App Language', lang, translate.currentLang);
+          this.rootPage = 'RecitalmenuPage';
+        } else {
+          this.rootPage = 'ChooselanguagePage';
+        }
+
       });
     });
   }

@@ -4,5 +4,13 @@ page-chooselanguage {
             background-image: url(../assets/imgs/home-bg.jpg);
             background-size: cover;
         }
+      .scroll-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      button {
+        color: $primary !important;
+      }
     }
 }

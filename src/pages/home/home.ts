@@ -4,6 +4,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { TranslateService } from '@ngx-translate/core';
 import { langDir } from '../settings/settings';
+import {Brightness} from "@ionic-native/brightness";
 interface Page {
   index: number,
   title: string,
@@ -19,20 +20,23 @@ interface Page {
 export class HomePage {
   homePages:Page[];
   appLang:string;
+  brightness = 0;
   constructor(public navCtrl: NavController,
     public localNotification: LocalNotifications,
     public screenOrientation: ScreenOrientation,
     public platform: Platform,
-    public translate: TranslateService
+    public translate: TranslateService,
+              public brightnessNative: Brightness
   ) {
 
   }
-  ionViewDidLoad() {
+  async ionViewDidLoad() {
+
     if (this.platform.is('cordova')) {
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     }
     this.appLang = this.translate.currentLang;
-    
+
     this.homePages = [
       {
         index: 0,
@@ -102,4 +106,9 @@ export class HomePage {
     )
   }
 
+
+  brightChange(event: any) {
+    console.log(event);
+    this.brightnessNative.setBrightness(event/10)
+  }
 }

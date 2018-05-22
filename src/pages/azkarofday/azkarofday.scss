@@ -60,6 +60,11 @@ page-azkarofday {
               .holy {
                   color: $primary;
               }
+            .ayah-ref {
+              color: #555;
+              font-size: 1.2rem;
+
+            }
           }
           .zekr-repeat {
               position: absolute;
@@ -78,9 +83,9 @@ page-azkarofday {
               border-radius: 50%;
                     box-shadow: 0 0 0 0 $primary;
 
-              
+
               animation: notify 500ms linear backwards;
-              
+
 
               @keyframes notify {
                   to {

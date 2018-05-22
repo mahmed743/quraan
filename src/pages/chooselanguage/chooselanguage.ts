@@ -24,8 +24,6 @@ export class ChooselanguagePage {
   }
 
   ionViewDidLoad() {
-    this.appLang = this.translate.currentLang;
-    console.log(this.appLang);
   }
 
   changeLang(lang: string) {

@@ -20,6 +20,16 @@ export enum AnimationStateToggle {
   selector: 'page-recital',
   templateUrl: 'recital.html',
   animations: [
+    trigger('slide', [
+      state('inactive', style({
+        transform: 'translateY(-120%)'
+      })),
+      state('active',   style({
+        transform: 'translateY(0)'
+      })),
+      transition('inactive => active', animate('250ms ease-in')),
+      transition('active => inactive', animate('250ms ease-out')),
+    ]),
     trigger('show', [
       state('inactive', style({
         transform: 'translateX(120%)'
@@ -43,7 +53,7 @@ export class RecitalPage {
               public quraanProvider: QuraanProvider,
               //public quraan: Quran
   ) {
-    
+
   }
 
   ionViewDidLoad() {
@@ -93,8 +103,18 @@ export class RecitalPage {
     this.showAudioControls = this.showAudioControls==AnimationStateToggle[1]?AnimationStateToggle[AnimationStateToggle.inactive]:AnimationStateToggle[AnimationStateToggle.active];
     console.log(this.showAudioControls);
   }
-  contentSwipe(dir) {
-    console.log(dir)
+  contentSwipe(event) {
+    console.log(event, event.direction);
+    if (event.direction === 1 || event.direction === 4) {
+      this.changePage(1);
+      console.info('left to right');
+    } else if (event.direction === 2) {
+      this.changePage(-1);
+      console.info('right to left')
+    }
   }
 
+  surahClicked() {
+    this.toggleAudioCtrl()
+  }
 }

@@ -21,7 +21,11 @@
 
 $primary: color($colors, primary);
 
+.range-bar {
 
+  transform: translateX(10px);
+
+}
 /*selector {
   // Include directional properties via mixins
   @include padding(0, 10px, null, 5px);

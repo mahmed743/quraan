@@ -29,6 +29,16 @@ interface Verse {
   selector: 'page-explain',
   templateUrl: 'explain.html',
   animations: [
+    trigger('slide', [
+      state('inactive', style({
+        transform: 'translateY(-120%)'
+      })),
+      state('active',   style({
+        transform: 'translateY(0)'
+      })),
+      transition('inactive => active', animate('250ms ease-in')),
+      transition('active => inactive', animate('250ms ease-out')),
+    ]),
     trigger('show', [
       state('inactive', style({
         transform: 'translateX(120%)'
@@ -49,7 +59,7 @@ export class ExplainPage {
   tafseer: string = '';
   allTafseers: TafseerId[];
   showTafseer: AnimationStateToggle | keyof AnimationStateToggle | string = AnimationStateToggle[1];
-
+  clickTime: number = 0;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -111,11 +121,12 @@ export class ExplainPage {
   }
 
   selectVerse(verse) {
-    this.verses = values(this.verses).map(ver => ({...ver, selected: ver == verse}));
-    this.selectedVers = verse;
-    console.log('verse =>', verse);
-    this.getTafseer(this.tafseerName)
-
+    if (verse.id !== this.selectedVers.id) {
+      this.verses = values(this.verses).map(ver => ({...ver, selected: ver == verse}));
+      this.selectedVers = verse;
+      console.log('verse =>', verse);
+      this.getTafseer(this.tafseerName)
+    }
   }
 
   getTafseer(tafseerName, surahNumber = this.selectedVers.surah, ayahNumber = this.selectedVers.ayah) {
@@ -136,6 +147,19 @@ export class ExplainPage {
 
   trackByFn(index, item) {
     return index; // or item.id
+  }
+  surahClicked() {
+
+    console.log('--clicked');
+    if (this.clickTime == 0) {
+      this.clickTime = +Date.now()
+    } else {
+      if ((+Date.now() - this.clickTime) < 600) {
+        this.toggleTafseerCtrls();
+      }
+      this.clickTime = 0
+
+    }
   }
 
 

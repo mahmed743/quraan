@@ -4,16 +4,20 @@ import {IonicPageModule} from "ionic-angular";
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { TranslateModule } from "@ngx-translate/core";
+import {Brightness} from "@ionic-native/brightness";
+import {ComponentsModule} from "../../components/components.module";
 
 @NgModule({
   declarations: [HomePage],
   imports: [
     IonicPageModule.forChild(HomePage),
-    TranslateModule
+    TranslateModule,
+    ComponentsModule
   ],
   providers: [
     LocalNotifications,
-    ScreenOrientation
+    ScreenOrientation,
+    Brightness
   ]
 })
 

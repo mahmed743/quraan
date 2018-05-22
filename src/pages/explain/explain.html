@@ -6,11 +6,25 @@
 
 
 <ion-content no-padding>
+
+  <section class="top-cta" [@slide]="showTafseer">
+    <div class="left">
+      <button small ion-button icon-only>
+        <ion-icon name="md-bulb"></ion-icon>
+      </button>
+    </div>
+    <div class="right">
+      <button small ion-button icon-only>
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </div>
+  </section>
+
   <!-- <button ion-button (click)="openPDF()">open Quran</button> -->
-  <section class=recital>
-    <img *ngIf="pageNum<3;else firstPages" src="https://hosam1696.github.io/Quran/img/{{pageNum|number:'3.'}}.jpg" alt="">
+  <section class="recital" (click)="surahClicked()">
+    <img *ngIf="pageNum<3;else firstPages" src="https://hosam1696.github.io/Quran/img/{{pageNum|number:'3.'}}.jpg" alt="" >
     <ng-template #firstPages>
-      <div class="page-verses">
+      <div class="page-verses" (dblclick)="surahClicked()">
         <a *ngFor="let verse of verses;trackBy:trackByFn" [class.selected]="verse.selected" (click)="selectVerse(verse)">{{verse.verse}} ({{verse.ayah}})</a>
       </div>
     </ng-template>
