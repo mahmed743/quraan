@@ -19,5 +19,11 @@
   "dailywerdNotification": "تنبيه يومى بالورد",
   "salahTimeNotification": "تنبيه بمواعيد الصلاة",
   "okText": "اختيار",
-  "cancelText": "الغاء"
+  "cancelText": "الغاء",
+  "Azkar of Morning": "أذكار الصباح",
+  "Azkar of Night": "أذكار المساء",
+  "azkarsTotalRead": "مجموع الأذكار المقروئة",
+  "azkar": "الأذكار"
+
+
 }

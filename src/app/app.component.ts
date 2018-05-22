@@ -11,7 +11,7 @@ import {DocumentDirection} from "ionic-angular/platform/platform";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = 'HomePage';
+  rootPage: any = 'ChooselanguagePage';
 
   constructor(platform: Platform,
               statusBar: StatusBar,

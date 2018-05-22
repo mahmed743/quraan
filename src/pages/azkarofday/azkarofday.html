@@ -1,0 +1,54 @@
+<ion-header no-lines>
+
+  <ion-navbar color="light" hideBackButton>
+    <ion-buttons start>
+      <button ion-button clear>
+        <ion-icon name="placeholder"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{azkarType|translate}}</ion-title>
+    <ion-buttons left>
+      <button ion-button navPop icon-only>
+        <ion-icon [name]="appLang=='ar'?'arrow-back':'arrow-forward'"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding-horizontal>
+<!--(ionSlideNextStart)="emitSlideDrag()"-->
+<div class="zekr-global-info" text-center >
+  <p>
+    <span>{{'azkarsTotalRead' | translate}}</span>
+<ion-badge>
+<span [@countChange]="countChanged">{{azkarsProvider.totalReaded|number}}</span>
+</ion-badge>
+
+
+  </p>
+</div>
+<ion-slides initialSlide="0" direction="vertical" dir="rtl" class=" zekr-container ">
+
+
+
+
+
+    <ion-slide *ngFor="let zekr of azkars">
+      <section class="zekr-container" padding>
+<div class="zekr-repeat" [@decrease]="zekr.state">{{zekr.repeat}}</div>
+
+        <div class="zekr-body" [innerHTML]="zekr.text"></div>
+      </section>
+      <p text-center margin>
+        <button ion-button margin (click)="readNext(zekr)">
+          تمت القراءة
+        </button>
+      </p>
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>

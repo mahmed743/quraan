@@ -37,6 +37,8 @@ export class WerdProvider {
     }])
   }
 
+
+
   getPrivateWerd() {
 
     return this.storage.get('private:werds')

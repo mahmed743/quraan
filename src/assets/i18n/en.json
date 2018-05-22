@@ -29,6 +29,13 @@
   "عام": "public",
   "خاص": "private",
   "okText": "ok",
-  "cancelText": "cancel"
+  "cancelText": "cancel",
+  "Azkar of Morning": "Azkar of Morning",
+  "Azkar of Night": "Azkar Of Night",
+  "azkarsTotalRead": "Total Readed Azkar",
+  "azkar": "Azkar"
+
+
+
 
 }

@@ -75,6 +75,11 @@ export class HomePage {
         component: 'SearchPage',
         icon: 'البحث',
         title: 'البحث'
+      }, {
+        index: 8,
+        component: 'AzkarofdayPage',
+        icon: 'البحث',
+        title: 'azkar'
       }
     ];
 

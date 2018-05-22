@@ -18,6 +18,7 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { AzkarproviderProvider } from '../providers/azkarprovider/azkarprovider';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -64,7 +65,8 @@ export function createTranslateLoader(http: HttpClient) {
     File,
     FileTransfer,
     DocumentViewer,
-    LocalNotifications
+    LocalNotifications,
+    AzkarproviderProvider
   ]
 })
 export class AppModule {}

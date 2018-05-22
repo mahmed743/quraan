@@ -1,0 +1,96 @@
+page-azkarofday {
+  ion-content {
+    &.content {
+      background-color: #f6f6f6;
+    }
+    .zekr-global-info {
+        height: 30px;
+        background-color: #f2f2f2;
+        border-radius: 0 0 5px 5px;
+        line-height: 30px;
+        p {
+            margin: 0;
+            font-size: 1rem;
+            ion-badge {
+                margin:  0 10px;
+                background-color: #fff !important;
+                color: $primary;
+            }
+            span {
+                &:last-child {
+                    font-size: 1.4rem;
+                    font-weight: bold;
+                    display: inline-flex;
+                    padding: 0 10px;
+                    color: $primary;
+                }
+            }
+        }
+    }
+    ion-slides {
+        height: calc(100% - 30px);
+
+      ion-slide {
+        .zekr-container {
+          background-color: #fff;
+          border-radius: 10px;
+          border: 1px solid #f6f6f6;
+          position: relative;
+          padding-top: 4rem !important;
+          &:before,
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            background-color: #fff;
+            border-radius: 10px;
+            border: 1px solid #f6f6f6;
+            left: 0;
+            z-index: -1;
+            width: 94%;
+            height: 100%;
+            transform: translate(3%, 6px)
+          }
+          &:after {
+            z-index: -2;
+            width: 88%;
+            transform: translate(6%, 12px)
+          }
+          .zekr-body {
+              .holy {
+                  color: $primary;
+              }
+          }
+          .zekr-repeat {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              border: 5px solid #fff;
+              box-sizing: content-box;
+              transform: translate(-50%, -50%);
+              width: 5.5rem;
+              height: 5.5rem;
+              background-color: $primary;
+              color: #fff;
+              text-align: center;
+              line-height: 2;
+              font-size: 2.8rem;
+              border-radius: 50%;
+                    box-shadow: 0 0 0 0 $primary;
+
+              
+              animation: notify 500ms linear backwards;
+              
+
+              @keyframes notify {
+                  to {
+                    box-shadow: 0 0 4px 8px  #fff;
+
+                  }
+              }
+          }
+        }
+      }
+    }
+  }
+}
