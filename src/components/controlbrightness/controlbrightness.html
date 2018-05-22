@@ -1,8 +1,10 @@
 
-<ion-item no-lines>
+<ion-item no-lines no-padding>
 
-  <ion-range [dir]="appLang==='ar'?'rtl':'ltr'" [ngModel]="brightness" (ngModelChange)="changeBrightness($event)" min="0" max="10" step="1">
-    <ion-icon range-left name="md-bulb"></ion-icon>
+<ion-range [dir]="direction" [ngModel]="brightness" pin="true"  color="primary" (ngModelChange)="changeBrightness($event)"
+  min="0" max="100" step="1">
+
+    <ion-icon small range-left name="md-bulb"></ion-icon>
 
     <ion-icon  range-right name="md-bulb"></ion-icon>
   </ion-range>

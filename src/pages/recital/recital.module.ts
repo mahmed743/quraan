@@ -3,6 +3,8 @@ import { IonicPageModule } from 'ionic-angular';
 import { RecitalPage } from './recital';
 import {QuraanProvider} from "../../providers/quraan/quraan";
 import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from '../../components/components.module';
+import { Brightness } from '@ionic-native/brightness';
 
 @NgModule({
   declarations: [
@@ -10,10 +12,13 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     IonicPageModule.forChild(RecitalPage),
-    TranslateModule
+    TranslateModule,
+    ComponentsModule,
+    
   ],
   providers: [
-    QuraanProvider
+    QuraanProvider,
+    Brightness
   ]
 })
 export class RecitalPageModule {}

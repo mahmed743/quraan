@@ -2,8 +2,30 @@ page-recitalmenu {
   ion-menu {
     ion-content {
       &.content {
-        background-color: #ffffff;
-        color: #fff
+        background-color: #faf9ee;
+        color: #fff;
+      }
+      ion-list {
+        padding-top: 4rem;
+
+        ion-item {
+          background-color: transparent !important;
+          .item-inner {
+            border-bottom: 1px solid #fff !important;
+          }
+          ion-label {
+            display: flex;
+            align-items: center;
+          }
+          img {
+            width: 2rem;
+            height: 2rem;
+          }
+          span {
+            display: flex;
+            padding: 0 1.5rem;
+          }
+        }
       }
     }
   }

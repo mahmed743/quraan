@@ -5,17 +5,23 @@ control-brightness {
   top: 50vh;
   transform: translate(-50%, -50%);
   width: 80vw;
-  padding: 30px 16px;
+  padding: 16px 0;
   border-radius: 16px;
   border: 1px solid $primary;
   ion-item {
-
+    .item-inner {
+      padding: 0 !important;
+    }
     ion-range {
       ion-icon {
-        display: inline-block;
-        margin: 0 1.6rem !important;
+        &:first-of-type {
+          color: #999;
+        }
+        //margin: 0 1.6rem !important;
         &:last-of-type {
-          margin: 0 3.8rem !important;
+          margin: 0 2rem !important;
+          transform: translateX(0.4em)
+
         }
       }
     }

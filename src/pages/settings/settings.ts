@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform, Config} from 'ionic-angular';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import {IonicPage, NavController, NavParams, Platform, Config, Events} from 'ionic-angular';
 import {TranslateService} from "@ngx-translate/core";
 import {ConfigProvider} from "../../providers/config/config";
 import {DocumentDirection} from "ionic-angular/platform/platform";
@@ -15,23 +15,39 @@ export enum langDir {
   selector: 'page-settings',
   templateUrl: 'settings.html',
 })
-export class SettingsPage {
+export class SettingsPage implements OnChanges{
   settings: any = {
     lang: 'ar',
     werdNotifications: true,
-    prayNotifications: true
+    prayNotifications: true,
+    showAzkarIcon: false
   };
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public platform: Platform,
               public translate: TranslateService,
               public configProvider: ConfigProvider,
-              public config: Config
+              public config: Config,
+              public events: Events
               ) {
   }
 
-  ionViewDidLoad() {
+  async ionViewDidLoad() {
     this.settings.lang = this.navParams.get('lang');
+    let preferences = await this.configProvider.getPreferences();
+
+    this.settings.showAzkarIcon = preferences.showAzkarIcon;
+    console.log(this.settings);
+  }
+  ngOnChanges(changes:SimpleChanges) {
+    console.log(changes);
+  }
+
+  changeVisibilityAzkarIcon(event) {
+    console.log(event);
+    this.configProvider.setPreferences('showAzkarIcon', event);
+    this.events.publish('preference:change', { showAzkarIcon: event})
+    
   }
 
   changeTafseer(tafsserName) {

@@ -84,7 +84,7 @@ export class AzkarofdayPage implements AfterViewInit {
   ionViewDidLoad() {
     let dateNow = new Date(Date.now());
     let hour = dateNow.getHours();
-    if (hour >= 18) {
+    if (hour >= 18 || hour < 6) {
       this.azkarType = "Azkar of Night";
     }
     this.getPageAzkar();
@@ -93,9 +93,10 @@ export class AzkarofdayPage implements AfterViewInit {
   private getPageAzkar() {
     console.log(this.azkarType, ZekrTypeData[this.azkarType]);
     this.azkars = this.azkarsProvider[ZekrTypeData[this.azkarType]].map(
-      zekr => {
+      (zekr, index) => {
         zekr.text = this.formatZekr(zekr.text);
         zekr.state = "inactive";
+        zekr.id = index
         //console.log(this.formatZekr(zekr.text));
         return zekr;
       }
@@ -110,9 +111,15 @@ export class AzkarofdayPage implements AfterViewInit {
   }
 
   readNext(zekr, lockSlide: boolean = false) {
+   
     if (zekr.repeat < 2) {
-      this.azkarSlides.lockSwipes(false);
       this.azkarSlides.slideNext();
+      setTimeout(() => {
+        
+        this.azkars = this.azkars.filter(z => z != zekr);
+        this.azkarSlides.slidePrev(0)
+      }, 100)
+      this.azkarSlides.lockSwipes(false);
     } else {
       lockSlide && this.azkarSlides.lockSwipes(true);
       zekr.repeat--;

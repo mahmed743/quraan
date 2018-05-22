@@ -33,9 +33,10 @@
   "Azkar of Morning": "Azkar of Morning",
   "Azkar of Night": "Azkar Of Night",
   "azkarsTotalRead": "Total Readed Azkar",
-  "azkar": "Azkar"
-
-
+  "azkar": "Azkar",
+  "showAzkarsIcon": "Show Azkars Icon",
+  "numOfPages": "Numbers of Pages",
+  "notifyTime": "Notify Every"
 
 
 }

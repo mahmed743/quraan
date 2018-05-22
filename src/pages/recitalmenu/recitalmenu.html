@@ -1,7 +1,19 @@
 <ion-menu [content]="mycontent" side="left">
   <ion-content>
+    <div>
+      <button icon-only ion-button menuClose clear>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+    <ion-list>
+<ion-item *ngFor="let page of menuPages" (click)="navTo(page.component, {index: page.index})">
+  <img [src]="'assets/icons/'+page.icon+'.png'">
+  <span [class.small]="page.component == 'SalahtimesPage'||page.component=='DailyreadPage'">{{page.title|translate}}</span>
 
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-nav  #mycontent [root]="recitalPage"></ion-nav>
+<ion-nav #mycontent root="ExplainPage"></ion-nav>
+

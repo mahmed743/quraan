@@ -1,8 +1,29 @@
 page-sealdoaa {
   ion-content {
     .scroll-content {
-      background-image: url(../assets/imgs/seal.jpg);
-      background-size: 100% 100%;
+      padding: 22px 23px 28px 22px !important;
+      background-color: #fff;
+      background-image: url('../assets/imgs/720.png');
+      background-size: 100% 100%
     }
+     p{
+      img {
+            width: 110px;
+            transform: rotate(-4deg);
+
+      }
+    }
+
+    article {
+      p {
+        padding: 0 1rem;
+        text-align: justify;
+        
+        .highlight {
+          color: $primary;
+        }
+      }
+    }
+
   }
 }

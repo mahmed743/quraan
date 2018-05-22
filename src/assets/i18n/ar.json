@@ -23,7 +23,9 @@
   "Azkar of Morning": "أذكار الصباح",
   "Azkar of Night": "أذكار المساء",
   "azkarsTotalRead": "مجموع الأذكار المقروئة",
-  "azkar": "الأذكار"
-
+  "azkar": "الأذكار",
+"showAzkarsIcon": "اظهار أيقونة الأذكار",
+  "NumOfPages": "عدد الأوجه",
+  "notifyTime": "وقت التنبيه كل"
 
 }

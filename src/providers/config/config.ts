@@ -13,14 +13,34 @@ export class ConfigProvider {
   private _availableTafseers: TafseerId[];
   public tafseerName: string ;
   public defaultTafseerName:tafsirNames = 'Arabic Saddi Tafseer';
-  public defaultLang:string = 'ar';
+  public defaultLang: string = 'ar';
+  public preferences: any = {};
+  defaultPreferences = {
+    showAzkarIcon: true
+  }
   constructor(public storage: Storage) {
-
+    this.getPreferences().then(pref => this.preferences = pref);
   }
   public async getTafseerName() {
     let tafseerName = await  this.storage.get('tafseer:name');
     //console.log('Config Tafseer Name', tafseerName);
     return this.tafseerName = tafseerName || this.defaultTafseerName;
+  }
+
+  async getPreferences() {
+    return this.getStoredPreferences()
+      .then(pref => {
+        pref = pref || {};
+        return this.preferences = { ...this.defaultPreferences, ...pref };
+      });
+  }
+  private getStoredPreferences() {
+    return this.storage.get('user:preferences');
+  }
+
+  public async setPreferences(prop, value) {
+    let preferences = await this.getPreferences();
+    return this.storage.set('user:preferences', { ...preferences, ...{ [prop]: value } });
   }
 
   public get availableTafssers():TafseerId[] {

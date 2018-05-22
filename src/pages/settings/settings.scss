@@ -23,11 +23,17 @@ page-settings {
                 &:first-of-type {
                   max-width: 40%;
                 }
+                &.lang-btns {
+                  margin: 0;
+                  display: flex;
+                  justify-content: space-between;
+
+                }
                 button {
                   box-shadow: none !important;
                   color: $primary !important;
-                  max-width: 50% !important;
-                  margin: 0 !important;
+                  //max-width: 50% !important;
+                  margin: 0 !important;border: 1px solid $primary;
                   &.selected {
                     border: 2px solid $primary !important;
                     background-color: $primary;

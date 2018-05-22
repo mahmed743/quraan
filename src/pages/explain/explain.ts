@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform, Events} from 'ionic-angular';
 import {QuraanProvider} from "../../providers/quraan/quraan";
 import {File} from '@ionic-native/file';
 import {values} from 'lodash';
 import 'rxjs/add/operator/pluck';
 import {DocumentViewer} from '@ionic-native/document-viewer';
-import {FileTransfer} from '@ionic-native/file-transfer';
 import {
   trigger,
   state,
@@ -15,6 +14,8 @@ import {
 } from '@angular/animations';
 import {AnimationStateToggle} from '../recital/recital';
 import {ConfigProvider, TafseerId} from '../../providers/config/config';
+import { Brightness } from '@ionic-native/brightness';
+import { langDir } from '../settings/settings';
 
 interface Verse {
   id: number,
@@ -60,6 +61,10 @@ export class ExplainPage {
   allTafseers: TafseerId[];
   showTafseer: AnimationStateToggle | keyof AnimationStateToggle | string = AnimationStateToggle[1];
   clickTime: number = 0;
+  brightness: number = 0;
+  showBrightnessPanel: boolean = false;
+  azkarIcon: string = 'ios-moon-outline';
+  preferences: any = {};
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -67,34 +72,41 @@ export class ExplainPage {
               public documentViewer: DocumentViewer,
               public file: File,
               public platform: Platform,
-              public transfer: FileTransfer
+    public brightnessNative: Brightness,
+              public events: Events
   ) {
   }
-
+  async ionViewWillEnter() {
+    this.preferences.showAzkarIcon = (await this.configProvider.getPreferences()).showAzkarIcon;
+    let hour = new Date(Date.now()).getHours();
+    if (hour < 18 && hour >= 6) {
+      this.azkarIcon = 'ios-partly-sunny-outline';
+    }
+    this.events.subscribe('preference:change', changes => {
+      console.log('explain page: preference change', changes);
+      this.preferences = { ...this.preferences, ...changes };
+    })
+  }
   async ionViewDidLoad() {
+    if (this.platform.is('cordova')) {
+      this.brightness = await this.brightnessNative.getBrightness();
+    }
+  
     this.allTafseers = this.configProvider.availableTafssers;
     this.tafseerName = await this.configProvider.getTafseerName();
     this.getPage();
   }
 
+
+  brightChange(event: any) {
+    console.log(event);
+    this.brightnessNative.setBrightness(event / 10)
+  }
   openPDF() {
     this.documentViewer.viewDocument('assets/ngcourse2.pdf', 'application/pdf', {title: 'pdf file'})
   }
 
-  getPDF() {
-    let path: string;
-    const transfer = this.transfer.create();
-    if (this.platform.is('ios')) {
-      path = this.file.documentsDirectory;
-    } else {
-      path = this.file.dataDirectory;
-    }
-    transfer.download('url', path + 'name.pdf')
-      .then(entry => {
-        let url = entry.toUrl();
-        this.documentViewer.viewDocument(url, 'application/pdf', {});
-      })
-  }
+
 
   getPage(num = 1) {
     this.quraanProvider.getPage(num)
@@ -102,6 +114,7 @@ export class ExplainPage {
       .subscribe(data => {
         this.verses = values(data).map((verse, index) => ({...verse, selected: index == 0}));
         this.selectedVers = this.verses[0];
+        this.showTafseer = 'active';
         if (this.verses.length) {
           this.getTafseer(this.tafseerName);
         }
@@ -110,6 +123,9 @@ export class ExplainPage {
       })
   }
 
+  goTo(page:string) {
+    this.navCtrl.push(page, { lang: langDir[this.platform.dir()]})
+  }
   popPage() {
 
     this.navCtrl.setRoot('HomePage', {}, {animate: true})
@@ -117,7 +133,8 @@ export class ExplainPage {
   }
 
   changePage(change) {
-    this.getPage(this.pageNum += change)
+    this.getPage(this.pageNum += change);
+    
   }
 
   selectVerse(verse) {
@@ -150,12 +167,12 @@ export class ExplainPage {
   }
   surahClicked() {
 
-    console.log('--clicked');
     if (this.clickTime == 0) {
       this.clickTime = +Date.now()
     } else {
-      if ((+Date.now() - this.clickTime) < 600) {
+      if ((+Date.now() - this.clickTime) < 800) {
         this.toggleTafseerCtrls();
+        this.showBrightnessPanel = false;
       }
       this.clickTime = 0
 

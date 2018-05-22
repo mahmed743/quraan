@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import {QuraanProvider} from "../../providers/quraan/quraan";
 import {values} from  'lodash'
 import 'rxjs/add/operator/pluck';
@@ -10,6 +10,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { Brightness } from '@ionic-native/brightness';
 
 export enum AnimationStateToggle {
   'inactive',
@@ -47,19 +48,27 @@ export class RecitalPage {
   pageNum: number = 1;
   audio:HTMLAudioElement;
   isOn:boolean = false;
-  showAudioControls: AnimationStateToggle|keyof AnimationStateToggle|string = AnimationStateToggle[1];
+  showAudioControls: AnimationStateToggle | keyof AnimationStateToggle | string = AnimationStateToggle[1];
+  clickTime: number = 0;
+  brightness: number = 0;
+  showBrightnessPanel: boolean = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
+    public brightnessNative: Brightness,
+              public platform: Platform
               //public quraan: Quran
   ) {
 
   }
 
-  ionViewDidLoad() {
+  async ionViewDidLoad() {
     console.log(this.navParams.data);
     if (this.navParams.get('initPage')) {
       this.pageNum = this.navParams.get('initPage');
+    }
+    if (this.platform.is('cordova')) {
+      this.brightness = await this.brightnessNative.getBrightness();
     }
     this.getPage();
     this.audio = new Audio('assets/001.mp3');
@@ -88,7 +97,7 @@ export class RecitalPage {
   }
   changePage(change) {
     this.pageNum += change;
-    //this.getPage(this.pageNum+=change)
+    //this.getPage(this.pageNum+=change);
   }
   selectVerse(verse) {
     this.verses = values(this.verses).map(ver=>({...ver, selected:ver==verse}));
@@ -113,8 +122,21 @@ export class RecitalPage {
       console.info('right to left')
     }
   }
-
+  brightChange(event: any) {
+    console.log(event);
+    this.brightnessNative.setBrightness(event / 10)
+  }
   surahClicked() {
-    this.toggleAudioCtrl()
+
+    if (this.clickTime == 0) {
+      this.clickTime = +Date.now()
+    } else {
+      if ((+Date.now() - this.clickTime) < 800) {
+        this.toggleAudioCtrl();
+        this.showBrightnessPanel = false;
+      }
+      this.clickTime = 0
+
+    }
   }
 }
