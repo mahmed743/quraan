@@ -1,0 +1,38 @@
+<ion-header no-lines>
+
+  <ion-navbar color="light" hideBackButton>
+    <ion-buttons start>
+      <button ion-button clear>
+        <ion-icon name="placeholder"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-title text-center>{{'الاعدادات'|translate}}</ion-title> -->
+    <ion-buttons left>
+      <button ion-button navPop icon-only>
+        <ion-icon [name]="appLang=='ar'?'arrow-back':'arrow-forward'"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <section class="hadith">
+    <p>
+       وقول الامام ابن كثير - رحمه الله- : "فكانوا اذا تلى عليهم القران اكثروا اللغط والكلام فى غيره و حتى لا يسمعوهو فهذا من هجرانهو وترك العمل به وامتثال أوامره واجتناب زواجره من هجرانه والعدول عنه الى غيره من شعر أو قول أو غناء أو لهو أو كلام أو طريقة مأخوذة من غيره من هجرانه". تفسير ابن كثير (3 /318)
+    </p>
+  </section>
+  
+  <section class="parts-num">
+    <p text-center>
+      الورد اليومى : عدد الأوجه
+    </p>
+    <div class="parts-btns">
+      <button ion-button (click)="choosePart(1)">وجه واحد</button>
+      <button ion-button (click)="choosePart(2)">وجهان</button>
+      <button ion-button (click)="choosePart(3)">ثلاثة أوجه</button>
+      <button ion-button (click)="choosePart(4)">أربعة أوجه</button>
+    </div>
+  </section>
+</ion-content>

@@ -33,7 +33,7 @@ export class ChooselanguagePage {
     this.config.set('backButtonIcon', 'arrow-' + (lang === 'ar' ? 'forward' : 'back'));
     this.configProvider.changeLang(lang);
     console.log('config change detector', this.config.get('backButtonIcon'));
-    this.navCtrl.setRoot('RecitalmenuPage')
+    this.navCtrl.push('UpreferencePage', {appLang: lang})
   }
 
 }

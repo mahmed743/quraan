@@ -1,19 +1,4 @@
 
-<!-- <ion-header no-lines>
-  <ion-navbar color="light">
-    <button ion-button clear icon-only (click)="popPage()">
-      <ion-icon name="arrow-back"></ion-icon>
-    </button>
-    <ion-title text-center>التلاوات</ion-title>
-    <!--<ion-buttons end>-->
-      <!--<button ion-button menuToggle>-->
-        <!--<ion-icon name="options"></ion-icon>-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
-  <!-- </ion-navbar>
-
-</ion-header> -->
-
 
 <ion-content (swipe)="contentSwipe($event)" >
 
@@ -34,7 +19,7 @@
   <ng-template #firstPages>
     <div class="page-verses">
       <a *ngFor="let verse of verses;trackBy:trackByFn" [class.selected]="verse.selected" (click)="selectVerse(verse)">{{verse.verse}}
-        <span >({{verse.ayah}})</span></a>
+        <span >[{{verse.ayah}}]</span></a>
     </div>
   </ng-template>
   </section>

@@ -27,7 +27,6 @@ page-explain {
         padding: 0 5px;
       }
     }
-
     .top-cta {
       position: absolute;
       top: 0;
@@ -35,14 +34,12 @@ page-explain {
       display: flex;
       padding: 8px;
       justify-content: space-between;
-      left: 0;
-      //background-color: rgba(255, 255, 255, 0.4);
+      left: 0; //background-color: rgba(255, 255, 255, 0.4);
       z-index: 5555;
     }
     .recital {
       width: 100%;
-      height: 100%;
-      //text-align: justify;
+      height: 100%; //text-align: justify;
       background-color: #E2FEDE;
       font-size: 5.35vw;
       text-align: justify;
@@ -51,30 +48,33 @@ page-explain {
         width: 100%;
         height: 100%;
       }
-    .page-verses {
-      padding: 5px 10px;
-    }
+      .page-verses {
+        padding: 5px 10px;
+      }
+       a {
+         font-family: 'UthmanicHafs', 'jf-flat-regular', sans-serif; //font-family: 'UthmanicHafs', sans-serif;
+         color: #222 !important;
+         margin: 6px;
+         span {
+           font-family: 'quranFont', QuranFont, sans-serif;
+           color: $primary !important;
+         }
 
-      a {
-        color: #222!important;
-        margin-left: 6px;
-        font-family: 'UthmanicHafs', 'jf-flat-regular', sans-serif;
         &.selected {
           background-color: #bce0b3;
           color: #000 !important;
-          border-radius: 0 4px  0 4px
+
+          border-radius: 0 4px 0 4px
         }
       }
     }
     .cta-btns {
       position: absolute;
       width: 100%;
-      right: 22px;
-      //transform: translateY(-100%);
+      right: 22px; //transform: translateY(-100%);
       bottom: 190px;
       button {
         box-shadow: none !important;
-
         min-width: 1em !important;
       }
     }
@@ -112,7 +112,7 @@ page-explain {
       .verse-tafseer {
         font-size: 12px;
         color: #eee;
-        height:calc(100% - 73px);
+        height: calc(100% - 73px);
         overflow-y: scroll;
         border-top: 1px solid #086d6f;
         margin: 0;
@@ -122,18 +122,15 @@ page-explain {
         position: relative;
         min-width: 40% !important;
         transform: scale(0.8);
-            margin: 5px auto;
-            background-color: #fff;
-            border-radius: 33px;
-            max-height: 48px;
-            .select-icon {
-              margin: 5px 10px
-            }
-
+        margin: 5px auto;
+        background-color: #fff;
+        border-radius: 33px;
+        max-height: 48px;
+        .select-icon {
+          margin: 5px 10px
+        }
       }
-
     }
-
   }
   ion-header {
     ion-navbar {

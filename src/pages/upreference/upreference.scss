@@ -1,0 +1,26 @@
+page-upreference {
+    ion-content {
+    &.content {
+        background-image: url(../assets/imgs/home-bg.jpg);
+        background-size: cover;
+    }
+    .hadith {
+        background-color: rgba(255,255,255, 0.98);
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 12px;
+    }
+    .parts-num {
+        margin-top: 4rem;
+        p {
+            font-size: 18px;
+            color: #fff;
+            text-shadow: 1px 1px $primary;
+        }
+        .parts-btns {
+            display: grid;
+            grid-template-columns: 12fr;
+        }
+    }
+    }
+}
