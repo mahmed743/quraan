@@ -87,7 +87,7 @@ export class ExplainPage {
   async ionViewWillEnter() {
     this.preferences.showAzkarIcon = (await this.configProvider.getPreferences()).showAzkarIcon;
     this.fromDailyPage = this.showHomeBtn = this.navParams.get('from') === 'dailyReadPage';
-    this.pageNum = this.navParams.get('initPage');
+    this.pageNum = this.navParams.get('initPage')||1;
     console.log('param', this.navParams.get('from'), this.fromDailyPage);
     let hour = new Date(Date.now()).getHours();
     if (hour < 18 && hour >= 4) {
@@ -110,7 +110,7 @@ export class ExplainPage {
 
     this.allTafseers = this.configProvider.availableTafssers;
     this.tafseerName = await this.configProvider.getTafseerName();
-    this.pageNum = this.navParams.get('initPage');
+    this.pageNum = this.navParams.get('initPage')||1;
     this.getPage();
   }
 

@@ -77,7 +77,7 @@ export class SalahtimesPage {
             this.appNotifications.localNotification.schedule(schedules);
             this.appNotifications.localNotification.getAll()
               .then(n => {
-                alert('All notifications' + JSON.stringify(n, null, 4))
+                //alert('All notifications' + JSON.stringify(n, null, 4))
               })
           }
           
