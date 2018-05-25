@@ -1,12 +1,36 @@
 <ion-menu [content]="mycontent" side="left">
   <ion-content>
+    <!-- Top navigation menu-->
     <div>
       <button icon-only ion-button menuClose clear>
         <ion-icon name="close"></ion-icon>
       </button>
     </div>
+    <!-- Quran navigation -->
+    <div>
+      <p text-center>
+        انتقال الى
+      </p>
+      <ion-item>
+        <ion-label>جزء</ion-label>
+        <ion-select>
+          <ion-option>1</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>سورة</ion-label>
+        <ion-select>
+          <ion-option>1</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Navigation page list -->
     <ion-list>
-<ion-item *ngFor="let page of menuPages" (click)="navTo(page.component, {index: page.index})">
+<ion-item *ngFor="let page of menuPages" (click)="navTo(page.component, {index: page.index})" [hidden]="(rootPage=='ExplainPage'&&page.component=='ExplainPage')||(rootPage=='RecitalPage'&&page.component=='RecitalPage')">
+
+
   <img [src]="'assets/icons/'+page.icon+'.png'">
   <span [class.small]="page.component == 'SalahtimesPage'||page.component=='DailyreadPage'">{{page.title|translate}}</span>
 
@@ -15,5 +39,5 @@
   </ion-content>
 </ion-menu>
 
-<ion-nav #mycontent root="ExplainPage"></ion-nav>
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
 

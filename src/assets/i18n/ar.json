@@ -24,8 +24,10 @@
   "Azkar of Night": "أذكار المساء",
   "azkarsTotalRead": "مجموع الأذكار المقروئة",
   "azkar": "الأذكار",
-"showAzkarsIcon": "اظهار أيقونة الأذكار",
-  "NumOfPages": "عدد الأوجه",
-  "notifyTime": "وقت التنبيه كل"
+  "showAzkarsIcon": "اظهار أيقونة الأذكار",
+  "numOfPages": "عدد الأوجه",
+  "notifyTime": "وقت التنبيه كل",
+  "searchQuranText": "ابحث فى كل القران",
+  "numOfResults": "عدد النتائج"
 
 }

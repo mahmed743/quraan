@@ -49,7 +49,7 @@ export class IndexPage {
   appLang: string;
   activeList:ActiveList = 'parts';
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+
   }
   ionViewDidEnter() {
     this.appLang = this.navParams.get('lang');
@@ -73,7 +73,7 @@ export class IndexPage {
       ayahNumber: ${ayahNumber}
       nextSurahName: ${nextSurahName}
       pageNumber: ${pageNum}
-      ${Quran.ayah.page(1)}
+      ${Quran.ayah.page(1,1)}
     `);
     this.juzSurahs = [];
     this.juzSurahs.push({ surahName, ayahNumber, pageNumber: 1||pageNum });
@@ -91,9 +91,9 @@ export class IndexPage {
     console.log(nextList);
     if(nextList)
       this.activeList = nextList;
-    
+
     this.selectJuz(juzId);
-    
+
   }
   goBack() {
     if (this.activeList === 'surah') {

@@ -19,20 +19,27 @@
 
   <section class="top-cta" [@slide]="showAudioControls">
     <div class="left">
-<button small ion-button icon-only (click)="showBrightnessPanel= !showBrightnessPanel">
-
+      <button small ion-button icon-only (click)="showBrightnessPanel= !showBrightnessPanel" color="light">
         <ion-icon name="md-bulb"></ion-icon>
       </button>
     </div>
     <div class="right">
-      
+      <button ion-button icon-only small (click)="goTo('AzkarofdayPage')" *ngIf="preferences?.showAzkarIcon" color="light">
+        <ion-icon [name]="azkarIcon"></ion-icon>
+      </button>
     </div>
   </section>
 <section class="recital" (click)="surahClicked()">
+  <img *ngIf="pageNum<3;else firstPages" src="https://hosam1696.github.io/Quran/img/{{pageNum|number:'3.'}}.jpg" alt="">
+  <ng-template #firstPages>
+    <div class="page-verses">
+      <a *ngFor="let verse of verses;trackBy:trackByFn" [class.selected]="verse.selected" (click)="selectVerse(verse)">{{verse.verse}}
+        <span >({{verse.ayah}})</span></a>
+    </div>
+  </ng-template>
+      <!--<img *ngIf="pageNum>=3" src="https://hosam1696.github.io/quran-ios/Quran/Resources/images/images_1280/width_1280/page{{pageNum|number:'3.'}}.png" alt="" >-->
 
-      <img *ngIf="pageNum>=3" src="https://hosam1696.github.io/quran-ios/Quran/Resources/images/images_1280/width_1280/page{{pageNum|number:'3.'}}.png" alt="" >
-
-      <img *ngIf="pageNum<3" src="https://hosam1696.github.io/Quran/img/{{pageNum|number:'3.'}}.jpg" alt="" >
+      <!--<img *ngIf="pageNum<3" src="https://hosam1696.github.io/Quran/img/{{pageNum|number:'3.'}}.jpg" alt="" >-->
     <!-- <a *ngFor="let verse of verses;trackBy:trackByFn"  [class.selected]="verse.selected" (click)="selectVerse(verse)">{{verse.verse}}({{verse.ayah}})</a> -->
  <!--/ إِنَّهُ لَقُرْآنٌ كَرِيمٌ (77) فِي كِتَابٍ مَّكْنُونٍ (78) لَّا يَمَسُّهُ إِلَّا الْمُطَهَّرُونَ (79) تَنزِيلٌ مِّن رَّبِّ الْعَالَمِينَ (80) أَفَبِهَٰذَا الْحَدِيثِ أَنتُم مُّدْهِنُونَ (81) وَتَجْعَلُونَ رِزْقَكُمْ أَنَّكُمْ تُكَذِّبُونَ (82) فَلَوْلَا إِذَا بَلَغَتِ الْحُلْقُومَ (83) وَأَنتُمْ حِينَئِذٍ تَنظُرُونَ (84) وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنكُمْ وَلَٰكِن لَّا تُبْصِرُونَ (85) فَلَوْلَا إِن كُنتُمْ غَيْرَ مَدِينِينَ (86) تَرْجِعُونَهَا إِن كُنتُمْ صَادِقِينَ (87) فَأَمَّا إِن كَانَ مِنَ الْمُقَرَّبِينَ (88) فَرَوْحٌ وَرَيْحَانٌ وَجَنَّتُ نَعِيمٍ (89) وَأَمَّا إِن كَانَ مِنْ أَصْحَابِ الْيَمِينِ (90) فَسَلَامٌ لَّكَ مِنْ أَصْحَابِ الْيَمِينِ (91) وَأَمَّا إِن كَانَ مِنَ الْمُكَذِّبِينَ الضَّالِّينَ (92) فَنُزُلٌ مِّنْ حَمِيمٍ (93) وَتَصْلِيَةُ جَحِيمٍ (94) إِنَّ هَٰذَا لَهُوَ حَقُّ الْيَقِينِ (95) فَسَبِّحْ بِاسْمِ رَبِّكَ الْعَظِيمِ (96)-->
   </section>
@@ -54,15 +61,20 @@
   </div>
 </div>
   <section class="audio-section" [@show]="showAudioControls">
-
+    <div class="audio-alt" hidden>
+      <div *ngIf="audio" [style.width]="_passedTime + '%'"></div>
+      <p text-center>
+        {{_passedTime}}
+      </p>
+    </div>
     <div class="rewind-btns">
-      <button ion-button clear>
+      <button ion-button clear (click)="rewind(1)" [disabled]="!audio&&!audio?.played">
         <ion-icon name="rewind"></ion-icon>
       </button>
       <button ion-button clear>
         <ion-icon [name]="isOn?'pause':'play'" (click)="changePlayState()"></ion-icon>
       </button>
-      <button ion-button clear>
+      <button ion-button clear (click)="rewind(-1)">
         <ion-icon name="rewind"></ion-icon>
       </button>
     </div>
@@ -70,8 +82,10 @@
     <div class="reader">
       <div class="reader-info">
         <p>القارىء</p>
-        <ion-select okText="{{'okText'|translate}}" cancelText="{{'cancelText'|translate}}">
-          <ion-option selected >المنشاوى</ion-option>
+        <ion-select okText="{{'okText'|translate}}" cancelText="{{'cancelText'|translate}}" [ngModel]="selectedReader" (ngModelChange)="changeReader($event)">
+          <!-- <ion-option *ngIf="selectedReader" [value]="selectedReader">{{selectedReader.Name}}</ion-option> -->
+          <!-- [hidden]="reader == selectedReader" -->
+          <ion-option *ngFor="let reader of allReaders" [value]="reader" >{{reader.Name}}</ion-option>
         </ion-select>
       </div>
     </div>

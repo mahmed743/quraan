@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import { IonicPageModule, MenuClose } from 'ionic-angular';
 import { RecitalmenuPage } from './recitalmenu';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -11,5 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicPageModule.forChild(RecitalmenuPage),
     TranslateModule
   ],
+  providers: [
+    MenuClose
+  ]
 })
 export class RecitalmenuPageModule {}

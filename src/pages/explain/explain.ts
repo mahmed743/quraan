@@ -17,7 +17,7 @@ import {ConfigProvider, TafseerId} from '../../providers/config/config';
 import { Brightness } from '@ionic-native/brightness';
 import { langDir } from '../settings/settings';
 
-interface Verse {
+export interface Verse {
   id: number,
   surah: number,
   ayah: number | string,
@@ -72,14 +72,14 @@ export class ExplainPage {
               public documentViewer: DocumentViewer,
               public file: File,
               public platform: Platform,
-    public brightnessNative: Brightness,
+              public brightnessNative: Brightness,
               public events: Events
   ) {
   }
   async ionViewWillEnter() {
     this.preferences.showAzkarIcon = (await this.configProvider.getPreferences()).showAzkarIcon;
     let hour = new Date(Date.now()).getHours();
-    if (hour < 18 && hour >= 6) {
+    if (hour < 18 && hour >= 4) {
       this.azkarIcon = 'ios-partly-sunny-outline';
     }
     this.events.subscribe('preference:change', changes => {
@@ -89,9 +89,9 @@ export class ExplainPage {
   }
   async ionViewDidLoad() {
     if (this.platform.is('cordova')) {
-      this.brightness = await this.brightnessNative.getBrightness();
+      this.brightness = (await this.brightnessNative.getBrightness()) * 100;
     }
-  
+
     this.allTafseers = this.configProvider.availableTafssers;
     this.tafseerName = await this.configProvider.getTafseerName();
     this.getPage();
@@ -114,7 +114,6 @@ export class ExplainPage {
       .subscribe(data => {
         this.verses = values(data).map((verse, index) => ({...verse, selected: index == 0}));
         this.selectedVers = this.verses[0];
-        this.showTafseer = 'active';
         if (this.verses.length) {
           this.getTafseer(this.tafseerName);
         }
@@ -134,13 +133,14 @@ export class ExplainPage {
 
   changePage(change) {
     this.getPage(this.pageNum += change);
-    
+
   }
 
   selectVerse(verse) {
     if (verse.id !== this.selectedVers.id) {
       this.verses = values(this.verses).map(ver => ({...ver, selected: ver == verse}));
       this.selectedVers = verse;
+      this.showTafseer = 'active';
       console.log('verse =>', verse);
       this.getTafseer(this.tafseerName)
     }

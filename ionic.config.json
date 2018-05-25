@@ -11,7 +11,12 @@
   }, {
     "path": "//page",
     "proxyUrl": "http://api.globalquran.com"
-  }]
+  }, {
+    "path": "/api/",
+    "proxyUrl": "http://www.mp3quran.net"
+  }
+  
+  ]
 
 
 }

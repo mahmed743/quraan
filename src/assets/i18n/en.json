@@ -36,7 +36,8 @@
   "azkar": "Azkar",
   "showAzkarsIcon": "Show Azkars Icon",
   "numOfPages": "Numbers of Pages",
-  "notifyTime": "Notify Every"
-
+  "notifyTime": "Notify Every",
+  "searchQuranText": "Search All Quran",
+  "numOfResults": "Number of Results"
 
 }

@@ -9,13 +9,12 @@
 
   <section class="top-cta" [@slide]="showTafseer">
     <div class="left">
-      <button small ion-button icon-only (click)="showBrightnessPanel= !showBrightnessPanel">
+      <button small ion-button icon-only (click)="showBrightnessPanel= !showBrightnessPanel" color="light">
         <ion-icon name="md-bulb"></ion-icon>
       </button>
     </div>
     <div class="right">
-<button ion-button icon-only small (click)="goTo('AzkarofdayPage')" *ngIf="preferences?.showAzkarIcon">
-
+      <button ion-button icon-only small (click)="goTo('AzkarofdayPage')" *ngIf="preferences?.showAzkarIcon" color="light">
         <ion-icon [name]="azkarIcon"></ion-icon>
       </button>
     </div>

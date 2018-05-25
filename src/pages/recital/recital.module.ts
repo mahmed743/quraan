@@ -5,6 +5,7 @@ import {QuraanProvider} from "../../providers/quraan/quraan";
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../../components/components.module';
 import { Brightness } from '@ionic-native/brightness';
+import { ConfigProvider } from '../../providers/config/config';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { Brightness } from '@ionic-native/brightness';
   ],
   providers: [
     QuraanProvider,
-    Brightness
+    Brightness,
+    ConfigProvider
   ]
 })
 export class RecitalPageModule {}

@@ -4,7 +4,20 @@ page-recital {
     display: flex;
   }
   ion-content {
-
+    .audio-alt {
+      background: #ccc;
+      height: 10px;
+      margin: 10px auto;
+      width: 60%;
+      border-radius: 4px;
+      overflow: hidden;
+      div {
+        width: 100%;
+        border-radius: 4px;
+        height: 100%;
+        background-color: #fff
+      }
+    }
     .scroll-content {
       padding: 22px 23px 28px 22px !important;
       background-color: $primary;
@@ -22,14 +35,13 @@ page-recital {
       z-index: 5555;
     }
     .recital {
-      overflow-y: hidden;
       width: 100%;
       height: 100%;
-      //padding: 10px;
-      font-size: 16px;
-      line-height: 1.8;
-      text-align: justify;
+      //text-align: justify;
       background-color: #E2FEDE;
+      font-size: 5.35vw;
+      text-align: justify;
+      line-height: 1.5;
       .slide-zoom {
         width: 100%;
         height: 100%;
@@ -43,14 +55,23 @@ page-recital {
         height: 100%;
       }
       a {
-
+        font-family:  'UthmanicHafs', 'jf-flat-regular', sans-serif;
       //font-family: 'UthmanicHafs', sans-serif;
         color: #222!important;
         margin: 6px;
+        span {
+        font-family: 'quranFont',QuranFont, sans-serif;
+        }
         &.selected {
-          background-color: #bce0b3;
           color: #000 !important;
-          border-radius: 0 4px  0 4px
+          background-color: #E2FEDE;
+          border-radius: 0 5px  0 5px;
+          animation: blink 0.25s ease-in-out 0.1s forwards;
+          @keyframes blink {
+            to {
+              background-color: #bce0b3;
+            }
+          }
         }
       }
     }
@@ -99,9 +120,9 @@ page-recital {
       left:22px;
       z-index: 5;
       .rewind-btns {
-        padding: 8px;
         display: flex;
         justify-content: space-around;
+        padding: 8px;
         button {
           color: #fff !important;
           &:first-of-type {
@@ -119,7 +140,7 @@ page-recital {
           border-radius: 5px;
           ion-select {
             position: relative;
-            min-width: 50% !important;
+            min-width: 60% !important;
           }
         }
       }

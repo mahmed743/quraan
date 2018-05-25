@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
-import {TranslateService} from "@ngx-translate/core";
+import { IonicPage, NavController, NavParams, Platform, MenuClose } from 'ionic-angular';
+import { TranslateService } from "@ngx-translate/core";
 import { langDir } from '../settings/settings';
 
 
@@ -13,10 +13,12 @@ import { langDir } from '../settings/settings';
 export class RecitalmenuPage {
   appLang: string = 'ar';
   menuPages: any[];
+  rootPage: string = 'RecitalPage';
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-              public platform: Platform,
-              public translateService: TranslateService) {
+    public platform: Platform,
+    public menuClose: MenuClose,
+    public translateService: TranslateService) {
   }
 
   ionViewDidLoad() {
@@ -28,6 +30,16 @@ export class RecitalmenuPage {
         component: 'SalahtimesPage',
         icon: 'مواعيد الصلاة',
         title: 'مواعيد الصلاة'
+      }, {
+        index: 3,
+        component: 'RecitalPage',// 'RecitalPage',
+        icon: 'تلاوة',
+        title: 'التلاوة'
+      }, {
+        index: 5,
+        component: 'ExplainPage',
+        icon: 'تفسير',
+        title: 'التفسير'
       },
       {
         index: 1,
@@ -40,23 +52,13 @@ export class RecitalmenuPage {
         icon: 'الورد اليومي',
         title: 'الورد اليومى'
       }, {
-        index: 3,
-        component: 'RecitalmenuPage',// 'RecitalPage',
-        icon: 'تلاوة',
-        title: 'التلاوة'
-      }, {
         index: 4,
         component: 'SealdoaaPage',
         icon: 'دعاء الختم',
         title: 'دعاء الختم'
       },
-      /*{
-        index: 5,
-        component: 'ExplainPage',
-        icon: 'تفسير',
-        title: 'التفسير'
-      },*/
-       {
+
+      {
         index: 7,
         component: 'SearchPage',
         icon: 'البحث',
@@ -76,7 +78,13 @@ export class RecitalmenuPage {
   }
 
   public navTo(page: string, params: any = {}): void {
-    this.navCtrl.push(page, { ...params, lang: langDir[this.platform.dir()] })
+    if (page === 'RecitalPage' || page === 'ExplainPage') {
+      this.rootPage = page;
+      //this.menuCtrl.close();
+      this.menuClose.close();
+    } else {
+      this.navCtrl.push(page, { ...params, lang: langDir[this.platform.dir()] })
+    }
   }
 
 }

@@ -19,9 +19,22 @@ page-search {
   ion-content {
     &.content {
       background-color: #f8f8f8;
-      color: #fff
+
     }
     ion-list {
+      .result-num {
+        width: 150px;
+        background-color: #eee;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 8px auto 16px;
+        padding: 2px;
+        ion-badge {
+          color: $primary
+        }
+      }
       ion-item {
 
         ion-label {

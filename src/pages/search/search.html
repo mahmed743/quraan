@@ -15,23 +15,29 @@
       </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
-        <ion-searchbar dir="rtl" showCancelButton="false" (ionInput)="search()" animates="true" placeholder="ابحث" type="search" (ionClear)="onSearchClear()"></ion-searchbar>
-    
+        <ion-searchbar [(ngModel)]="searchText" dir="rtl" showCancelButton="false" (ionInput)="search()" animates="true" placeholder="ابحث" type="search" (ionClear)="onSearchClear()"></ion-searchbar>
+
       </ion-toolbar>
-  
+
   </ion-header>
 
 <ion-content no-padding>
-  <ion-list>
-    <ion-item >
-      <p class="surah-name">سورة الحديد</p>
-      <p class="surah-search"><span class="matched">سَبَّحَ لِلَّهِ</span> مَا فِي السَّمَاوَاتِ وَالْأَرْضِ ۖ وَهُوَ الْعَزِيزُ الْحَكِيمُ (1) لَهُ مُلْكُ السَّمَاوَاتِ وَالْأَرْضِ ۖ يُحْيِي وَيُمِيتُ ۖ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ (2) هُوَ الْأَوَّلُ وَالْآخِرُ وَالظَّاهِرُ وَالْبَاطِنُ ۖ وَهُوَ بِكُلِّ شَيْءٍ عَلِيمٌ (3)</p>
-      <p class="surah-page"><ion-icon name="md-book"></ion-icon> ٥٣٧</p>
-    </ion-item>
-    <ion-item>
-      <p class="surah-name">سورة الحديد</p>
-      <p class="surah-search">سَبَّحَ لِلَّهِ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ ۖ وَهُوَ الْعَزِيزُ الْحَكِيمُ (1) لَهُ مُلْكُ السَّمَاوَاتِ وَالْأَرْضِ ۖ يُحْيِي وَيُمِيتُ ۖ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ (2) هُوَ الْأَوَّلُ وَالْآخِرُ وَالظَّاهِرُ وَالْبَاطِنُ ۖ وَهُوَ بِكُلِّ شَيْءٍ عَلِيمٌ (3)</p>
-      <p class="surah-page"><ion-icon name="md-book"></ion-icon> ٥٣٧</p>
+
+  <p text-center *ngIf="loader">
+    <ion-spinner></ion-spinner>
+  </p>
+  <p *ngIf="matched.length<1&&!loader" text-center>
+    {{'searchQuranText' | translate}}
+  </p>
+  <ion-list *ngIf="matched.length>0">
+    <div class="result-num">
+      <span>{{'numOfResults'| translate}}</span>
+      <ion-badge color="light">{{matchCount}}</ion-badge>
+    </div>
+    <ion-item *ngFor="let match of matched">
+      <p class="surah-name">{{match.surahName}}</p>
+      <p class="surah-search" [innerHTML]="match.text"></p>
+      <p class="surah-page"><ion-icon name="md-book"></ion-icon>{{match.ayahNumber}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

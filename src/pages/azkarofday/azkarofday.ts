@@ -111,14 +111,13 @@ export class AzkarofdayPage implements AfterViewInit {
   }
 
   readNext(zekr, lockSlide: boolean = false) {
-   
+
     if (zekr.repeat < 2) {
-      this.azkarSlides.slideNext();
+      this.azkarSlides.slideNext(500);
       setTimeout(() => {
-        
         this.azkars = this.azkars.filter(z => z != zekr);
         this.azkarSlides.slidePrev(0)
-      }, 100)
+      }, 100);
       this.azkarSlides.lockSwipes(false);
     } else {
       lockSlide && this.azkarSlides.lockSwipes(true);
