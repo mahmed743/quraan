@@ -41,7 +41,12 @@
   "numOfResults": "Number of Results",
   "Juz": "Juzaa",
   "moveTo": "Move To",
-  "pressToChoose": "Press to choose"
+  "pressToChoose": "Press to choose",
+  "pressToExit": "You are about to close the app, Press again to exit!",
+  "وجه واحد": "one part",
+  "وجهان": "two parts",
+  "ثلاث أوجه": "three parts",
+  "أربع أوجه": "four parts"
 
 
 }

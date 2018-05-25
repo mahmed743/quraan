@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
+import {ArPartsNumber} from "../../providers/werd/werd";
 
 
 @IonicPage()
@@ -10,6 +11,7 @@ import { ConfigProvider } from '../../providers/config/config';
 })
 export class UpreferencePage {
   appLang: string = 'ar';
+  parts:{name: string, value: number}[] = [];
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public configProvider: ConfigProvider
@@ -18,7 +20,10 @@ export class UpreferencePage {
   }
 
   ionViewDidLoad() {
-    
+
+    this.parts = Array.from({length:4}, (iter, index)=>({name:ArPartsNumber[index+1], value: index+1}));
+    console.log('user parts', this.parts);
+
   }
 
   choosePart(partNumber) {

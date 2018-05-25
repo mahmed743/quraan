@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Platform, Config} from 'ionic-angular';
+import {Platform, Config, App, ToastController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TranslateService} from '@ngx-translate/core';
@@ -12,17 +12,19 @@ export type DocumentDirection = 'ltr' | 'rtl';
 })
 export class MyApp {
   rootPage: any;
-
-  constructor(platform: Platform,
+  counter: number = 0;
+  constructor(public platform: Platform,
+              public app:App,
+              public toastCtrl: ToastController,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
-              translate: TranslateService,
+              public translate: TranslateService,
               configProvider: ConfigProvider,
               config: Config
   ) {
 
 
-    platform.ready().then(() => {
+    this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
@@ -33,7 +35,7 @@ export class MyApp {
         if (lang) {
           translate.setDefaultLang(lang);
           translate.use(lang);
-          platform.setDir(langDir[lang] as DocumentDirection, true);
+          this.platform.setDir(langDir[lang] as DocumentDirection, true);
           config.set('backButtonIcon', 'arrow-'+(lang==='ar'?'forward':'back'));
           console.log('App Language', lang, translate.currentLang);
           this.rootPage = 'RecitalmenuPage';
@@ -43,6 +45,37 @@ export class MyApp {
 
       });
     });
+    this.handleBackButton();
+  }
+
+  handleBackButton(){
+    this.platform.registerBackButtonAction(() => {
+      if (this.counter == 0) {
+        if(this.app.getActiveNavs()[0].canGoBack()){
+          this.app.getActiveNavs()[0].pop();
+        } else{
+          this.counter++;
+          this.presentToast();
+          setTimeout(() => { this.counter = 0 }, 1500)
+        }
+      } else {
+        this.platform.exitApp();
+      }
+    }, 1)
+
+  }
+
+  presentToast() {
+    this.translate.get('pressToExit')
+      .subscribe(translated=>{
+        let toast = this.toastCtrl.create({
+          message: translated,
+          showCloseButton: true,
+          dismissOnPageChange: true,
+          closeButtonText: 'X'
+        });
+        toast.present()
+      });
   }
 }
 

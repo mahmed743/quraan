@@ -100,8 +100,12 @@ export class RecitalPage {
     public quranProvider: QuraanProvider,
     public configProvider: ConfigProvider,
     public events: Events
-  ) //public quraan: Quran
-  {}
+  ) {
+    if (this.navParams.get('initPage')) {
+
+      this.changePage(this.navParams.get('initPage'), true)
+    }
+  }
   async ionViewWillEnter() {
     this.preferences.showAzkarIcon = (await this.configProvider.getPreferences()).showAzkarIcon;
     let hour = new Date(Date.now()).getHours();
@@ -148,7 +152,7 @@ export class RecitalPage {
 
   private getQuranRadioReaders() {
     this.quranProvider.getQuranRadio().subscribe(data => {
-      console.log(data["Radios"]);
+      //console.log(data["Radios"]);
       let radios = uniqBy(data["Radios"], "Name") as QuranReader[];
       radios.pop();
       this.allReaders = radios;
@@ -167,7 +171,7 @@ export class RecitalPage {
         this.audio = new Audio(ayahUrl);
         this.audio.preload = 'none';
         document.body.appendChild(this.audio);
-        
+
         this.audio.addEventListener("ended", () => {
           console.log('audio ended');
           this.getNextAyah(this.selectedReader.URL);
@@ -198,7 +202,7 @@ export class RecitalPage {
     this._passedTime = (this.audio.currentTime / this.audio.duration) * 100;
     console.log('passed Time', this._passedTime);
 
-  }  
+  }
   getNextAyah(url) {
     try {
       let index = this.verses.findIndex(verse=>verse.verse == this.selectedVerse.verse);
@@ -255,7 +259,7 @@ export class RecitalPage {
           // make the first verse the selected one
           this.selectedVerse = this.verses[0];
           this.currentSurahName = this.surahsName.find(surah => this.selectedVerse.surah == surah.id)['name'];
-        
+
           // play audio on it
           if (num > 1)
             this.playAudio(this.selectedReader.URL)

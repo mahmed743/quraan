@@ -1,13 +1,42 @@
 
 import { Injectable } from '@angular/core';
 import { Storage } from "@ionic/storage";
+import {QuraanProvider} from "../quraan/quraan";
+import {ConfigProvider} from "../config/config";
+import {Events} from "ionic-angular";
 
+export interface UserDailyWerd {
+  id: number,
+  read: boolean,
+  partsNumber: number|string,
+  added: string|any,
+  readDate?: null|string,
+  location: {
+    page: number,
+    from: any[],
+    to: any[],
+    verse?:string
+  }|any
+}
 
+export enum ArPartsNumber {
+  'وجه واحد' = 1,
+    'وجهان',
+  'ثلاث أوجه',
+  'أربع أوجه'
+}
 @Injectable()
 export class WerdProvider {
 
-  constructor(public storage: Storage) {
+  constructor(public storage: Storage, public quranProvider: QuraanProvider, public configProvider: ConfigProvider, public events: Events) {
     //this.storage.clear()
+    this.events.subscribe('user:readPart', (pageNumber)=>{
+      this.setUserWerdProperty('read', true, pageNumber)
+        .then(data=>{
+          console.log('saved..', data);
+        })
+
+    })
   }
 
   getStaticWerd() {
@@ -40,10 +69,67 @@ export class WerdProvider {
 
 
   getPrivateWerd() {
-
     return this.storage.get('private:werds')
   }
 
+  async getUserPrivateWerds() {
+    const [userPreferences, userPrivateWerds ]= await Promise.all([this.storage.get('user:preferences'), this.storage.get('user:privateWerds')]);
+    if(!userPrivateWerds) {
+      let werds:UserDailyWerd[] = [];
+      console.info('user preferences', Array(userPreferences.partsNumber));
+      Array(userPreferences.partsNumber).fill(userPreferences.partsNumber).forEach(async (p, i)=> {
+        werds[i] = {
+          id: 0,
+          read: false,
+          partsNumber: ArPartsNumber[userPreferences.partsNumber],
+          added: new Date(Date.now()),
+          readDate: null,
+          location: {}
+
+        };
+        werds[i].location = await this.getPageLocations(1);
+        console.log(werds[i]);
+      });
+        return this.storage.set('user:privateWerds', werds)
+
+      } else {
+      return userPrivateWerds
+    }
+
+  }
+
+  private async getPageLocations(pageNumber, read?:boolean) {
+    let location: any = {page: pageNumber, verse: ''};
+    let pageData: any = await this.quranProvider.getPage(pageNumber).toPromise();
+    console.log('pageInfo', pageData);
+    let ayatNums = Object.keys(pageData);
+    location.from = [pageData[ayatNums[0]].surah, pageData[ayatNums[0]].ayah];
+    location.to = [pageData[ayatNums[ayatNums.length - 1]].surah, pageData[ayatNums[ayatNums.length - 1]].ayah];
+    let surahNames = await this.configProvider.surasNames;
+    console.log('suraz names', surahNames, location, 'ayatNum', ayatNums);
+    location.from[2] = surahNames.find(surah => location.from[0] == surah.id)['name'];
+    location.to[2] = surahNames.find(surah => location.to[0] == surah.id)['name'];
+    for (let key in ayatNums) {
+      if (Number(key) < 4) {
+        location.verse += pageData[ayatNums[key]].verse+' ( '+((pageNumber==1)?ayatNums[key]:(Number(ayatNums[key])-7))+' ) ';
+      }
+    }
+    read&&(location.page+=1);
+    return location
+  }
+
+  async setUserWerdProperty(prop, value, pageNumber?:any) {
+
+        let werds = await  this.getUserPrivateWerds();
+        let werd = werds[0];
+        console.log('saved werd', werds, werds);
+        if (prop === 'read') {
+          console.info('werd location', werd.location);
+          werd.location = await this.getPageLocations(Number(pageNumber)+1);
+        }
+        return this.storage.set('user:privateWerds', [{...werd, ...{[prop]:value}}]);
+
+  }
   async addPrivateWerd(werd) {
 
 

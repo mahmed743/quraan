@@ -14,9 +14,13 @@
       </button>
     </div>
     <div class="right">
+      <button ion-button icon-only small *ngIf="fromDailyPage" (click)="saveDailyRead()" color="light">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
       <button ion-button icon-only small (click)="goTo('AzkarofdayPage')" *ngIf="preferences?.showAzkarIcon" color="light">
         <ion-icon [name]="azkarIcon"></ion-icon>
       </button>
+
     </div>
   </section>
 

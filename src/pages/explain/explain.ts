@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Platform, Events} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Platform, Events, ToastController} from 'ionic-angular';
 import {QuraanProvider} from "../../providers/quraan/quraan";
 import {File} from '@ionic-native/file';
 import {values} from 'lodash';
@@ -67,8 +67,9 @@ export class ExplainPage {
   azkarIcon: string = 'ios-moon-outline';
   preferences: any = {};
   currentSurahName: string = 'البقرة';
-  currentJuzName: string = 'الأول'
+  currentJuzName: string = 'الأول';
   surahsName: any[] = [];
+  fromDailyPage:boolean = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -77,11 +78,15 @@ export class ExplainPage {
               public file: File,
               public platform: Platform,
               public brightnessNative: Brightness,
-              public events: Events
+              public events: Events,
+              public toastCtrl: ToastController
   ) {
   }
   async ionViewWillEnter() {
     this.preferences.showAzkarIcon = (await this.configProvider.getPreferences()).showAzkarIcon;
+    this.fromDailyPage = this.navParams.get('from') === 'dailyReadPage';
+    this.pageNum = this.navParams.get('initPage');
+    console.log('param', this.navParams.get('from'), this.fromDailyPage);
     let hour = new Date(Date.now()).getHours();
     if (hour < 18 && hour >= 4) {
       this.azkarIcon = 'ios-partly-sunny-outline';
@@ -103,6 +108,7 @@ export class ExplainPage {
 
     this.allTafseers = this.configProvider.availableTafssers;
     this.tafseerName = await this.configProvider.getTafseerName();
+    this.pageNum = this.navParams.get('initPage');
     this.getPage();
   }
 
@@ -117,7 +123,7 @@ export class ExplainPage {
 
 
 
-  getPage(num = 1) {
+  getPage(num = this.pageNum) {
     this.quraanProvider.getPage(num)
       .subscribe(data => {
         this.verses = values(data).map((verse, index) => ({...verse, selected: index == 0}));
@@ -195,4 +201,15 @@ export class ExplainPage {
   }
 
 
+  saveDailyRead() {
+    this.events.publish('user:readPart', this.navParams.get('initPage'));
+    this.fromDailyPage = false;
+    this.toastCtrl.create({
+      message: 'لقد قمت بقراء الورد. ',
+      duration: 2000,
+      showCloseButton: true,
+      closeButtonText: 'X',
+      dismissOnPageChange: true
+    }).present()
+  }
 }

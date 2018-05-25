@@ -13,20 +13,23 @@
         </button>
       </ion-buttons>
     </ion-navbar>
-  
+
   </ion-header>
 
 <ion-content padding-horizontal>
   <ion-segment margin-bottom [(ngModel)]="dailyReadCategory">
-    <ion-segment-button value="static">
-      {{"عام"|translate}}
-    </ion-segment-button>
     <ion-segment-button value="private">
       {{"خاص"|translate}}
     </ion-segment-button>
+
+    <ion-segment-button value="static">
+      {{"عام"|translate}}
+    </ion-segment-button>
   </ion-segment>
   <ng-template [ngIf]="dailyReadCategory === 'static'">
+
     <ion-list *ngIf="staticDailyWerds&&staticDailyWerds.length">
+
       <ion-item margin-bottom *ngFor="let werd of staticDailyWerds">
         <div class="name">
           <span>{{werd.name}}</span>
@@ -43,7 +46,50 @@
   </ng-template>
   <ng-template [ngIf]="dailyReadCategory === 'private'">
 
+    <ion-list *ngIf="userDailyRead&&userDailyRead.length>0">
+      <ion-item *ngFor="let werd of userDailyRead">
+        <div class="name">
+          <span>قراءة {{werd.partsNumber}} من القراءن</span>
+          <button  ion-button  (click)="goToQuran(werd.location.page)">
+            صفحة {{werd.location.page}}
+          </button>
+        </div>
+        <div class="ayah">
+          <p>{{werd.location.verse}}</p>
+        </div>
+        <div class="ayah-info">
+          <div class="info-container">
+            <p>
+              <label >من</label>
+              <span class="ayah-number">
+                اية
+                {{werd.location?.from[1]}}
+              </span>
+              <span class="surah-name">
+                سورة
 
+                {{werd.location?.from[2]}}
+              </span>
+
+            </p>
+            <p>
+              <label>الى</label>
+              <span class="ayah-number">
+                اية
+
+                {{werd.location?.to[1]}}
+              </span>
+              <span class="surah-name">
+                سورة
+
+                {{werd.location?.to[2]}}
+              </span>
+
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
     <ion-list *ngIf="privateDailyRead&&privateDailyRead.length;else noprivateread">
       <ion-item margin-bottom *ngFor="let werd of privateDailyRead">
         <div class="name">
@@ -67,7 +113,7 @@
       <ng-template #noprivateread>
         <br>
         <p text-center >
-          لم تقم باضافة ورد يومى خاص بك</p>
+          قم باضافة ورد يومى خاص بك</p>
 
       </ng-template>
       <p text-center>

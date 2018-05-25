@@ -23,16 +23,15 @@
        وقول الامام ابن كثير - رحمه الله- : "فكانوا اذا تلى عليهم القران اكثروا اللغط والكلام فى غيره و حتى لا يسمعوهو فهذا من هجرانهو وترك العمل به وامتثال أوامره واجتناب زواجره من هجرانه والعدول عنه الى غيره من شعر أو قول أو غناء أو لهو أو كلام أو طريقة مأخوذة من غيره من هجرانه". تفسير ابن كثير (3 /318)
     </p>
   </section>
-  
+
   <section class="parts-num">
     <p text-center>
-      الورد اليومى : عدد الأوجه
+      {{ 'الورد اليومى' | translate}} : {{ 'numOfPages'|translate}}
     </p>
     <div class="parts-btns">
-      <button ion-button (click)="choosePart(1)" color="light">وجه واحد</button>
-      <button ion-button (click)="choosePart(2)" color="light">وجهان</button>
-      <button ion-button (click)="choosePart(3)" color="light">ثلاثة أوجه</button>
-      <button ion-button (click)="choosePart(4)" color="light">أربعة أوجه</button>
+
+      <button ion-button *ngFor="let part of parts" (click)="choosePart(part.value)" color="light">{{part.name|translate}}</button>
+
     </div>
   </section>
 </ion-content>

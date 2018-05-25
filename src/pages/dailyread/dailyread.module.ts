@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule
   ],
   providers: [
-    WerdProvider
+    WerdProvider,
   ]
 })
 export class DailyreadPageModule {}

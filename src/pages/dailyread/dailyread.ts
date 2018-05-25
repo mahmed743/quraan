@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import {WerdProvider} from "../../providers/werd/werd";
+import {UserDailyWerd, WerdProvider} from "../../providers/werd/werd";
 import {
   trigger,
   state,
@@ -28,41 +28,43 @@ type DailyReadCategory = 'static' | 'private';
         style({transform: 'translateY(150px) scale(0.2)'}),
         animate(250)
       ])])]
-  // transition('* => void', [
-  //   animate(250, style({transform: 'translateX(100%)'}))
-  // ])
 })
 export class DailyreadPage {
-  dailyReadCategory: DailyReadCategory = 'static';
+  dailyReadCategory: DailyReadCategory = 'private';
   privateDailyRead:any[] = [];
   staticDailyWerds: any[] = [];
   appLang: string;
+  userDailyRead: UserDailyWerd[]= [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
-              public werdProvider: WerdProvider
+              public werdProvider: WerdProvider,
   ) {
 
     this.appLang = this.navParams.get('lang');
   }
 
   ionViewDidLoad() {
-    this.werdProvider.addStaticWerds()
-      .then(data=>{
-        console.log('static werds',data);
-        this.staticDailyWerds = data;
-      });
-    this.werdProvider.getPrivateWerd()
-      .then(data=>{
-        console.log('private werds',data);
-        this.privateDailyRead = data
-      });
+    Promise.all([this.werdProvider.addStaticWerds()
+      ,this.werdProvider.getPrivateWerd()
+      ]).then(data=>[this.staticDailyWerds, this.privateDailyRead ] = [...data]);
+
+    this.werdProvider.getUserPrivateWerds()
+      .then((data:UserDailyWerd[])=>{
+        this.userDailyRead = data;
+        console.log('user daily read', data);
+
+      })
   }
 
   toggle(doaa) {
 
   }
 
+  goToQuran(pageNumber) {
+    console.log('read page number', pageNumber);
+    this.navCtrl.push('ExplainPage', {root: 'ExplainPage', initPage: pageNumber, from:'dailyReadPage'})
+  }
   addWerd() {
 
     const modal = this.modalCtrl.create('AddwerdPage');
