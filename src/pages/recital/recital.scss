@@ -34,6 +34,24 @@ page-recital {
       left: 0;
       z-index: 5555;
     }
+    .page-id-info {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 21px;
+      background-color: $primary;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+      font-size: 1rem;
+      box-shadow: inset 1px 1px #555,inset -1px -1px #555;
+      padding: 0 6px;
+      span {
+        padding: 0 5px;
+      }
+    }
     .recital {
       width: 100%;
       height: 100%;

@@ -28,6 +28,9 @@
   "numOfPages": "عدد الأوجه",
   "notifyTime": "وقت التنبيه كل",
   "searchQuranText": "ابحث فى كل القران",
-  "numOfResults": "عدد النتائج"
+  "numOfResults": "عدد النتائج",
+  "Juz": "الجزء",
+  "moveTo": "انتقال الى",
+  "pressToChoose": "اضغط للاختيار"
 
 }

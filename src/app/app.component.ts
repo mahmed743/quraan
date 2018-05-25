@@ -5,9 +5,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfigProvider} from "../providers/config/config";
 import {langDir} from "../pages/settings/settings";
-import {DocumentDirection} from "ionic-angular/platform/platform";
-import {RecitalmenuPage} from "../pages/recitalmenu/recitalmenu";
 
+export type DocumentDirection = 'ltr' | 'rtl';
 @Component({
   templateUrl: 'app.html'
 })

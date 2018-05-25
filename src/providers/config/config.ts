@@ -1,11 +1,13 @@
 
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { HttpClient } from '@angular/common/http';
 export interface TafseerId {
   id?:number,
   resource_name: string,
   name: string
 }
+export interface SurasNames { Suras_Name: { id: string, name: string }[] }
 export type tafsirNames = 'المیسر'|'ابن كثير'|'Arabic Qurtubi Tafseer'|'Arabic Saddi Tafseer'|'Arabic Tanweer Tafseer'|'Arabic Waseet Tafseer'|'Arabic Baghawy Tafseer'|'الطبري';
 
 @Injectable()
@@ -18,7 +20,7 @@ export class ConfigProvider {
   defaultPreferences = {
     showAzkarIcon: true
   }
-  constructor(public storage: Storage) {
+  constructor(public storage: Storage, public http: HttpClient) {
     this.getPreferences().then(pref => this.preferences = pref);
   }
   public async getTafseerName() {
@@ -101,5 +103,49 @@ export class ConfigProvider {
   }
   public getAppLang() {
     return this.storage.get('app:lang')
+  }
+
+  get surasNames() {
+    return this.storage.get('suras:names')
+      .then(suras => suras&&suras.length > 0 ? suras : this.getSurahNames())
+      .then(fetched => this.storage.set('suras:names', fetched))
+  }
+  getSurahNames() {
+    return this.http.get('https://mp3quran.net/api/_arabic_sura.json').pluck('Suras_Name').toPromise()
+  }
+
+  get JuzPageNumbers() {
+    return [
+      [1, 1],
+      [2,22],
+      [3,42],
+      [4, 62],
+      [5,82],
+      [6,102],
+      [7, 122],
+      [8,142],
+      [9,162],
+      [10, 182],
+      [11,202],
+      [12,222],
+      [13, 242],
+      [14,262],
+      [15,282],
+      [16, 302],
+      [17,322],
+      [18,342],
+      [19, 362],
+      [20,382],
+      [21,402],
+      [22, 422],
+      [23,442],
+      [24,462],
+      [25, 482],
+      [26,502],
+      [27,522],
+      [28, 542],
+      [29,562],
+      [30,582],
+    ]
   }
 }

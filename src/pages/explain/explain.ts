@@ -16,6 +16,7 @@ import {AnimationStateToggle} from '../recital/recital';
 import {ConfigProvider, TafseerId} from '../../providers/config/config';
 import { Brightness } from '@ionic-native/brightness';
 import { langDir } from '../settings/settings';
+import { partsNames } from '../index';
 
 export interface Verse {
   id: number,
@@ -65,6 +66,9 @@ export class ExplainPage {
   showBrightnessPanel: boolean = false;
   azkarIcon: string = 'ios-moon-outline';
   preferences: any = {};
+  currentSurahName: string = 'البقرة';
+  currentJuzName: string = 'الأول'
+  surahsName: any[] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -85,7 +89,12 @@ export class ExplainPage {
     this.events.subscribe('preference:change', changes => {
       console.log('explain page: preference change', changes);
       this.preferences = { ...this.preferences, ...changes };
-    })
+    });
+    this.events.subscribe('change:pageByJuz', navData => {
+      console.log('change Page Juz', navData);
+      this.changePage(navData[1], true);
+      this.currentJuzName = navData[2];
+    });
   }
   async ionViewDidLoad() {
     if (this.platform.is('cordova')) {
@@ -110,7 +119,6 @@ export class ExplainPage {
 
   getPage(num = 1) {
     this.quraanProvider.getPage(num)
-      .pluck('quran', 'quran-simple')
       .subscribe(data => {
         this.verses = values(data).map((verse, index) => ({...verse, selected: index == 0}));
         this.selectedVers = this.verses[0];
@@ -131,9 +139,16 @@ export class ExplainPage {
     //this.navCtrl.popToRoot()
   }
 
-  changePage(change) {
-    this.getPage(this.pageNum += change);
+  changePage(change, exact?: boolean) {
+    this.getPage((this.pageNum = exact ? change : this.pageNum + change));
+    this.detectJuz()
+  }
+  private detectJuz() {
+    const juzPageNumbers = this.configProvider.JuzPageNumbers;
+    const index = juzPageNumbers.findIndex(juz => this.pageNum < juz[1]);
+    this.currentJuzName = partsNames[juzPageNumbers[index - 1][0]];
 
+    console.log('currect juz number', this.currentJuzName, juzPageNumbers[index - 1][0])
   }
 
   selectVerse(verse) {

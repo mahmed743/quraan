@@ -3,16 +3,23 @@ page-recitalmenu {
     ion-content {
       &.content {
         background-color: #faf9ee;
-        color: #fff;
       }
       ion-list {
+        &.quran-nav-list {
+          ion-item {
+            .item-inner {
+              border-bottom: none !important
+            }
+          }
+        }
         padding-top: 4rem;
-
         ion-item {
           background-color: transparent !important;
           .item-inner {
             border-bottom: 1px solid #fff !important;
           }
+        }
+        ion-item {
           ion-label {
             display: flex;
             align-items: center;

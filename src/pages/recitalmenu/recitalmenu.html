@@ -7,32 +7,36 @@
       </button>
     </div>
     <!-- Quran navigation -->
-    <div>
-      <p text-center>
-        انتقال الى
-      </p>
+    <p text-center>
+      {{'moveTo'|translate}}
+    </p>
+
+    <ion-list class="quran-nav-list" no-padding>
       <ion-item>
-        <ion-label>جزء</ion-label>
-        <ion-select>
-          <ion-option>1</ion-option>
+        <ion-label>{{'Juz'| translate}}</ion-label>
+        <ion-select [ngModel]="juzNumber" (ngModelChange)="changePageBy($event,'Juz', juzNumber)" okText="{{'okText'|translate}}"
+          cancelText="{{'cancelText'|translate}}">
+
+          <ion-option *ngFor="let part of quranparts" [value]="part">{{part[2]}}</ion-option>
+
         </ion-select>
       </ion-item>
 
-      <ion-item>
+      <ion-item hidden>
         <ion-label>سورة</ion-label>
         <ion-select>
           <ion-option>1</ion-option>
         </ion-select>
       </ion-item>
-    </div>
+    </ion-list>
 
     <!-- Navigation page list -->
     <ion-list>
-<ion-item *ngFor="let page of menuPages" (click)="navTo(page.component, {index: page.index})" [hidden]="(rootPage=='ExplainPage'&&page.component=='ExplainPage')||(rootPage=='RecitalPage'&&page.component=='RecitalPage')">
+      <ion-item *ngFor="let page of menuPages" (click)="navTo(page.component, {index: page.index})" [hidden]="(rootPage=='ExplainPage'&&page.component=='ExplainPage')||(rootPage=='RecitalPage'&&page.component=='RecitalPage')">
 
 
-  <img [src]="'assets/icons/'+page.icon+'.png'">
-  <span [class.small]="page.component == 'SalahtimesPage'||page.component=='DailyreadPage'">{{page.title|translate}}</span>
+        <img [src]="'assets/icons/'+page.icon+'.png'">
+        <span [class.small]="page.component == 'SalahtimesPage'||page.component=='DailyreadPage'">{{page.title|translate}}</span>
 
       </ion-item>
     </ion-list>
@@ -40,4 +44,3 @@
 </ion-menu>
 
 <ion-nav #mycontent [root]="rootPage"></ion-nav>
-

@@ -14,6 +14,7 @@ import { Brightness } from "@ionic-native/brightness";
 import { Verse } from "../explain/explain";
 import { ConfigProvider } from "../../providers/config/config";
 import { langDir } from "../settings/settings";
+import { partsNames } from "../index";
 
 export enum AnimationStateToggle {
   "inactive",
@@ -88,6 +89,9 @@ export class RecitalPage {
   preferences: any = {};
   private selectedVerse: Verse;
   azkarIcon: string = 'ios-moon-outline';
+  currentSurahName: string = 'البقرة';
+  currentJuzName: string = 'الأول'
+  surahsName: any[] = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -105,11 +109,44 @@ export class RecitalPage {
       this.azkarIcon = 'ios-partly-sunny-outline';
     }
     this.events.subscribe('preference:change', changes => {
-      console.log('explain page: preference change', changes);
       this.preferences = { ...this.preferences, ...changes };
+    });
+
+    this.events.subscribe('change:pageByJuz', navData => {
+      console.log('change Page Juz', navData);
+      this.changePage(navData[1], true);
+      this.currentJuzName = navData[2];
     })
   }
   async ionViewDidLoad() {
+    // get Quran readers
+    this.getQuranRadioReaders();
+
+    // config Page
+    if (this.navParams.get("initPage")) {
+      this.pageNum = this.navParams.get("initPage");
+    }
+    if (this.platform.is("cordova")) {
+      this.brightness = (await this.brightnessNative.getBrightness()) * 100;
+    }
+    this.configPage();
+  }
+  ionViewWillLeave() {
+    this.isOn = false;
+    this.audio&&this.audio.pause();
+  }
+  configPage() {
+
+    this.configProvider.surasNames
+      .then((result: any) => {
+        this.surahsName = result;
+        //console.log(this.surahsName);
+        // Get ayat of Page
+        this.getPage();
+      });
+  }
+
+  private getQuranRadioReaders() {
     this.quranProvider.getQuranRadio().subscribe(data => {
       console.log(data["Radios"]);
       let radios = uniqBy(data["Radios"], "Name") as QuranReader[];
@@ -119,21 +156,8 @@ export class RecitalPage {
         reader => reader.Name === this.defaultSavedReader
       );
     });
-    console.log(this.navParams.data);
-    if (this.navParams.get("initPage")) {
-      this.pageNum = this.navParams.get("initPage");
-    }
-    if (this.platform.is("cordova")) {
-      this.brightness = (await this.brightnessNative.getBrightness()) * 100;
-    }
-    this.getPage();
   }
-  ionViewWillLeave() {
-    this.isOn = false;
-    this.audio.pause();
-  }
-
-  playAudio(url, ayahNumber = this.selectedVerse.ayah, partNumber = this.selectedVerse.surah) {
+  private playAudio(url, ayahNumber = this.selectedVerse.ayah, partNumber = this.selectedVerse.surah) {
     let mp3Num = String(Number(partNumber) * 1000 + Number(ayahNumber));
     let ayahUrl = url + mp3Num.padStart(6, "0") + ".mp3";
     console.info("Audio Url", ayahUrl);
@@ -221,9 +245,7 @@ export class RecitalPage {
   }
 
   getPage(num = 1) {
-    this.quranProvider
-      .getPage(num)
-      .pluck("quran", "quran-simple")
+    this.quranProvider.getPage(num)
       .subscribe(
         data => {
           this.verses = values(data).map((verse, index) => ({
@@ -232,6 +254,8 @@ export class RecitalPage {
           }));
           // make the first verse the selected one
           this.selectedVerse = this.verses[0];
+          this.currentSurahName = this.surahsName.find(surah => this.selectedVerse.surah == surah.id)['name'];
+        
           // play audio on it
           if (num > 1)
             this.playAudio(this.selectedReader.URL)
@@ -245,9 +269,18 @@ export class RecitalPage {
     this.navCtrl.setRoot("HomePage", {}, { animate: true });
     //this.navCtrl.popToRoot()
   }
-  changePage(change) {
+  changePage(change, exact?:boolean) {
     //this.pageNum += change;
-    this.getPage((this.pageNum += change));
+    this.getPage((this.pageNum = exact?change:this.pageNum+change));
+    this.detectJuz()
+  }
+
+  private detectJuz() {
+    const juzPageNumbers = this.configProvider.JuzPageNumbers;
+    const index = juzPageNumbers.findIndex(juz => this.pageNum < juz[1]);
+    this.currentJuzName = partsNames[juzPageNumbers[index - 1][0]];
+
+    console.log('currect juz number', this.currentJuzName, juzPageNumbers[index - 1][0] )
   }
   selectVerse(verse) {
     this.verses = values(this.verses).map(ver => ({

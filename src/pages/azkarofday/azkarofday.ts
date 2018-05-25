@@ -84,7 +84,7 @@ export class AzkarofdayPage implements AfterViewInit {
   ionViewDidLoad() {
     let dateNow = new Date(Date.now());
     let hour = dateNow.getHours();
-    if (hour >= 18 || hour < 6) {
+    if (hour >= 18 || hour < 4) {
       this.azkarType = "Azkar of Night";
     }
     this.getPageAzkar();

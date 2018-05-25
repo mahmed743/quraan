@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, MenuClose } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, MenuClose, Events } from 'ionic-angular';
 import { TranslateService } from "@ngx-translate/core";
 import { langDir } from '../settings/settings';
+import { ConfigProvider } from '../../providers/config/config';
+import { partsNames } from '../index';
 
 
 
@@ -14,16 +16,25 @@ export class RecitalmenuPage {
   appLang: string = 'ar';
   menuPages: any[];
   rootPage: string = 'RecitalPage';
+  quranparts: any[] = [];
+  juzNumber: any = '0';
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
     public menuClose: MenuClose,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public configProvider: ConfigProvider,
+    public events: Events
+  ) {
   }
 
   ionViewDidLoad() {
+
     this.appLang = this.translateService.currentLang;
-    console.log('menu app lang', this.appLang);
+
+    this.quranparts = this.configProvider.JuzPageNumbers
+      .map((part: any[]) => { part[2] = partsNames[part[0]];return part})  ;
+    
     this.menuPages = [
       {
         index: 0,
@@ -51,12 +62,7 @@ export class RecitalmenuPage {
         component: 'DailyreadPage',
         icon: 'الورد اليومي',
         title: 'الورد اليومى'
-      }, {
-        index: 4,
-        component: 'SealdoaaPage',
-        icon: 'دعاء الختم',
-        title: 'دعاء الختم'
-      },
+      }, 
 
       {
         index: 7,
@@ -69,6 +75,11 @@ export class RecitalmenuPage {
         icon: 'البحث',
         title: 'azkar'
       }, {
+        index: 4,
+        component: 'SealdoaaPage',
+        icon: 'دعاء الختم',
+        title: 'دعاء الختم'
+      }, {
         index: 6,
         component: 'SettingsPage',
         icon: 'الاعدادات',
@@ -76,7 +87,12 @@ export class RecitalmenuPage {
       }
     ];
   }
-
+  changePageBy(navData, type: 'juz' | 'surah') {
+    this.juzNumber = navData;
+    this.events.publish('change:pageByJuz', navData);
+    console.log(type, navData, this.juzNumber);
+    this.menuClose.close();
+  }
   public navTo(page: string, params: any = {}): void {
     if (page === 'RecitalPage' || page === 'ExplainPage') {
       this.rootPage = page;

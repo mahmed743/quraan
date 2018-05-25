@@ -59,5 +59,10 @@
   <control-brightness *ngIf="showBrightnessPanel" [brightness]="brightness" (onBrightChange)="brightChange($event)">
 
   </control-brightness>
+<div class="page-id-info">
+  <span>{{currentSurahName}}</span>
+  |
+  <span>{{'Juz'|translate}} {{currentJuzName}}</span>
+</div>
 
 </ion-content>
