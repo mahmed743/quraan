@@ -4,6 +4,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { langDir } from '../settings/settings';
 import { ConfigProvider } from '../../providers/config/config';
 import { partsNames } from '../index';
+import { AppnotificatiosProvider } from '../../providers/appnotificatios/appnotificatios';
 
 
 
@@ -24,8 +25,19 @@ export class RecitalmenuPage {
     public menuClose: MenuClose,
     public translateService: TranslateService,
     public configProvider: ConfigProvider,
-    public events: Events
+    public events: Events,
+    public appLocalNotification: AppnotificatiosProvider
   ) {
+
+    this.platform.ready()
+      .then(() => {
+        this.appLocalNotification.localNotification.on('click')
+          .subscribe(d => {
+            if (d && d.page) {
+              this.rootPage = d.page;
+            }
+          })
+      })
   }
 
   ionViewDidLoad() {
@@ -86,7 +98,21 @@ export class RecitalmenuPage {
         title: 'الاعدادات'
       }
     ];
+    this.scheduleNotifications();
   }
+
+  scheduleNotifications() {
+    this.appLocalNotification.localNotification.schedule(
+      {
+        text: 'تذكير بقراءة الورد اليومى',
+        trigger: { at: new Date(new Date().getTime() + 30000) },
+        led: 'FF0000',
+        sound: this.platform.is('android')? 'file://sound.mp3': 'file://beep.caf',
+        data: { page: 'DailyreadPage' }
+      }
+    );
+  }
+
   changePageBy(navData, type: 'juz' | 'surah') {
     this.juzNumber = navData;
     this.events.publish('change:pageByJuz', navData);
@@ -94,6 +120,7 @@ export class RecitalmenuPage {
     this.menuClose.close();
   }
   public navTo(page: string, params: any = {}): void {
+    this.events.publish('navmenu:changed');
     if (page === 'RecitalPage' || page === 'ExplainPage') {
       this.rootPage = page;
       //this.menuCtrl.close();

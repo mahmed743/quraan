@@ -61,11 +61,20 @@ export class SalahtimesPage {
           console.log(this.times);
          
           if (this.platform.is('cordova')) {
-            this.times.forEach(async (time) => {
+            let schedules = [];
+            this.times.forEach(async (time, index) => {
               let [salah, date] = time;
-              let salahTranslatedName = await this.translate.get(salah).toPromise()
-              this.appNotifications.scheduleNotifications('اقتربت صلاة ' + salahTranslatedName, new Date(new Date(date).getTime() - (1000 * 60 * 30) + (1000 * 60 * 60)));
+              let salahTranslatedName = await this.translate.get(salah).toPromise();
+              schedules.push({
+                id: index+=3,
+                text: 'تذكير بقراءة الورد اليومى',
+                trigger: { at: new Date(new Date(date).getTime()) },
+                led: 'FF0000',
+                sound: 'assets/ns.mp3',
+                data: { page: 'DailyreadPage' }
+              });
             });
+            this.appNotifications.localNotification.schedule(schedules);
             this.appNotifications.localNotification.getAll()
               .then(n => {
                 alert('All notifications' + JSON.stringify(n, null, 4))

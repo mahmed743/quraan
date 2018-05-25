@@ -87,7 +87,6 @@ export class HomePage {
       }
     ];
 
-    this.scheduleNotifications();
   }
 
   public navTo(page:string, params:any={}):void {
@@ -95,15 +94,7 @@ export class HomePage {
     this.navCtrl.push(page, {...params, lang:langDir[this.platform.dir()]})
   }
 
-  scheduleNotifications() {
-    this.localNotification.schedule(
-      {
-        text: 'تذكير بقراءة الورد اليومى',
-        trigger: {at: new Date(new Date().getTime() + 30000)},
-        led: 'FF0000',
-     }
-    )
-  }
+ 
 
 
   brightChange(event: any) {

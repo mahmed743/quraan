@@ -17,6 +17,7 @@ import {ConfigProvider, TafseerId} from '../../providers/config/config';
 import { Brightness } from '@ionic-native/brightness';
 import { langDir } from '../settings/settings';
 import { partsNames } from '../index';
+import {RecitalmenuPage} from "../recitalmenu/recitalmenu";
 
 export interface Verse {
   id: number,
@@ -70,6 +71,7 @@ export class ExplainPage {
   currentJuzName: string = 'الأول';
   surahsName: any[] = [];
   fromDailyPage:boolean = false;
+  showHomeBtn: boolean = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -84,7 +86,7 @@ export class ExplainPage {
   }
   async ionViewWillEnter() {
     this.preferences.showAzkarIcon = (await this.configProvider.getPreferences()).showAzkarIcon;
-    this.fromDailyPage = this.navParams.get('from') === 'dailyReadPage';
+    this.fromDailyPage = this.showHomeBtn = this.navParams.get('from') === 'dailyReadPage';
     this.pageNum = this.navParams.get('initPage');
     console.log('param', this.navParams.get('from'), this.fromDailyPage);
     let hour = new Date(Date.now()).getHours();
@@ -211,5 +213,9 @@ export class ExplainPage {
       closeButtonText: 'X',
       dismissOnPageChange: true
     }).present()
+  }
+
+  gotoHomeMenu() {
+    this.navCtrl.setRoot('RecitalmenuPage')
   }
 }

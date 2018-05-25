@@ -134,11 +134,17 @@ export class RecitalPage {
       this.brightness = (await this.brightnessNative.getBrightness()) * 100;
     }
     this.configPage();
+
+    this.events.subscribe('navmenu:changed', () => {
+      console.log('ion menu changed');
+      this.ionViewWillLeave();
+    })
   }
   ionViewWillLeave() {
     this.isOn = false;
-    this.audio&&this.audio.pause();
+    this.audio && this.audio.pause();
   }
+  
   configPage() {
 
     this.configProvider.surasNames
