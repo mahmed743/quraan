@@ -4,14 +4,19 @@ page-upreference {
         background-image: url(../assets/imgs/home-bg.jpg);
         background-size: cover;
     }
+    .scroll-content {
+        display: flex;
+        align-content: space-between;
+        flex-direction: column;
+        justify-content: space-between;
+    }
     .hadith {
-        background-color: rgba(255,255,255, 0.98);
+        background-color: rgba(255,255,255, 0.95);
         border: 1px solid #ccc;
         border-radius: 4px;
         padding: 12px;
     }
     .parts-num {
-        margin-top: 4rem;
         p {
             font-size: 18px;
             color: #fff;

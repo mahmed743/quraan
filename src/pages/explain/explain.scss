@@ -5,7 +5,7 @@ page-explain {
   ion-content {
     .scroll-content {
       padding: 22px 23px 28px 22px !important;
-      background-color: $primary;
+      background-color: $recital-bg;
       background-image: url('../assets/imgs/720.png');
       background-size: 100% 100%
     }
@@ -40,34 +40,45 @@ page-explain {
     .recital {
       width: 100%;
       height: 100%; //text-align: justify;
-      background-color: #E2FEDE;
-      font-size: 5.35vw;
-      text-align: justify;
-      line-height: 1.5;
-      img {
+      background-color: $recital-bg;
+      font-size: 5vw;
+      line-height: 1.8;
+      .slide-zoom {
         width: 100%;
         height: 100%;
       }
       .page-verses {
         padding: 5px 10px;
+        text-align: justify;
       }
-       a {
-         font-family: 'UthmanicHafs', 'jf-flat-regular', sans-serif; //font-family: 'UthmanicHafs', sans-serif;
-         color: #222 !important;
-         margin: 6px;
-         span {
-           font-family: 'quranFont', QuranFont, sans-serif;
-           color: $primary !important;
-         }
-
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      a {
+        font-family: 'UthmanicHafs', 'jf-flat-regular', sans-serif; //font-family: 'UthmanicHafs', sans-serif;
+        color: #222 !important;
+        word-spacing: -3px !important;
+        span {
+          font-family: 'quranFont', QuranFont, sans-serif;
+          color: $primary !important;
+          padding: 0 2px;
+          font-size: 1.4rem;
+        }
         &.selected {
-          background-color: #bce0b3;
           color: #000 !important;
-
-          border-radius: 0 4px 0 4px
+          background-color: #E2FEDE;
+          border-radius: 0 5px 0 5px;
+          animation: blink 0.25s ease-in-out 0.1s forwards;
+          @keyframes blink {
+            to {
+              background-color: #bce0b3;
+            }
+          }
         }
       }
     }
+
     .cta-btns {
       position: absolute;
       width: 100%;
@@ -79,7 +90,7 @@ page-explain {
       }
     }
     .cta {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 50%;
       transform: translateX(-53%) translateY(-8px);

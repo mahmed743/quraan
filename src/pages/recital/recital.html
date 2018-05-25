@@ -18,8 +18,7 @@
   <img *ngIf="pageNum<3;else firstPages" src="https://hosam1696.github.io/Quran/img/{{pageNum|number:'3.'}}.jpg" alt="">
   <ng-template #firstPages>
     <div class="page-verses">
-      <a *ngFor="let verse of verses;trackBy:trackByFn" [class.selected]="verse.selected" (click)="selectVerse(verse)">{{verse.verse}}
-        <span >[{{verse.ayah}}]</span></a>
+      <a *ngFor="let verse of verses;trackBy:trackByFn" [class.selected]="verse.selected" (click)="selectVerse(verse)">{{verse.verse}}<span >[{{verse.ayah}}]</span></a>
     </div>
   </ng-template>
   </section>

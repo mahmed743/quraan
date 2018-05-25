@@ -36,7 +36,7 @@ export class SettingsPage implements OnChanges{
     this.settings.lang = this.navParams.get('lang');
     let preferences = await this.configProvider.getPreferences();
 
-    this.settings.showAzkarIcon = preferences.showAzkarIcon;
+    this.settings = { ...this.settings, ...preferences };
     console.log(this.settings);
   }
   ngOnChanges(changes:SimpleChanges) {
@@ -52,6 +52,9 @@ export class SettingsPage implements OnChanges{
 
   changeTafseer(tafsserName) {
     this.configProvider.selectedTafseer = tafsserName;
+  }
+  changePartsNumber(number) {
+    this.configProvider.setPreferences('partsNumber', number)
   }
 
   changeLang(lang:string) {

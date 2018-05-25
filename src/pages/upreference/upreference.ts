@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ConfigProvider } from '../../providers/config/config';
 
 
 @IonicPage()
@@ -9,7 +10,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UpreferencePage {
   appLang: string = 'ar';
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public configProvider: ConfigProvider
+  ) {
     this.appLang = this.navParams.get('appLang');
   }
 
@@ -19,7 +23,10 @@ export class UpreferencePage {
 
   choosePart(partNumber) {
     // save user choose
-
+    this.configProvider.setPreferences('partsNumber', partNumber)
+      .then(pref => {
+        console.info('user saved preferences', pref);
+      })
     this.navCtrl.setRoot('RecitalmenuPage')
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { PraytimeProvider } from '../../providers/praytime/praytime';
 import {toPairs} from 'lodash';
 import {
@@ -33,7 +33,8 @@ export class SalahtimesPage {
      public navParams: NavParams,
     public prayTime: PraytimeProvider,
     public appNotifications: AppnotificatiosProvider,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public platform: Platform
     ) {
   }
 
@@ -58,11 +59,19 @@ export class SalahtimesPage {
           console.log('Pray Data', data);
           this.times = toPairs(data.data.timings).filter(time=>(time[0]!='Sunset'&&time[0]!='Imsak'&&time[0]!='Midnight'))
           console.log(this.times);
-          this.times.forEach(async(time) => {
-            let [salah, date] = time;
-            let salahTranslatedName = await this.translate.get(salah).toPromise()
-            this.appNotifications.scheduleNotifications('اقتربت صلاة '+ salahTranslatedName, new Date(new Date(date).getTime() - (1000 * 60 * 30)+ (1000*60*60)));
-          })
+         
+          if (this.platform.is('cordova')) {
+            this.times.forEach(async (time) => {
+              let [salah, date] = time;
+              let salahTranslatedName = await this.translate.get(salah).toPromise()
+              this.appNotifications.scheduleNotifications('اقتربت صلاة ' + salahTranslatedName, new Date(new Date(date).getTime() - (1000 * 60 * 30) + (1000 * 60 * 60)));
+            });
+            this.appNotifications.localNotification.getAll()
+              .then(n => {
+                alert('All notifications' + JSON.stringify(n, null, 4))
+              })
+          }
+          
         })
 
     });

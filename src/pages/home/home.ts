@@ -101,7 +101,6 @@ export class HomePage {
         text: 'تذكير بقراءة الورد اليومى',
         trigger: {at: new Date(new Date().getTime() + 30000)},
         led: 'FF0000',
-        sound: null
      }
     )
   }

@@ -18,7 +18,9 @@ export class ConfigProvider {
   public defaultLang: string = 'ar';
   public preferences: any = {};
   defaultPreferences = {
-    showAzkarIcon: true
+    showAzkarIcon: true,
+    partsNumber: 1,
+    prayNotifications: false
   }
   constructor(public storage: Storage, public http: HttpClient) {
     this.getPreferences().then(pref => this.preferences = pref);
