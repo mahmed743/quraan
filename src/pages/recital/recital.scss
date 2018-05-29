@@ -56,6 +56,8 @@ page-recital {
       height: 28px;
       background-color: $primary;
       color: #fff;
+      margin-top: 3px;
+      margin-left: -1px;
       display: flex;
       align-items: center;
       font-size: 1rem;
@@ -163,7 +165,7 @@ page-recital {
     }
     .audio-section {
       position: absolute;
-      bottom: 28px;
+      bottom: 26px;
       width: calc(100vw - 52px);
       background-color: rgba(5, 125, 128, 0.92);
       left: 26px;

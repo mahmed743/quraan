@@ -26,6 +26,8 @@ page-explain {
       height: 28px;
       background-color: $primary;
       color: #fff;
+      margin-top: 3px;
+      margin-left: -1px;
       display: flex;
       transform: translateY(2px) trasnalateX(-2px);
       align-items: center;
@@ -147,7 +149,7 @@ page-explain {
     }
     .tafseer-section {
       position: absolute;
-      bottom: 28px;
+      bottom: 26px;
       width: calc(100vw - 52px);
       padding: 0 8px;
       background-color: rgba(5, 125, 128, 0.92);
