@@ -2,12 +2,12 @@
 
   <ion-navbar color="light" hideBackButton>
     <ion-buttons start>
-      <button ion-button clear>
-        <ion-icon name="placeholder"></ion-icon>
-      </button>
+<button ion-button icon-only small (click)="gotToAzkarPage()">
+  <ion-icon [name]="azkarIcon" color="primary"></ion-icon>
+</button>
+
     </ion-buttons>
-    <!-- <ion-title text-center>{{'الاعدادات'|translate}}</ion-title> -->
-    <ion-buttons left>
+    <ion-buttons left *ngIf="appLang">
       <button ion-button navPop icon-only>
         <ion-icon [name]="appLang=='ar'?'arrow-back':'arrow-forward'"></ion-icon>
       </button>

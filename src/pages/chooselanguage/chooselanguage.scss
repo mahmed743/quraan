@@ -1,16 +1,19 @@
 page-chooselanguage {
-    ion-content {
-        &.content {
-            background-image: url(../assets/imgs/home-bg.jpg);
-            background-size: cover;
-        }
-      .scroll-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-      }
-      button {
-        color: $primary !important;
-      }
+  ion-content {
+    &.content {
+      background-image: url(../assets/imgs/top-img.png), url(../assets/imgs/mid-img.png), url(../assets/imgs/bottom-img.png);
+      background-color: #d4d4d4;
+      background-size: 80% 100px, 280px 210px, 80% 100px;
+      background-repeat: no-repeat;
+      background-position: top center, center, bottom center
     }
+    .scroll-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    button {
+      color: $primary !important;
+    }
+  }
 }

@@ -1,6 +1,22 @@
 
 
 <ion-content (swipe)="contentSwipe($event)" >
+<section class="page-title">
+  <p>{{'Recital'|translate}}</p>
+</section>
+<div class="page-id-info">
+  <span>
+    {{'Juz'|translate}} {{currentJuzName}}</span>
+
+  <ion-select [ngModel]="juzNumber" (ngModelChange)="changePageBy($event,'Juz', juzNumber)" okText="{{'okText'|translate}}"
+    cancelText="{{'cancelText'|translate}}">
+    <ion-option *ngFor="let part of quranparts" [value]="part">{{part[2]}}</ion-option>
+
+  </ion-select>
+
+  <span>{{currentSurahName}}</span>
+
+</div>
 
   <section class="top-cta" [@slide]="showAudioControls">
     <div class="left">
@@ -50,7 +66,7 @@
       <button ion-button clear (click)="rewind(1)" [disabled]="!audio&&!audio?.played">
         <ion-icon name="rewind"></ion-icon>
       </button>
-      <button ion-button clear>
+      <button ion-button clear [class.isOn]="!isOn">
         <ion-icon [name]="isOn?'pause':'play'" (click)="changePlayState()"></ion-icon>
       </button>
       <button ion-button clear (click)="rewind(-1)">
@@ -70,12 +86,7 @@
     </div>
     
   </section>
-<!-- top page idetifier for surah name and Juzaa Number -->
-<div class="page-id-info">
-  <span>{{currentSurahName}}</span>
-  |
-  <span>{{'Juz'|translate}} {{currentJuzName}}</span>
-</div>
+
 <control-brightness *ngIf="showBrightnessPanel" [brightness]="brightness" (onBrightChange)="brightChange($event)"></control-brightness>
 
 </ion-content>

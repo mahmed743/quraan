@@ -1,89 +1,84 @@
 page-dailyread {
-    ion-content {
-
-        ion-segment {
-            width: 80%;
-            margin: 8px auto 16px;
+  ion-content {
+    ion-segment {
+      width: 80%;
+      margin: 8px auto 16px;
+    }
+    .no-read {
+      width: 100%;
+      height: 10vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      p {
+        &:first-of-type {
+          font-weight: bold;
         }
-        .no-read {
-            width:100%;
-            height: 10vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+        &:last-child {
+          color: #777;
+        }
+        button {
+          box-shadow: none;
+          transform: translateY(-5px)
+        }
+      }
+    }
+    ion-list {
+      ion-item {
+        background-color: #f6f6f6 !important;
+        border-radius: 2px;
+        .item-inner {
+          border: none !important;
+        }
+        .name {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: inset 0 -0.5px #fff;
+          span {
+            font-size: 1.2rem
+          }
+          button {
+            box-shadow: none;
+          }
+        }
+        .close {
+          position: absolute;
+          bottom: 14px;
+          left: 5px;
+          font-size: 10px
+        }
+        .ayah {
+          p {
+            white-space: normal;
+            padding: 8px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            line-height: 1.5;
+            color: $primary;
+            font-family: 'UthmanicHafs', 'quranFont', QuranFont, 'jf-flat-regular', sans-serif;
+            background-image: linear-gradient(180deg, #f6f6f6, #f4f4f4, #f6f6f6);
+          }
+        }
+        .ayah-info {
+          padding: 0 10px;
+          margin-top: 10px;
+          .info-container {
+            padding-top: 8px;
+            border-top: 1px solid #eee;
             p {
-                &:first-of-type {
-                    font-weight: bold;
-
-                }
-                &:last-child {
-                    color: #777;
-                }
-                button {
-                    box-shadow: none;
-                    transform: translateY(-5px)
-                }
-            }
-        }
-        ion-list {
-            ion-item {
-                background-color: #f6f6f6 !important;
-
-                border-radius: 2px;
-                .item-inner {
-                    border: none !important;
-                }
-                .name {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  box-shadow: inset 0 -0.5px #fff;
-                    span {
-                        font-size: 1.2rem
-                    }
-                  button {
-                    box-shadow: none;
-                  }
-                }
-                .close {
-                    position: absolute;
-                    bottom : 14px;
-                    left: 5px;
-                    font-size: 10px
-
-                }
-                .ayah {
-                    p {
-                        white-space: normal;
-                        padding: 8px;
-                        border-top: 1px solid #eee;
-                        text-align: center;
-                        line-height: 1.5;
-                        color: $primary;
-                        background-image: linear-gradient(180deg,#f6f6f6,#f4f4f4, #f6f6f6);
-                    }
-                }
-              .ayah-info {
-                padding:  0 10px;
-                margin-top: 10px;
-                .info-container {
-                  padding-top: 8px;
-                  border-top: 1px solid #eee;
-                  p {
-
-                    font-size: 1.2rem;
-                    display: flex;
-                    justify-content: space-between;
-                    label {
-
-                      width: 20%;
-                      font-weight: bold;
-                    }
-                  }
-                }
+              font-size: 1.2rem;
+              display: flex;
+              justify-content: space-between;
+              label {
+                width: 20%;
+                font-weight: bold;
               }
             }
+          }
         }
+      }
     }
+  }
 }

@@ -92,6 +92,8 @@ export class RecitalPage {
   currentSurahName: string = 'البقرة';
   currentJuzName: string = 'الأول'
   surahsName: any[] = [];
+  quranparts: any[] = [];
+  juzNumber: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -134,6 +136,8 @@ export class RecitalPage {
       this.brightness = (await this.brightnessNative.getBrightness()) * 100;
     }
     this.configPage();
+    this.quranparts = this.configProvider.JuzPageNumbers
+      .map((part: any[]) => { part[2] = partsNames[part[0]]; return part });
 
     this.events.subscribe('navmenu:changed', () => {
       console.log('ion menu changed');
@@ -207,6 +211,12 @@ export class RecitalPage {
   getPassedTime() {
     this._passedTime = (this.audio.currentTime / this.audio.duration) * 100;
     console.log('passed Time', this._passedTime);
+
+  }
+  changePageBy(navData, type: 'juz' | 'surah') {
+    this.juzNumber = navData;
+    this.changePage(navData[1], true);
+    this.currentJuzName = navData[2];
 
   }
   getNextAyah(url) {

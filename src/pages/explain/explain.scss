@@ -4,27 +4,54 @@ page-explain {
   }
   ion-content {
     .scroll-content {
-      padding: 22px 23px 28px 22px !important;
-      background-color: $recital-bg;
-      background-image: url('../assets/imgs/720.png');
+      padding: 22px 26px 28px  !important;
+      background-color: #fff;//$recital-bg;
+      background-image: url('../assets/imgs/1080.png');
       background-size: 100% 100%
     }
+    .page-title {
+      padding:  10px 20px;
+      p {
+        border-radius: 18px;
+        text-align: center;
+        border: 2px solid $primary;
+        margin: 0;
+        padding: 4px;
+        box-shadow: 0 2px  12px #555;
+        font-weight: bold;
+        color: $primary;
+      }
+    }
     .page-id-info {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 21px;
+      height: 28px;
       background-color: $primary;
       color: #fff;
       display: flex;
-      justify-content: space-between;
       align-items: center;
       font-size: 1rem;
       box-shadow: inset 1px 1px #555, inset -1px -1px #555;
       padding: 0 6px;
+      position: relative;
+
+      ion-select {
+        position: absolute;
+        width: 50%;
+        top: 0;
+        right:0;
+        max-height: 100%;
+        //transform: scale(0);
+        opacity: 0;
+      }
       span {
+        width: 50%;
+        text-align: center;
         padding: 0 5px;
+        color: #fff;
+        font-weight: bold;
+        &:first-child {
+          border-left: 1px solid #025556
+
+        }
       }
     }
     .top-cta {
@@ -39,16 +66,16 @@ page-explain {
     }
     .recital {
       width: 100%;
-      height: 100%; //text-align: justify;
+      height: calc(100% - 84px); //text-align: justify;
       background-color: $recital-bg;
-      font-size: 5vw;
+      font-size: 1.8rem;
       line-height: 1.8;
       .slide-zoom {
         width: 100%;
         height: 100%;
       }
       .page-verses {
-        padding: 5px 10px;
+        padding: 5px;
         text-align: justify;
       }
       img {
@@ -112,8 +139,8 @@ page-explain {
     }
     .tafseer-section {
       position: absolute;
-      bottom: 28px;
-      width: calc(100vw - 44px);
+      bottom: 30px;
+      width: calc(100vw - 52px);
       padding: 0 8px;
       background-color: rgba(5, 125, 128, 0.92);
       left: 22px;

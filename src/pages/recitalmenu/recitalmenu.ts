@@ -31,12 +31,14 @@ export class RecitalmenuPage {
 
     this.platform.ready()
       .then(() => {
-        this.appLocalNotification.localNotification.on('click')
-          .subscribe(d => {
-            if (d && d.page) {
-              this.rootPage = d.page;
-            }
-          })
+        if (this.platform.is('cordova')) {
+          this.appLocalNotification.localNotification.on('click')
+            .subscribe(d => {
+              if (d && d.page) {
+                this.rootPage = d.page;
+              }
+            });
+        }
       })
   }
 
@@ -98,7 +100,10 @@ export class RecitalmenuPage {
         title: 'الاعدادات'
       }
     ];
-    this.scheduleNotifications();
+    if (this.platform.is('cordova')) {
+    
+      this.scheduleNotifications();
+    }
   }
 
   scheduleNotifications() {

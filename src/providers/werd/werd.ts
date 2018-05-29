@@ -72,28 +72,45 @@ export class WerdProvider {
     return this.storage.get('private:werds')
   }
 
-  async getUserPrivateWerds() {
+  async getUserPrivateWerds(datastore:any[] = []) {
     const [userPreferences, userPrivateWerds ]= await Promise.all([this.storage.get('user:preferences'), this.storage.get('user:privateWerds')]);
-    if(!userPrivateWerds) {
-      let werds:UserDailyWerd[] = [];
+    if(!userPrivateWerds||datastore.length) {
+      let werds:UserDailyWerd[] = [...datastore];
       console.info('user preferences', Array(userPreferences.partsNumber));
-      Array(userPreferences.partsNumber).fill(userPreferences.partsNumber).forEach(async (p, i)=> {
-        werds[i] = {
+      Array(userPreferences.partsNumber - werds.length).fill(userPreferences.partsNumber).forEach(async (p, i, arr)=> {
+        werds.push({
           id: 0,
           read: false,
           partsNumber: ArPartsNumber[userPreferences.partsNumber],
           added: new Date(Date.now()),
           readDate: null,
-          location: {}
-
-        };
-        werds[i].location = await this.getPageLocations(1);
+          location: await this.getPageLocations(datastore.length ? userPrivateWerds[userPrivateWerds.length-1].location.page+1:i+1)
+        });
+        //werds[i].location = await this.getPageLocations(i+1);
         console.log(werds[i]);
+        let storedWerdsAfterAssign = await this.storage.set('user:privateWerds', [...werds, werds[i]]);
+        console.log('saved Werds after assign', storedWerdsAfterAssign);
       });
         return this.storage.set('user:privateWerds', werds)
 
+    } else {
+      userPrivateWerds[0].partsNumber = ArPartsNumber[userPreferences.partsNumber];
+      return this.storage.set('user:privateWerds', userPrivateWerds)
+      /*let [privateWerdsNumber, partsNumber] = [ArPartsNumber[userPrivateWerds[userPrivateWerds.length-1].partsNumber], userPreferences.partsNumber]
+      console.log(privateWerdsNumber, partsNumber);
+      if (privateWerdsNumber == partsNumber) {
+        console.warn('same daily parts');
+        return userPrivateWerds
       } else {
-      return userPrivateWerds
+        //this.storage.set()
+        console.warn('daily parts changes');
+        if (partsNumber < privateWerdsNumber) {
+          return userPrivateWerds.slice(0, partsNumber);
+        } else {
+          return this.getUserPrivateWerds(userPrivateWerds);
+        }
+        
+      }*/
     }
 
   }
@@ -111,7 +128,7 @@ export class WerdProvider {
     location.to[2] = surahNames.find(surah => location.to[0] == surah.id)['name'];
     for (let key in ayatNums) {
       if (Number(key) < 4) {
-        location.verse += pageData[ayatNums[key]].verse+' ( '+((pageNumber==1)?ayatNums[key]:(Number(ayatNums[key])-7))+' ) ';
+        location.verse += pageData[ayatNums[key]].verse+' [ '+((pageNumber==1)?ayatNums[key]:(Number(ayatNums[key])-7))+' ] ';
       }
     }
     read&&(location.page+=1);

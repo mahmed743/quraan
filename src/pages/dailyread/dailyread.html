@@ -50,7 +50,7 @@
       <ion-item *ngFor="let werd of userDailyRead">
         <div class="name">
           <span>قراءة {{werd.partsNumber}} من القراءن</span>
-          <button  ion-button  (click)="goToQuran(werd.location.page)">
+          <button  ion-button  (click)="goToQuran(werd.location.page, werd)">
             صفحة {{werd.location.page}}
           </button>
         </div>

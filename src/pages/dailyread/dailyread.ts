@@ -61,9 +61,9 @@ export class DailyreadPage {
 
   }
 
-  goToQuran(pageNumber) {
+  goToQuran(pageNumber, werd) {
     console.log('read page number', pageNumber);
-    this.navCtrl.push('ExplainPage', {root: 'ExplainPage', initPage: pageNumber, from:'dailyReadPage'})
+    this.navCtrl.push('ExplainPage', { root: 'ExplainPage', initPage: pageNumber, from: 'dailyReadPage', werd });
   }
   addWerd() {
 

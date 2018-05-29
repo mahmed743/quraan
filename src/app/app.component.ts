@@ -38,7 +38,7 @@ export class MyApp {
           this.platform.setDir(langDir[lang] as DocumentDirection, true);
           config.set('backButtonIcon', 'arrow-'+(lang==='ar'?'forward':'back'));
           console.log('App Language', lang, translate.currentLang);
-          this.rootPage = 'RecitalmenuPage';
+          this.rootPage = 'UpreferencePage'; //'RecitalmenuPage';
         } else {
           this.rootPage = 'ChooselanguagePage';
         }

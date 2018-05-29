@@ -17,7 +17,7 @@ import {ConfigProvider, TafseerId} from '../../providers/config/config';
 import { Brightness } from '@ionic-native/brightness';
 import { langDir } from '../settings/settings';
 import { partsNames } from '../index';
-import {RecitalmenuPage} from "../recitalmenu/recitalmenu";
+import { ArPartsNumber } from '../../providers/werd/werd';
 
 export interface Verse {
   id: number,
@@ -72,6 +72,9 @@ export class ExplainPage {
   surahsName: any[] = [];
   fromDailyPage:boolean = false;
   showHomeBtn: boolean = false;
+  numberOfWerdsPages: number;
+  quranparts: any[] = [];
+  juzNumber: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public quraanProvider: QuraanProvider,
@@ -87,7 +90,9 @@ export class ExplainPage {
   async ionViewWillEnter() {
     this.preferences.showAzkarIcon = (await this.configProvider.getPreferences()).showAzkarIcon;
     this.fromDailyPage = this.showHomeBtn = this.navParams.get('from') === 'dailyReadPage';
-    this.pageNum = this.navParams.get('initPage')||1;
+    this.pageNum = this.navParams.get('initPage') || 1;
+    if (this.navParams.get('werd')!=undefined) 
+      this.numberOfWerdsPages = +ArPartsNumber[this.navParams.get('werd').partsNumber] || 1;
     console.log('param', this.navParams.get('from'), this.fromDailyPage);
     let hour = new Date(Date.now()).getHours();
     if (hour < 18 && hour >= 4) {
@@ -110,11 +115,19 @@ export class ExplainPage {
 
     this.allTafseers = this.configProvider.availableTafssers;
     this.tafseerName = await this.configProvider.getTafseerName();
+    this.quranparts = this.configProvider.JuzPageNumbers
+      .map((part: any[]) => { part[2] = partsNames[part[0]]; return part });
+
     this.pageNum = this.navParams.get('initPage')||1;
     this.getPage();
   }
 
+  changePageBy(navData, type: 'juz' | 'surah') {
+    this.juzNumber = navData;
+    this.changePage(navData[1], true);
+    this.currentJuzName = navData[2];
 
+  }
   brightChange(event: any) {
     console.log(event);
     this.brightnessNative.setBrightness(event / 10)
@@ -204,17 +217,31 @@ export class ExplainPage {
 
 
   saveDailyRead() {
-    this.events.publish('user:readPart', this.navParams.get('initPage'));
-    this.fromDailyPage = false;
+    
+    if (this.numberOfWerdsPages < 2) {
+      this.fromDailyPage = false;
+      this.showToast('لقد قمت بقراء الورد. ');
+      this.configProvider.getPreferences()
+        .then(preferences => {
+
+          this.events.publish('user:readPart', this.navParams.get('initPage')+preferences.partsNumber-1);
+        })
+    } else {
+      this.numberOfWerdsPages--;
+      this.showToast('لقد قمت بقراءة وجه من الورد');
+      this.changePage(1);
+    }
+  }  
+
+  private showToast(msg) {
     this.toastCtrl.create({
-      message: 'لقد قمت بقراء الورد. ',
+      message: msg,
       duration: 2000,
       showCloseButton: true,
-      closeButtonText: 'X',
+      closeButtonText: 'x',
       dismissOnPageChange: true
     }).present()
   }
-
   gotoHomeMenu() {
     this.navCtrl.setRoot('RecitalmenuPage')
   }

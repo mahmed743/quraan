@@ -67,7 +67,7 @@ export class SalahtimesPage {
               let salahTranslatedName = await this.translate.get(salah).toPromise();
               schedules.push({
                 id: index+=3,
-                text: 'تذكير بقراءة الورد اليومى',
+                text: ` (${salahTranslatedName})تذكير بقراءة الورد اليومى`,
                 trigger: { at: new Date(new Date(date).getTime()) },
                 led: 'FF0000',
                 sound: 'assets/ns.mp3',
