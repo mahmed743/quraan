@@ -220,7 +220,7 @@ export class ExplainPage {
     
     if (this.numberOfWerdsPages < 2) {
       this.fromDailyPage = false;
-      this.showToast('لقد قمت بقراء الورد. ');
+      this.showToast('✔ لقد قمت بقراء الورد. ');
       this.configProvider.getPreferences()
         .then(preferences => {
 
@@ -228,7 +228,7 @@ export class ExplainPage {
         })
     } else {
       this.numberOfWerdsPages--;
-      this.showToast('لقد قمت بقراءة وجه من الورد');
+      this.showToast('📑 لقد قمت بقراءة وجه من الورد ');
       this.changePage(1);
     }
   }  

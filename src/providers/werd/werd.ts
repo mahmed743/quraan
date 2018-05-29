@@ -77,8 +77,8 @@ export class WerdProvider {
     if(!userPrivateWerds||datastore.length) {
       let werds: UserDailyWerd[] = [...datastore];
       let storedWerdsAfterAssign: any[];
-      console.info('user preferences', Array(userPreferences.partsNumber));
-      Array(userPreferences.partsNumber - werds.length).fill(userPreferences.partsNumber).forEach(async (p, i, arr)=> {
+      console.info('user preferences', userPreferences);
+      let savedWerds = (async (p, i, arr)=> {
         
         werds.push({
           id: 0,
@@ -86,14 +86,14 @@ export class WerdProvider {
           partsNumber: ArPartsNumber[userPreferences.partsNumber],
           added: new Date(Date.now()),
           readDate: null,
-          location: await this.getPageLocations(datastore.length ? userPrivateWerds[userPrivateWerds.length-1].location.page+1:i+1)
+          location: await this.getPageLocations(1)
         });
         //werds[i].location = await this.getPageLocations(i+1);
-        console.log(werds[i]);
-        storedWerdsAfterAssign = await this.storage.set('user:privateWerds', Array.from(new Set([...werds, werds[i]])));
+        storedWerdsAfterAssign = await this.storage.set('user:privateWerds', Array.from(new Set([...werds])));
         console.log('saved Werds after assign', storedWerdsAfterAssign);
-      });
-      return this.storage.get('user:privateWerds')
+        return storedWerdsAfterAssign;
+      })();
+      return savedWerds;
 
     } else {
       userPrivateWerds[0].partsNumber = ArPartsNumber[userPreferences.partsNumber];

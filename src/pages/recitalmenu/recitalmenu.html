@@ -7,11 +7,11 @@
       </button>
     </div>
     <!-- Quran navigation -->
-    <p text-center>
+    <p text-center hidden>
       {{'moveTo'|translate}}
     </p>
 
-    <ion-list class="quran-nav-list" no-padding>
+    <ion-list class="quran-nav-list" no-padding hidden>
       <ion-item>
         <ion-label>{{'Juz'| translate}}</ion-label>
         <ion-select [ngModel]="juzNumber" (ngModelChange)="changePageBy($event,'Juz', juzNumber)" okText="{{'okText'|translate}}"

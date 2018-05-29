@@ -6,9 +6,7 @@
 
 
 <ion-content no-padding>
-  <section class="page-title">
-    <p>{{'Explain'|translate}}</p>
-  </section>
+
   <div class="page-id-info">
     <span>
       {{'Juz'|translate}} {{currentJuzName}}</span>
@@ -27,17 +25,19 @@
       <button small ion-button icon-only (click)="showBrightnessPanel= !showBrightnessPanel" color="light">
         <ion-icon name="md-bulb"></ion-icon>
       </button>
-      <button ion-button icon-only small *ngIf="showHomeBtn" (click)="gotoHomeMenu()" color="light">
-        <ion-icon name="home"></ion-icon>
-      </button>
+
     </div>
     <div class="right">
-      <button ion-button icon-only small *ngIf="fromDailyPage" (click)="saveDailyRead()" color="light">
-        <ion-icon name="checkmark"></ion-icon>
+
+      <button ion-button icon-only small *ngIf="showHomeBtn" (click)="gotoHomeMenu()" color="light">
+        <ion-icon name="home"></ion-icon>
       </button>
 
       <button ion-button icon-only small (click)="goTo('AzkarofdayPage')" *ngIf="preferences?.showAzkarIcon&&!fromDailyPage" color="light">
         <ion-icon [name]="azkarIcon"></ion-icon>
+      </button>
+      <button ion-button icon-only small *ngIf="fromDailyPage" (click)="saveDailyRead()" color="light">
+        <ion-icon name="checkmark"></ion-icon>
       </button>
 
     </div>

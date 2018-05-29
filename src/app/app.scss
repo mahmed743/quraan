@@ -22,6 +22,19 @@
 $primary: color($colors, primary);
 $recital-bg: #E2FEDE;
 
+.toast-wrapper {
+  width: 90% !important;
+  bottom: 10px !important;
+  border-radius: 18px;
+  background-color: #fff !important;
+  .toast-message {
+  color: #555 !important
+  }
+  button {
+    color: $primary !important
+
+  }
+}
 .alert-wrapper {
   border-radius: 10px !important;
   border: 1px solid $primary;

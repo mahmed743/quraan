@@ -26,7 +26,7 @@ page-recital {
     }
     .top-cta {
       position: absolute;
-      top: 22px;
+      top: 10px;
       width: 100vw;
       display: flex;
       padding: 8px;
@@ -64,11 +64,13 @@ page-recital {
       position: relative;
       ion-select {
         position: absolute;
-        width: 50%;
+        width: 40%;
         top: 0;
-        right: 0;
+        right: 5%;
         max-height: 100%; //transform: scale(0);
         opacity: 0;
+        background-color: rebeccapurple;
+        z-index:9999
       }
       span {
         width: 50%;
@@ -84,10 +86,11 @@ page-recital {
 
     .recital {
       width: 100%;
-      height: calc(100% - 84px); //text-align: justify;
+      height: calc(100% - 28px); //text-align: justify;
       background-color: $recital-bg;
       font-size: 5vw;
       line-height: 1.8;
+      overflow-y: scroll;
       .slide-zoom {
         width: 100%;
         height: 100%;

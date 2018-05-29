@@ -39,8 +39,9 @@ page-explain {
         top: 0;
         right:0;
         max-height: 100%;
-        //transform: scale(0);
         opacity: 0;
+        background-color: rebeccapurple;
+        z-index:9999
       }
       span {
         width: 50%;
@@ -56,14 +57,15 @@ page-explain {
     }
     .top-cta {
       position: absolute;
-      top: 20px;
+      top: 10px;
       width: 100vw;
       display: flex;
       padding: 8px;
       justify-content: space-between;
       left: 0; //background-color: rgba(255, 255, 255, 0.4);
       z-index: 5555;
-      .left {
+      overflow-y: scroll;
+      .right {
         display: flex;
         flex-direction: column;
       }
@@ -71,7 +73,7 @@ page-explain {
     }
     .recital {
       width: 100%;
-      height: calc(100% - 84px); //text-align: justify;
+      height: calc(100% - 26px); //text-align: justify;
       background-color: $recital-bg;
       font-size: 1.8rem;
       line-height: 1.8;

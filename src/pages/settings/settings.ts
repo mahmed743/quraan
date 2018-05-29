@@ -54,7 +54,7 @@ export class SettingsPage implements OnChanges{
     this.configProvider.selectedTafseer = tafsserName;
   }
   changePartsNumber(number) {
-    this.configProvider.setPreferences('partsNumber', number)
+    this.configProvider.setPreferences('partsNumber', Number(number))
   }
 
   changeLang(lang:string) {

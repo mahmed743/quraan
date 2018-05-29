@@ -18,7 +18,7 @@ export class ConfigProvider {
   public defaultLang: string = 'ar';
   public preferences: any = {};
   defaultPreferences = {
-    showAzkarIcon: true,
+    showAzkarIcon: false,
     partsNumber: 1,
     prayNotifications: false
   }
