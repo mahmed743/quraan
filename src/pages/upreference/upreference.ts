@@ -24,7 +24,10 @@ export class UpreferencePage {
   }
 
   ionViewDidLoad() {
-
+    let hour = new Date(Date.now()).getHours();
+    if (hour < 18 && hour >= 4) {
+      this.azkarIcon = 'ios-partly-sunny-outline';
+    }
     this.parts = Array.from({length:4}, (iter, index)=>({name:ArPartsNumber[index+1], value: index+1}));
     console.log('user parts', this.parts);
 

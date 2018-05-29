@@ -10,7 +10,7 @@ page-explain {
       background-size: 100% 100%
     }
     .page-title {
-      padding:  10px 20px;
+      padding:  10px 30px;
       p {
         border-radius: 18px;
         text-align: center;
@@ -56,13 +56,18 @@ page-explain {
     }
     .top-cta {
       position: absolute;
-      top: 0;
+      top: 20px;
       width: 100vw;
       display: flex;
       padding: 8px;
       justify-content: space-between;
       left: 0; //background-color: rgba(255, 255, 255, 0.4);
       z-index: 5555;
+      .left {
+        display: flex;
+        flex-direction: column;
+      }
+
     }
     .recital {
       width: 100%;

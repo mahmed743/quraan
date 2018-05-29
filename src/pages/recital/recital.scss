@@ -26,16 +26,20 @@ page-recital {
     }
     .top-cta {
       position: absolute;
-      top: 0;
+      top: 22px;
       width: 100vw;
       display: flex;
       padding: 8px;
       justify-content: space-between;
       left: 0;
       z-index: 5555;
+      .left {
+        display: flex;
+        flex-direction: column;
+      } 
     }
     .page-title {
-      padding: 10px 20px;
+      padding: 10px 30px;
       p {
         border-radius: 18px;
         text-align: center;

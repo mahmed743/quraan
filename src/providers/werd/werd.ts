@@ -75,9 +75,11 @@ export class WerdProvider {
   async getUserPrivateWerds(datastore:any[] = []) {
     const [userPreferences, userPrivateWerds ]= await Promise.all([this.storage.get('user:preferences'), this.storage.get('user:privateWerds')]);
     if(!userPrivateWerds||datastore.length) {
-      let werds:UserDailyWerd[] = [...datastore];
+      let werds: UserDailyWerd[] = [...datastore];
+      let storedWerdsAfterAssign: any[];
       console.info('user preferences', Array(userPreferences.partsNumber));
       Array(userPreferences.partsNumber - werds.length).fill(userPreferences.partsNumber).forEach(async (p, i, arr)=> {
+        
         werds.push({
           id: 0,
           read: false,
@@ -88,10 +90,10 @@ export class WerdProvider {
         });
         //werds[i].location = await this.getPageLocations(i+1);
         console.log(werds[i]);
-        let storedWerdsAfterAssign = await this.storage.set('user:privateWerds', [...werds, werds[i]]);
+        storedWerdsAfterAssign = await this.storage.set('user:privateWerds', Array.from(new Set([...werds, werds[i]])));
         console.log('saved Werds after assign', storedWerdsAfterAssign);
       });
-        return this.storage.set('user:privateWerds', werds)
+      return this.storage.get('user:privateWerds')
 
     } else {
       userPrivateWerds[0].partsNumber = ArPartsNumber[userPreferences.partsNumber];
@@ -123,7 +125,7 @@ export class WerdProvider {
     location.from = [pageData[ayatNums[0]].surah, pageData[ayatNums[0]].ayah];
     location.to = [pageData[ayatNums[ayatNums.length - 1]].surah, pageData[ayatNums[ayatNums.length - 1]].ayah];
     let surahNames = await this.configProvider.surasNames;
-    console.log('suraz names', surahNames, location, 'ayatNum', ayatNums);
+    //console.log('suraz names', surahNames, location, 'ayatNum', ayatNums);
     location.from[2] = surahNames.find(surah => location.from[0] == surah.id)['name'];
     location.to[2] = surahNames.find(surah => location.to[0] == surah.id)['name'];
     for (let key in ayatNums) {

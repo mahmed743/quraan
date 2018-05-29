@@ -34,7 +34,8 @@ export class DailyreadPage {
   privateDailyRead:any[] = [];
   staticDailyWerds: any[] = [];
   appLang: string;
-  userDailyRead: UserDailyWerd[]= [];
+  userDailyRead: UserDailyWerd[] = [];
+  getWerdsAgain: boolean = true;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
@@ -49,14 +50,22 @@ export class DailyreadPage {
       ,this.werdProvider.getPrivateWerd()
       ]).then(data=>[this.staticDailyWerds, this.privateDailyRead ] = [...data]);
 
+    this.getMyWerds();
+  }
+
+  getMyWerds(callAgaing = this.getWerdsAgain) {
     this.werdProvider.getUserPrivateWerds()
-      .then((data:UserDailyWerd[])=>{
+      .then((data: UserDailyWerd[]) => {
         this.userDailyRead = data;
         console.log('user daily read', data);
+        if (!data && callAgaing) {
+          setTimeout(() => {
+            this.getMyWerds(false);
+          }, 100)
+        } 
 
       })
   }
-
   toggle(doaa) {
 
   }
