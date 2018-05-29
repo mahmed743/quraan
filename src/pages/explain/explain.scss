@@ -27,6 +27,7 @@ page-explain {
       background-color: $primary;
       color: #fff;
       display: flex;
+      transform: translateY(2px) trasnalateX(-2px);
       align-items: center;
       font-size: 1rem;
       box-shadow: inset 1px 1px #555, inset -1px -1px #555;
@@ -75,7 +76,7 @@ page-explain {
       width: 100%;
       height: calc(100% - 26px); //text-align: justify;
       background-color: $recital-bg;
-      font-size: 1.8rem;
+      font-size: 5vw;
       line-height: 1.8;
       .slide-zoom {
         width: 100%;
@@ -146,11 +147,11 @@ page-explain {
     }
     .tafseer-section {
       position: absolute;
-      bottom: 30px;
+      bottom: 28px;
       width: calc(100vw - 52px);
       padding: 0 8px;
       background-color: rgba(5, 125, 128, 0.92);
-      left: 22px;
+      left: 26px;
       height: 163px;
       min-height: 136px;
       max-height: 163px;
